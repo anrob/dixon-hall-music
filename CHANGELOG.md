@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-01 — Logo loading screen
+- Added a cinematic preloader (`#loader`): the metallic Dixon Hall crest with a gold **light-sweep sheen** (CSS `mask-image` of logo.png over a moving gradient, so the shine follows the crest shape), a subtle gold glow, the equalizer motif pulsing below, and "No Limit Country" set in Marcellus SC.
+- Reveal logic: shows for a 2s minimum (so the animation always reads), waits for `window.load`, then fades out and unlocks scroll. 6s hard-cap fallback. Respects `prefers-reduced-motion`.
+- Verified: mask applies, loader auto-hides to the hero, scroll unlocks, no console errors.
+
 ## 2026-07-01 — Hero headroom fix + scroll-dock nav
 - **Headroom:** biased the hero crop toward the top (`object-position: center 18%`) and softened the zoom (1.0→1.05) so the space above the crest breathes instead of the tuning pegs jamming the top edge.
 - **Scroll-dock nav:** restructured the nav. The bottom split-nav (Home/Music/About · Shows/Media/Store) now crossfades into a sticky top nav bar (logo + links) as you scroll; the Listen Now button is `position:fixed`, stays pinned through the early scroll, then fades out once the top nav docks. Verified the opacity/pointer-events handoff at every scroll depth.

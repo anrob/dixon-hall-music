@@ -38,6 +38,55 @@
     @keyframes dhZoom{0%{transform:scale(1.0);}100%{transform:scale(1.05);}}
     @keyframes dhWave{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
 
+    /* ============ LOADING SCREEN ============ */
+    @keyframes dhLogoIn{0%{opacity:0;transform:translateY(16px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
+    @keyframes dhShine{0%{background-position:170% 0;}55%,100%{background-position:-70% 0;}}
+    @keyframes dhGlow{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.88);}50%{opacity:.65;transform:translate(-50%,-50%) scale(1.06);}}
+    @keyframes dhLoaderOut{to{opacity:0;visibility:hidden;}}
+
+    body.loading{overflow:hidden;}
+    #loader{
+      position:fixed;inset:0;z-index:100;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;
+      background:radial-gradient(120% 120% at 50% 42%, #0d0a07 0%, #060402 68%, #040302 100%);
+      transition:opacity .7s ease, visibility .7s ease;
+    }
+    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+    .loader-glow{
+      position:absolute;top:42%;left:50%;width:min(72vw,520px);height:min(72vw,520px);
+      transform:translate(-50%,-50%);pointer-events:none;
+      background:radial-gradient(circle, rgba(205,164,95,.22) 0%, rgba(205,164,95,0) 62%);
+      animation:dhGlow 2.6s ease-in-out infinite;
+    }
+    .loader-logo{position:relative;width:clamp(190px,32vw,300px);animation:dhLogoIn .85s cubic-bezier(.2,.75,.25,1) both;}
+    .loader-logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 30px rgba(0,0,0,.6));}
+    .loader-shine{
+      position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+      -webkit-mask:url('assets/logo.png') center/contain no-repeat;
+              mask:url('assets/logo.png') center/contain no-repeat;
+      background:linear-gradient(110deg, transparent 34%, rgba(233,193,126,.65) 46%, rgba(255,246,226,.95) 50%, rgba(233,193,126,.65) 54%, transparent 66%);
+      background-size:230% 100%;background-repeat:no-repeat;
+      animation:dhShine 2.6s ease-in-out .55s infinite;
+    }
+    .loader-eq{display:inline-flex;align-items:flex-end;gap:5px;height:26px;}
+    .loader-eq span{
+      display:block;width:4px;height:100%;transform-origin:bottom;border-radius:1px;
+      background:linear-gradient(180deg,#e9c17e,#cda45f);
+      animation:dhWave 1s ease-in-out infinite;
+    }
+    .loader-eq span:nth-child(1){animation-delay:0s;}
+    .loader-eq span:nth-child(2){animation-delay:.15s;}
+    .loader-eq span:nth-child(3){animation-delay:.3s;}
+    .loader-eq span:nth-child(4){animation-delay:.12s;}
+    .loader-eq span:nth-child(5){animation-delay:.24s;}
+    .loader-word{
+      font-family:'Marcellus SC',serif;letter-spacing:.42em;text-transform:uppercase;
+      font-size:12px;color:#8a7f6c;padding-left:.42em;animation:dhLogoIn .9s ease .18s both;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .loader-shine,.loader-glow,.loader-eq span,.loader-logo,.loader-word{animation:none;}
+    }
+
     /* ============ STICKY TOP NAV (appears on scroll) ============ */
     .topnav{
       position:fixed;top:0;left:0;right:0;z-index:20;
@@ -187,7 +236,18 @@
     }
   </style>
 </head>
-<body>
+<body class="loading">
+
+  <!-- LOADING SCREEN -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-glow"></div>
+    <div class="loader-logo">
+      <img src="assets/logo.png" alt="">
+      <div class="loader-shine"></div>
+    </div>
+    <div class="loader-eq"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="loader-word">No Limit Country</div>
+  </div>
 
   <!-- STICKY TOP NAV -->
   <header class="topnav" id="topnav">
@@ -341,6 +401,29 @@
       }
       [mToggle, bTop].forEach(function(b){ if(b) b.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); }); });
       menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+    })();
+  </script>
+
+  <!-- LOADING SCREEN reveal -->
+  <script>
+    (function(){
+      var loader = document.getElementById('loader');
+      if(!loader) return;
+      var MIN = 2000, CAP = 6000, done = false;
+      function now(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
+      var t0 = now();
+      function reveal(){
+        if(done) return; done = true;
+        var wait = Math.max(0, MIN - (now() - t0));
+        setTimeout(function(){
+          loader.classList.add('hidden');
+          document.body.classList.remove('loading');
+          setTimeout(function(){ loader.style.display = 'none'; }, 750);
+        }, wait);
+      }
+      if(document.readyState === 'complete') reveal();
+      else window.addEventListener('load', reveal);
+      setTimeout(reveal, CAP); // hard fallback
     })();
   </script>
 
