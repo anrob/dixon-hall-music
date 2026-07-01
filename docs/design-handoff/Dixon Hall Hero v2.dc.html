@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Marcellus+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0a0705;}
+  @keyframes dhZoom{0%{transform:scale(1.05);}100%{transform:scale(1.11);}}
+  @keyframes dhWave{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
+</style>
+</helmet>
+<div style="position:relative;width:100%;aspect-ratio:1536/1024;max-height:100vh;min-height:560px;overflow:hidden;background:#0a0705;font-family:Marcellus,serif;">
+
+  <!-- HERO ART PLATE -->
+  <img src="assets/hero-mock.png" alt="Dixon Hall — No Limit Country" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;animation:dhZoom 30s ease-out forwards;"/>
+
+  <!-- top-right mask to seat real social row -->
+  <div style="position:absolute;top:0;right:0;width:52%;height:15%;z-index:2;pointer-events:none;background:radial-gradient(120% 150% at 88% 0%, rgba(8,6,4,.92) 0%, rgba(8,6,4,.55) 42%, rgba(8,6,4,0) 72%);"></div>
+
+  <!-- bottom mask to seat real nav bar -->
+  <div style="position:absolute;left:0;right:0;bottom:0;height:32%;z-index:2;pointer-events:none;background:linear-gradient(180deg, rgba(8,6,4,0) 0%, rgba(8,6,4,.28) 24%, rgba(7,5,3,.82) 52%, rgba(6,4,2,.98) 78%, #060402 100%);"></div>
+
+  <!-- FOLLOW US + SOCIALS -->
+  <div style="position:absolute;top:clamp(18px,3.4%,42px);right:clamp(22px,3.6%,58px);z-index:5;display:flex;align-items:center;gap:clamp(14px,1.4vw,22px);">
+    <span style="font-family:'Marcellus SC',serif;font-size:clamp(12px,1vw,15px);letter-spacing:.28em;color:#e7ddcb;text-transform:uppercase;">Follow Us</span>
+    <div style="display:flex;align-items:center;gap:clamp(12px,1.15vw,18px);font-size:clamp(15px,1.15vw,18px);">
+      <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" style="color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;" style-hover="color:#d3a860;text-decoration:none;transform:translateY(-2px);"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" style="color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;" style-hover="color:#d3a860;text-decoration:none;transform:translateY(-2px);"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" style="color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;" style-hover="color:#d3a860;text-decoration:none;transform:translateY(-2px);"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#" style="color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;" style-hover="color:#d3a860;text-decoration:none;transform:translateY(-2px);"><i class="fa-brands fa-spotify"></i></a>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV BAR -->
+  <nav style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:clamp(22px,3vw,54px);width:min(1440px,94%);margin:0 auto;padding:0 clamp(16px,2vw,40px) clamp(22px,3.4%,42px);">
+
+    <div style="display:flex;align-items:center;gap:clamp(22px,2.8vw,52px);flex:1;justify-content:flex-end;">
+      <a href="#" style="position:relative;font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#f3ead9;text-decoration:none;padding-bottom:6px;">Home<span style="position:absolute;left:0;bottom:0;width:100%;height:2px;background:#cda45f;"></span></a>
+      <a href="#" style="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#d8cdba;text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;" style-hover="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding-bottom:6px;border-bottom:2px solid #cda45f;">Music</a>
+      <a href="#" style="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#d8cdba;text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;" style-hover="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding-bottom:6px;border-bottom:2px solid #cda45f;">About</a>
+    </div>
+
+    <a href="#" style="display:inline-flex;align-items:center;gap:14px;flex:0 0 auto;font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.22em;text-transform:uppercase;color:#e9c17e;text-decoration:none;border:1px solid rgba(205,164,95,.75);padding:clamp(11px,1.1vw,15px) clamp(22px,2vw,34px);background:linear-gradient(180deg, rgba(205,164,95,.1), rgba(205,164,95,.02));box-shadow:0 6px 26px rgba(0,0,0,.5), inset 0 0 22px rgba(205,164,95,.08);transition:all .22s ease;" style-hover="display:inline-flex;align-items:center;gap:14px;flex:0 0 auto;font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.22em;text-transform:uppercase;color:#0f0a04;text-decoration:none;border:1px solid #e9c17e;padding:clamp(11px,1.1vw,15px) clamp(22px,2vw,34px);background:#dcac60;box-shadow:0 10px 30px rgba(205,164,95,.4);">
+      Listen Now
+      <span style="display:inline-flex;align-items:flex-end;gap:2.5px;height:15px;">
+        <span style="display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;animation-delay:0s;"></span>
+        <span style="display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;animation-delay:.18s;"></span>
+        <span style="display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;animation-delay:.36s;"></span>
+        <span style="display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;animation-delay:.12s;"></span>
+        <span style="display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;animation-delay:.3s;"></span>
+      </span>
+    </a>
+
+    <div style="display:flex;align-items:center;gap:clamp(22px,2.8vw,52px);flex:1;justify-content:flex-start;">
+      <a href="#" style="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#d8cdba;text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;" style-hover="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding-bottom:6px;border-bottom:2px solid #cda45f;">Shows</a>
+      <a href="#" style="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#d8cdba;text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;" style-hover="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding-bottom:6px;border-bottom:2px solid #cda45f;">Media</a>
+      <a href="#" style="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#d8cdba;text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;" style-hover="font-family:Marcellus,serif;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding-bottom:6px;border-bottom:2px solid #cda45f;">Store</a>
+    </div>
+
+  </nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 810 }
+}"></script>
+</body>
+</html>

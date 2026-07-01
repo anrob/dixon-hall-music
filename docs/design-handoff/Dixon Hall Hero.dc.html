@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#080706;}
+  body{background:#080706;}
+  @keyframes dhKB{0%{transform:scale(1.08) translate(0,0);}100%{transform:scale(1.16) translate(-1.6%,-1.2%);}}
+  @keyframes dhMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @keyframes dhPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.25;transform:scale(.7);}}
+  @keyframes dhBob{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+</style>
+</helmet>
+<div style="position:relative;width:100%;min-height:100vh;overflow:hidden;background:#080706;display:flex;flex-direction:column;font-family:Barlow,sans-serif;">
+
+  <!-- LAYER: band photo -->
+  <div style="position:absolute;inset:-6% -6% -6% -6%;z-index:0;background-image:url('assets/band.png');background-size:cover;background-position:58% 40%;filter: {{ grade }};animation:dhKB 26s ease-out forwards;"></div>
+  <!-- LAYER: brick grunge over photo -->
+  <div style="position:absolute;inset:0;z-index:1;background-image:url('assets/brick.avif');background-size:cover;background-position:center;mix-blend-mode:multiply;opacity:.62;"></div>
+  <!-- LAYER: left legibility gradient -->
+  <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(90deg, rgba(8,7,6,.98) 0%, rgba(8,7,6,.92) 26%, rgba(8,7,6,.6) 50%, rgba(8,7,6,.12) 76%, rgba(8,7,6,0) 100%);"></div>
+  <!-- LAYER: top + bottom gradients -->
+  <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(180deg, rgba(6,5,4,.85) 0%, rgba(6,5,4,0) 22%, rgba(6,5,4,0) 62%, rgba(6,5,4,.96) 100%);"></div>
+  <!-- LAYER: vignette -->
+  <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(125% 115% at 46% 42%, rgba(0,0,0,0) 52%, rgba(0,0,0,.72) 100%);"></div>
+  <!-- LAYER: film grain -->
+  <div style="position:absolute;inset:0;z-index:3;opacity:.45;mix-blend-mode:overlay;pointer-events:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+  <!-- LAYER: warm light bloom from photo side -->
+  <div style="position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(60% 70% at 74% 46%, rgba(224,160,74,.14) 0%, rgba(224,160,74,0) 60%);"></div>
+
+  <!-- NAV -->
+  <header style="position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px clamp(22px,4.5vw,72px);">
+    <img src="assets/logo.png" alt="Dixon Hall" style="height:62px;width:auto;display:block;filter:drop-shadow(0 2px 12px rgba(0,0,0,.7));"/>
+    <nav style="display:flex;align-items:center;gap:clamp(20px,2.4vw,38px);font-family:Oswald,sans-serif;font-weight:500;font-size:14px;letter-spacing:.2em;text-transform:uppercase;">
+      <a href="#" style="color:#f4f1ec;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:border-color .2s;" style-hover="color:#f4f1ec;text-decoration:none;padding-bottom:4px;border-bottom:2px solid {{ accent }};">Home</a>
+      <a href="#" style="color:#cbc3b8;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:all .2s;" style-hover="color:#fff;text-decoration:none;padding-bottom:4px;border-bottom:2px solid {{ accent }};">Events</a>
+      <a href="#" style="color:#cbc3b8;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:all .2s;" style-hover="color:#fff;text-decoration:none;padding-bottom:4px;border-bottom:2px solid {{ accent }};">Music</a>
+      <a href="#" style="color:#cbc3b8;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:all .2s;" style-hover="color:#fff;text-decoration:none;padding-bottom:4px;border-bottom:2px solid {{ accent }};">About</a>
+      <a href="#" style="color:#cbc3b8;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:all .2s;" style-hover="color:#fff;text-decoration:none;padding-bottom:4px;border-bottom:2px solid {{ accent }};">Merch</a>
+    </nav>
+    <a href="#" style="font-family:Oswald,sans-serif;font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#f4f1ec;text-decoration:none;border:1px solid rgba(244,241,236,.45);padding:11px 22px;border-radius:2px;transition:all .2s;white-space:nowrap;" style-hover="font-family:Oswald,sans-serif;font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#12100d;text-decoration:none;border:1px solid {{ accent }};background:{{ accent }};padding:11px 22px;border-radius:2px;white-space:nowrap;">Join The Fan Club</a>
+  </header>
+
+  <!-- HERO CONTENT -->
+  <div style="position:relative;z-index:6;flex:1;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:8px clamp(22px,4.5vw,72px) 12px;max-width:920px;">
+
+    <div style="display:inline-flex;align-items:center;gap:11px;align-self:flex-start;background:rgba(10,8,6,.5);border:1px solid {{ accent }};backdrop-filter:blur(4px);padding:8px 16px;border-radius:100px;">
+      <span style="width:8px;height:8px;border-radius:50%;background:{{ accent }};box-shadow:0 0 10px {{ accent }};animation:dhPulse 1.8s ease-in-out infinite;"></span>
+      <span style="font-family:Oswald,sans-serif;font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:{{ accent }};">New Single &ldquo;Beautiful Life&rdquo; &middot; Out 7.31.26</span>
+    </div>
+
+    <div style="font-family:Oswald,sans-serif;font-weight:600;font-size:clamp(13px,1.1vw,15px);letter-spacing:.34em;text-transform:uppercase;color:{{ accent }};">Nashville-Recorded Debut EP</div>
+
+    <h1 style="margin:0;font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(52px,8.6vw,138px);line-height:.9;letter-spacing:.005em;background:linear-gradient(180deg,#ffffff 0%,#eceef0 40%,#c2c6cc 68%,#9a9ea4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 2px rgba(0,0,0,.55));">Soul Meets<br/>Southern Rock</h1>
+
+    <p style="margin:0;max-width:560px;font-family:Barlow,sans-serif;font-weight:400;font-size:clamp(16px,1.35vw,20px);line-height:1.62;color:#c3bbb0;">The unlikely, electric partnership of soul-country voice <strong style="color:#efe9e0;font-weight:600;">John Dixon Hall&nbsp;Jr.</strong> and rock icon <strong style="color:#efe9e0;font-weight:600;">Terry&nbsp;Glaze</strong> &mdash; heartfelt storytelling with grit, harmony, and no limits.</p>
+
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:6px;">
+      <a href="#" style="display:inline-flex;align-items:center;gap:11px;font-family:Oswald,sans-serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#17120a;text-decoration:none;background:{{ accent }};padding:17px 34px;border-radius:2px;box-shadow:0 12px 34px rgba(224,160,74,.28);transition:transform .18s ease, box-shadow .18s ease;" style-hover="display:inline-flex;align-items:center;gap:11px;font-family:Oswald,sans-serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#17120a;text-decoration:none;background:{{ accent }};padding:17px 34px;border-radius:2px;box-shadow:0 16px 42px rgba(224,160,74,.42);transform:translateY(-2px);">
+        <span style="font-size:16px;line-height:1;">&#9654;</span> Listen Now
+      </a>
+      <a href="#" style="display:inline-flex;align-items:center;font-family:Oswald,sans-serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#f4f1ec;text-decoration:none;background:transparent;border:1px solid rgba(244,241,236,.4);padding:17px 32px;border-radius:2px;transition:all .18s ease;" style-hover="display:inline-flex;align-items:center;font-family:Oswald,sans-serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#12100d;text-decoration:none;background:#f4f1ec;border:1px solid #f4f1ec;padding:17px 32px;border-radius:2px;">See Tour Dates</a>
+    </div>
+  </div>
+
+  <!-- FOOTER ROW -->
+  <div style="position:relative;z-index:6;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:0 clamp(22px,4.5vw,72px) 24px;">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:Oswald,sans-serif;font-weight:600;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:{{ accent }};">Next Show</span>
+      <span style="width:6px;height:6px;border-radius:50%;background:rgba(244,241,236,.3);"></span>
+      <span style="font-family:Barlow,sans-serif;font-weight:500;font-size:14px;letter-spacing:.02em;color:#d8d0c5;">Jul 8 &mdash; Admiral&rsquo;s Cup, Baltimore MD</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <span style="font-family:Oswald,sans-serif;font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#8b8378;">Scroll</span>
+      <span style="font-size:15px;color:#8b8378;animation:dhBob 1.9s ease-in-out infinite;">&#8595;</span>
+    </div>
+  </div>
+
+  <!-- MARQUEE BANNER -->
+  <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ true }}">
+  <div style="position:relative;z-index:6;overflow:hidden;white-space:nowrap;background:rgba(9,7,5,.9);border-top:1px solid rgba(224,160,74,.28);border-bottom:1px solid rgba(255,255,255,.04);padding:13px 0;">
+    <div style="display:inline-block;white-space:nowrap;animation:dhMarquee 32s linear infinite;font-family:Oswald,sans-serif;font-weight:500;font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:#9b9288;">
+      <span style="padding:0 26px;">No Limit Country</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">Debut EP Recorded In Nashville</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">John Dixon Hall Jr. &times; Terry Glaze</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">No Limit Country</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">Debut EP Recorded In Nashville</span><span style="color:{{ accent }};">&#9670;</span><span style="padding:0 26px;">John Dixon Hall Jr. &times; Terry Glaze</span><span style="color:{{ accent }};">&#9670;</span>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 820 },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#e0a04a&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#e0a04a&quot;, &quot;#d9803a&quot;, &quot;#c9a227&quot;, &quot;#b5b8bd&quot;], &quot;section&quot;: &quot;Style&quot; },
+  &quot;grade&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Cinematic&quot;, &quot;options&quot;: [&quot;Cinematic&quot;, &quot;Warm&quot;, &quot;Mono&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot; },
+  &quot;showBanner&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot; }
+}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent || '#e0a04a';
+    const grades = {
+      Cinematic: 'saturate(0.84) contrast(1.08) brightness(0.9)',
+      Warm: 'sepia(0.2) saturate(1.2) contrast(1.05) brightness(0.92)',
+      Mono: 'grayscale(1) contrast(1.14) brightness(0.96)'
+    };
+    const grade = grades[this.props.grade] || grades.Cinematic;
+    const showBanner = this.props.showBanner !== false;
+    return { accent, grade, showBanner };
+  }
+}
+</script>
+</body>
+</html>
