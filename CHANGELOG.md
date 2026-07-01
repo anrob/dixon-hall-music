@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-07-01 — Full site build (awwwards-grade) + Listen Now nav rework
+- Built out the complete one-page site with real copy pulled from dixonhallmusic.com. Used the frontend-design + ui-ux-pro-max skills for direction (one hero element per section, 112px+ rhythm, restraint, contained widths, no parallax).
+- **Type system:** Anton (heavy display) × Marcellus/Marcellus SC (serif labels/nav) × Barlow (body); metallic silver gradient on display headings to echo the crest.
+- **Sections:** Music/Single (huge "Beautiful Life", live countdown to 7.31.26, pre-save + streaming row, cover-art card built from the crest), About (real bio narrative + both member cards — Hall / Glaze-ex-Pantera), Shows (editorial tour ledger, 5 real MD/PA dates + booking), Media (band photo + branded crest tile + follow tile), Store (5 real merch items w/ prices + placeholder note), Fan Club newsletter (real copy), footer.
+- **Nav rework:** removed the pinned/fixed Listen Now. It now scrolls away with the hero nav and **docks as the last item** in the sticky top bar (gold CTA). Nav order: Home · Music · About · Shows · Media · Store · Listen Now.
+- Scroll-reveals (IntersectionObserver, no parallax), marquee strip, hover micro-interactions, reduced-motion support. Verified every section + mobile stacking; no console errors.
+
 ## 2026-07-01 — Logo loading screen
 - Added a cinematic preloader (`#loader`): the metallic Dixon Hall crest with a gold **light-sweep sheen** (CSS `mask-image` of logo.png over a moving gradient, so the shine follows the crest shape), a subtle gold glow, the equalizer motif pulsing below, and "No Limit Country" set in Marcellus SC.
 - Reveal logic: shows for a 2s minimum (so the animation always reads), waits for `window.load`, then fades out and unlocks scroll. 6s hard-cap fallback. Respects `prefers-reduced-motion`.

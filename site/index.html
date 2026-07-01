@@ -8,7 +8,6 @@
   <meta name="description" content="Dixon Hall is John Dixon Hall Jr. and rock icon Terry Glaze — modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
   <meta name="theme-color" content="#0a0705">
 
-  <!-- Open Graph / social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Dixon Hall — No Limit Country">
   <meta property="og:description" content="Modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
@@ -21,28 +20,54 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Marcellus+SC&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Marcellus&family=Marcellus+SC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     :root{
-      --bg:#0a0705; --bg2:#060402;
-      --cream:#e7ddcb; --cream-dim:#d8cdba;
+      --bg:#0a0705; --bg2:#060402; --bg3:#0d0a07;
+      --cream:#e7ddcb; --cream-dim:#c3bbb0; --muted:#8f8676;
       --gold:#cda45f; --gold2:#e9c17e;
+      --line:rgba(231,221,203,.12);
+      --sp:clamp(88px,13vh,150px);
+      --serif:'Marcellus',serif; --serifsc:'Marcellus SC',serif;
+      --display:'Anton',sans-serif; --body:'Barlow',sans-serif;
     }
     *{box-sizing:border-box;}
     html{scroll-behavior:smooth;scroll-padding-top:74px;}
-    body{margin:0;padding:0;background:var(--bg);color:var(--cream);font-family:'Marcellus',serif;}
+    body{margin:0;padding:0;background:var(--bg);color:var(--cream);font-family:var(--body);-webkit-font-smoothing:antialiased;}
     a{-webkit-tap-highlight-color:transparent;}
+    img{max-width:100%;}
+    ::selection{background:rgba(205,164,95,.3);color:#fff;}
+
+    .container{max-width:1180px;margin:0 auto;padding:0 clamp(22px,5vw,72px);}
+    .metal{
+      background:linear-gradient(180deg,#ffffff 0%,#eceef0 38%,#c2c6cc 66%,#9a9ea4 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 3px 2px rgba(0,0,0,.5));
+    }
+    .eyebrow{
+      display:flex;align-items:center;gap:14px;
+      font-family:var(--serifsc);letter-spacing:.34em;text-transform:uppercase;
+      color:var(--gold);font-size:13px;margin:0 0 22px;
+    }
+    .eyebrow .num{font-family:var(--body);font-weight:600;letter-spacing:.1em;color:var(--muted);font-size:12px;}
+    .eyebrow .bar{flex:0 0 34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+    h2.display{
+      margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;
+      font-size:clamp(40px,6.4vw,92px);line-height:.92;letter-spacing:.01em;
+    }
+    .lead{font-family:var(--serif);font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:#efe9e0;}
+    .body-text{font-size:clamp(15.5px,1.2vw,18px);line-height:1.7;color:var(--cream-dim);}
 
     @keyframes dhZoom{0%{transform:scale(1.0);}100%{transform:scale(1.05);}}
     @keyframes dhWave{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
+    @keyframes dhMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
     /* ============ LOADING SCREEN ============ */
     @keyframes dhLogoIn{0%{opacity:0;transform:translateY(16px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
     @keyframes dhShine{0%{background-position:170% 0;}55%,100%{background-position:-70% 0;}}
     @keyframes dhGlow{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.88);}50%{opacity:.65;transform:translate(-50%,-50%) scale(1.06);}}
-    @keyframes dhLoaderOut{to{opacity:0;visibility:hidden;}}
 
     body.loading{overflow:hidden;}
     #loader{
@@ -69,106 +94,16 @@
       animation:dhShine 2.6s ease-in-out .55s infinite;
     }
     .loader-eq{display:inline-flex;align-items:flex-end;gap:5px;height:26px;}
-    .loader-eq span{
-      display:block;width:4px;height:100%;transform-origin:bottom;border-radius:1px;
-      background:linear-gradient(180deg,#e9c17e,#cda45f);
-      animation:dhWave 1s ease-in-out infinite;
-    }
+    .loader-eq span{display:block;width:4px;height:100%;transform-origin:bottom;border-radius:1px;background:linear-gradient(180deg,#e9c17e,#cda45f);animation:dhWave 1s ease-in-out infinite;}
     .loader-eq span:nth-child(1){animation-delay:0s;}
     .loader-eq span:nth-child(2){animation-delay:.15s;}
     .loader-eq span:nth-child(3){animation-delay:.3s;}
     .loader-eq span:nth-child(4){animation-delay:.12s;}
     .loader-eq span:nth-child(5){animation-delay:.24s;}
-    .loader-word{
-      font-family:'Marcellus SC',serif;letter-spacing:.42em;text-transform:uppercase;
-      font-size:12px;color:#8a7f6c;padding-left:.42em;animation:dhLogoIn .9s ease .18s both;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .loader-shine,.loader-glow,.loader-eq span,.loader-logo,.loader-word{animation:none;}
-    }
+    .loader-word{font-family:var(--serifsc);letter-spacing:.42em;text-transform:uppercase;font-size:12px;color:var(--muted);padding-left:.42em;animation:dhLogoIn .9s ease .18s both;}
 
-    /* ============ STICKY TOP NAV (appears on scroll) ============ */
-    .topnav{
-      position:fixed;top:0;left:0;right:0;z-index:20;
-      display:flex;align-items:center;justify-content:space-between;gap:24px;
-      height:72px;padding:0 clamp(18px,3vw,44px);
-      background:linear-gradient(180deg, rgba(8,6,4,.97), rgba(8,6,4,.9));
-      border-bottom:1px solid rgba(205,164,95,.28);
-      backdrop-filter:blur(8px);
-      opacity:0;transform:translateY(-16px);pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
-    }
-    .topnav img{height:44px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));}
-    .topnav .links{display:flex;align-items:center;gap:clamp(20px,2.2vw,40px);}
-    .topnav .links a{
-      font-size:clamp(13px,1vw,16px);letter-spacing:.2em;text-transform:uppercase;
-      color:var(--cream-dim);text-decoration:none;padding-bottom:4px;
-      border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
-    }
-    .topnav .links a:hover,.topnav .links a.active{color:#fff;border-bottom-color:var(--gold);}
-    .topnav .burger{display:none;}
-
-    /* ============ HERO ============ */
-    .hero{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden;background:var(--bg);}
-    .hero-art{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;object-position:center 18%;
-      transform-origin:center 22%;
-      animation:dhZoom 30s ease-out forwards;
-    }
-    .mask-social{
-      position:absolute;top:0;right:0;width:52%;height:15%;z-index:2;pointer-events:none;
-      background:radial-gradient(120% 150% at 88% 0%, rgba(8,6,4,.92) 0%, rgba(8,6,4,.55) 42%, rgba(8,6,4,0) 72%);
-    }
-    .mask-nav{
-      position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;
-      background:linear-gradient(180deg, rgba(8,6,4,0) 0%, rgba(8,6,4,.28) 22%, rgba(7,5,3,.82) 50%, rgba(6,4,2,.98) 78%, var(--bg2) 100%);
-    }
-
-    /* FOLLOW US + SOCIALS */
-    .social-row{
-      position:absolute;top:clamp(18px,3.4vh,42px);right:clamp(22px,3.6vw,58px);z-index:5;
-      display:flex;align-items:center;gap:clamp(14px,1.4vw,22px);
-    }
-    .follow-label{font-family:'Marcellus SC',serif;font-size:clamp(12px,1vw,15px);letter-spacing:.28em;color:var(--cream);text-transform:uppercase;}
-    .social-icons{display:flex;align-items:center;gap:clamp(12px,1.15vw,18px);font-size:clamp(15px,1.15vw,18px);}
-    .social-icons a{color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;}
-    .social-icons a:hover{color:#d3a860;transform:translateY(-2px);}
-
-    /* BOTTOM HERO NAV (docks away on scroll) */
-    .hero-nav{
-      position:absolute;left:0;right:0;bottom:0;z-index:5;
-      display:flex;align-items:center;justify-content:center;gap:clamp(22px,3vw,54px);
-      width:min(1440px,94%);margin:0 auto;
-      padding:0 clamp(16px,2vw,40px) clamp(22px,3.4vh,42px);
-      transition:opacity .2s ease;
-    }
-    .hero-nav .group{display:flex;align-items:center;gap:clamp(22px,2.8vw,52px);flex:1;}
-    .hero-nav .group.left{justify-content:flex-end;}
-    .hero-nav .group.right{justify-content:flex-start;}
-    /* center spacer reserves room for the fixed Listen Now button */
-    .hero-nav .spacer{flex:0 0 auto;width:clamp(180px,15vw,240px);}
-    .nav-link{
-      position:relative;font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;
-      color:var(--cream-dim);text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;
-      transition:color .2s,border-color .2s;white-space:nowrap;
-    }
-    .nav-link:hover{color:#fff;border-bottom-color:var(--gold);}
-    .nav-link.active{color:#f3ead9;border-bottom-color:var(--gold);}
-
-    /* FIXED LISTEN NOW (stays pinned, then fades) */
-    .listen-fixed{
-      position:fixed;left:50%;bottom:clamp(20px,3vh,38px);transform:translateX(-50%);z-index:15;
-      display:inline-flex;align-items:center;gap:14px;
-      font-size:clamp(14px,1.05vw,18px);letter-spacing:.22em;text-transform:uppercase;
-      color:var(--gold2);text-decoration:none;
-      border:1px solid rgba(205,164,95,.75);padding:clamp(11px,1.1vh,15px) clamp(22px,2vw,34px);
-      background:linear-gradient(180deg, rgba(205,164,95,.1), rgba(205,164,95,.02));
-      box-shadow:0 6px 26px rgba(0,0,0,.5), inset 0 0 22px rgba(205,164,95,.08);
-      transition:opacity .25s ease, color .22s ease, background .22s ease, box-shadow .22s ease;
-    }
-    .listen-fixed:hover{color:#0f0a04;border-color:var(--gold2);background:#dcac60;box-shadow:0 10px 30px rgba(205,164,95,.4);}
-    .eq{display:inline-flex;align-items:flex-end;gap:2.5px;height:15px;}
+    /* ============ EQ (shared button motif) ============ */
+    .eq{display:inline-flex;align-items:flex-end;gap:2.5px;height:14px;}
     .eq span{display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;}
     .eq span:nth-child(1){animation-delay:0s;}
     .eq span:nth-child(2){animation-delay:.18s;}
@@ -176,63 +111,215 @@
     .eq span:nth-child(4){animation-delay:.12s;}
     .eq span:nth-child(5){animation-delay:.3s;}
 
-    /* MOBILE MENU */
-    .menu-toggle{
-      position:fixed;top:16px;left:16px;z-index:21;width:44px;height:44px;
-      display:none;align-items:center;justify-content:center;
-      background:rgba(8,6,4,.5);border:1px solid rgba(205,164,95,.45);border-radius:2px;
-      color:var(--cream);font-size:18px;cursor:pointer;backdrop-filter:blur(4px);
+    /* ============ STICKY TOP NAV ============ */
+    .topnav{
+      position:fixed;top:0;left:0;right:0;z-index:20;
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+      height:72px;padding:0 clamp(18px,3vw,44px);
+      background:linear-gradient(180deg, rgba(8,6,4,.97), rgba(8,6,4,.9));
+      border-bottom:1px solid rgba(205,164,95,.28);backdrop-filter:blur(8px);
+      opacity:0;transform:translateY(-16px);pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
     }
-    .mobile-menu{
-      position:fixed;inset:0;z-index:19;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;
-      background:rgba(6,4,2,.96);backdrop-filter:blur(6px);
+    .topnav img{height:44px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));}
+    .topnav .links{display:flex;align-items:center;gap:clamp(18px,2vw,34px);}
+    .topnav .links a{font-family:var(--serif);font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+    .topnav .links a:hover,.topnav .links a.active{color:#fff;border-bottom-color:var(--gold);}
+    .nav-cta{
+      display:inline-flex!important;align-items:center;gap:10px;border-bottom:0!important;
+      color:#0f0a04!important;background:linear-gradient(180deg,#e9c17e,#cda45f);
+      padding:9px 18px!important;letter-spacing:.16em!important;font-size:13px!important;
+      transition:filter .2s,transform .2s;
     }
+    .nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+    .topnav .burger{display:none;}
+
+    /* ============ HERO ============ */
+    .hero{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden;background:var(--bg);}
+    .hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;transform-origin:center 22%;animation:dhZoom 30s ease-out forwards;}
+    .mask-social{position:absolute;top:0;right:0;width:52%;height:15%;z-index:2;pointer-events:none;background:radial-gradient(120% 150% at 88% 0%, rgba(8,6,4,.92) 0%, rgba(8,6,4,.55) 42%, rgba(8,6,4,0) 72%);}
+    .mask-nav{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(180deg, rgba(8,6,4,0) 0%, rgba(8,6,4,.28) 22%, rgba(7,5,3,.82) 50%, rgba(6,4,2,.98) 78%, var(--bg2) 100%);}
+    .social-row{position:absolute;top:clamp(18px,3.4vh,42px);right:clamp(22px,3.6vw,58px);z-index:5;display:flex;align-items:center;gap:clamp(14px,1.4vw,22px);}
+    .follow-label{font-family:var(--serifsc);font-size:clamp(12px,1vw,15px);letter-spacing:.28em;color:var(--cream);text-transform:uppercase;}
+    .social-icons{display:flex;align-items:center;gap:clamp(12px,1.15vw,18px);font-size:clamp(15px,1.15vw,18px);}
+    .social-icons a{color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;}
+    .social-icons a:hover{color:var(--gold);transform:translateY(-2px);}
+
+    .hero-nav{position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:clamp(22px,3vw,54px);width:min(1440px,94%);margin:0 auto;padding:0 clamp(16px,2vw,40px) clamp(22px,3.4vh,42px);transition:opacity .2s ease;}
+    .hero-nav .group{display:flex;align-items:center;gap:clamp(22px,2.8vw,52px);flex:1;}
+    .hero-nav .group.left{justify-content:flex-end;}
+    .hero-nav .group.right{justify-content:flex-start;}
+    .nav-link{position:relative;font-family:var(--serif);font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;}
+    .nav-link:hover{color:#fff;border-bottom-color:var(--gold);}
+    .nav-link.active{color:#f3ead9;border-bottom-color:var(--gold);}
+    .hero-listen{
+      flex:0 0 auto;display:inline-flex;align-items:center;gap:14px;
+      font-family:var(--serif);font-size:clamp(14px,1.05vw,18px);letter-spacing:.22em;text-transform:uppercase;
+      color:var(--gold2);text-decoration:none;border:1px solid rgba(205,164,95,.75);
+      padding:clamp(11px,1.1vh,15px) clamp(22px,2vw,34px);
+      background:linear-gradient(180deg, rgba(205,164,95,.1), rgba(205,164,95,.02));
+      box-shadow:0 6px 26px rgba(0,0,0,.5), inset 0 0 22px rgba(205,164,95,.08);
+      transition:color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+    .hero-listen:hover{color:#0f0a04;border-color:var(--gold2);background:#dcac60;box-shadow:0 10px 30px rgba(205,164,95,.4);}
+
+    .menu-toggle{position:fixed;top:16px;left:16px;z-index:21;width:44px;height:44px;display:none;align-items:center;justify-content:center;background:rgba(8,6,4,.5);border:1px solid rgba(205,164,95,.45);border-radius:2px;color:var(--cream);font-size:18px;cursor:pointer;backdrop-filter:blur(4px);}
+    .mobile-menu{position:fixed;inset:0;z-index:19;display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:rgba(6,4,2,.97);backdrop-filter:blur(6px);}
     .mobile-menu.open{display:flex;}
-    .mobile-menu a{font-size:22px;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .2s;}
+    .mobile-menu a{font-family:var(--serif);font-size:22px;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .2s;}
     .mobile-menu a:hover,.mobile-menu a.active{color:var(--gold2);}
+    .mobile-menu a.m-cta{color:var(--gold2);}
 
-    /* ============ CONTENT (starter section so the page scrolls) ============ */
-    section.band{
-      position:relative;padding:clamp(64px,10vh,120px) clamp(22px,5vw,72px);
-      background:
-        linear-gradient(180deg, var(--bg2) 0%, #0c0906 40%, #0a0705 100%);
-      border-top:1px solid rgba(205,164,95,.14);
+    /* ============ MARQUEE ============ */
+    .marquee{overflow:hidden;white-space:nowrap;background:var(--bg2);border-top:1px solid rgba(205,164,95,.22);border-bottom:1px solid rgba(255,255,255,.04);padding:15px 0;}
+    .marquee-track{display:inline-block;white-space:nowrap;animation:dhMarquee 34s linear infinite;font-family:var(--serifsc);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);}
+    .marquee-track span{padding:0 26px;}
+    .marquee-track .di{color:var(--gold);}
+
+    /* ============ REVEAL ============ */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+    .reveal.in{opacity:1;transform:none;}
+    .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;} .reveal.d4{transition-delay:.32s;}
+
+    section{position:relative;}
+
+    /* ============ MUSIC / SINGLE ============ */
+    .music{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg2) 0%, var(--bg3) 100%);border-top:1px solid var(--line);}
+    .music-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,88px);align-items:center;}
+    .single-date{font-family:var(--serifsc);letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);font-size:15px;margin:20px 0 24px;}
+    .countdown{display:flex;gap:clamp(14px,2vw,26px);margin:0 0 30px;}
+    .cd-unit{text-align:left;}
+    .cd-num{font-family:var(--display);font-size:clamp(34px,4.4vw,54px);line-height:1;color:#f3ead9;}
+    .cd-label{font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--muted);margin-top:8px;}
+    .cd-sep{align-self:flex-start;font-family:var(--display);font-size:clamp(28px,3.6vw,44px);color:rgba(205,164,95,.4);line-height:1;}
+    .btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:11px;font-family:var(--serif);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#17120a;text-decoration:none;background:linear-gradient(180deg,#e9c17e,#cda45f);padding:16px 32px;border-radius:2px;transition:filter .2s,transform .2s;}
+    .btn-primary:hover{filter:brightness(1.08);transform:translateY(-2px);}
+    .streams{display:flex;align-items:center;gap:18px;font-size:19px;}
+    .streams a{color:var(--cream-dim);transition:color .2s,transform .2s;}
+    .streams a:hover{color:var(--gold);transform:translateY(-2px);}
+
+    .cover{position:relative;aspect-ratio:1/1;border:1px solid rgba(205,164,95,.28);background:#0a0806;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6);}
+    .cover-bg{position:absolute;inset:0;background-image:url('assets/brick.avif');background-size:cover;background-position:center;opacity:.5;mix-blend-mode:luminosity;}
+    .cover-grad{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 24%, rgba(205,164,95,.16), rgba(0,0,0,0) 60%), linear-gradient(180deg, rgba(6,4,2,.2), rgba(6,4,2,.86));}
+    .cover-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9%;}
+    .cover-inner img{width:44%;filter:drop-shadow(0 10px 26px rgba(0,0,0,.6));margin-bottom:8%;}
+    .cover-title{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,4vw,52px);line-height:.92;letter-spacing:.02em;}
+    .cover-meta{font-family:var(--serifsc);letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-top:16px;}
+    .cover-tag{position:absolute;top:16px;left:16px;font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--gold2);border:1px solid rgba(205,164,95,.5);padding:6px 12px;}
+
+    /* ============ ABOUT ============ */
+    .about{padding:var(--sp) 0;background:var(--bg);}
+    .about-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:end;margin-bottom:clamp(40px,6vw,72px);}
+    .about-photo{position:relative;margin:clamp(40px,6vw,72px) 0;overflow:hidden;border:1px solid var(--line);}
+    .about-photo img{display:block;width:100%;height:clamp(320px,52vh,560px);object-fit:cover;object-position:50% 40%;}
+    .about-photo .cap{position:absolute;left:0;bottom:0;padding:22px 26px;font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--cream);background:linear-gradient(0deg, rgba(6,4,2,.9), rgba(6,4,2,0));width:100%;}
+    .members{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,40px);margin-top:clamp(20px,3vw,40px);}
+    .member{border:1px solid var(--line);border-top:2px solid rgba(205,164,95,.55);background:linear-gradient(180deg, rgba(255,255,255,.015), rgba(0,0,0,0));padding:clamp(28px,3vw,40px);transition:background .25s, border-color .25s;}
+    .member:hover{background:rgba(205,164,95,.04);border-top-color:var(--gold2);}
+    .member .role{font-family:var(--serifsc);letter-spacing:.26em;text-transform:uppercase;font-size:11px;color:var(--gold);margin-bottom:14px;}
+    .member h3{margin:0 0 16px;font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,2.6vw,36px);line-height:1;color:#efe9e0;letter-spacing:.01em;}
+    .member p{margin:0;font-size:15px;line-height:1.7;color:var(--cream-dim);}
+    .member .tag{margin-top:18px;display:inline-block;font-family:var(--serifsc);letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--muted);}
+
+    /* ============ SHOWS ============ */
+    .shows{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg3) 0%, var(--bg2) 100%);border-top:1px solid var(--line);}
+    .shows-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:clamp(30px,4vw,54px);}
+    .show-list{border-top:1px solid var(--line);}
+    .show-row{display:flex;align-items:center;gap:clamp(16px,3vw,40px);padding:clamp(20px,2.6vw,30px) 4px;border-bottom:1px solid var(--line);transition:background .2s,padding-left .2s;}
+    .show-row:hover{background:rgba(205,164,95,.045);padding-left:16px;}
+    .sr-date{flex:0 0 auto;width:clamp(72px,8vw,110px);}
+    .sr-day{font-family:var(--display);font-size:clamp(26px,3vw,40px);line-height:.9;color:#f3ead9;}
+    .sr-mon{font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--gold);margin-top:4px;}
+    .sr-info{flex:1;min-width:0;}
+    .sr-venue{font-family:var(--serif);font-size:clamp(19px,1.9vw,26px);color:#efe9e0;}
+    .sr-city{font-family:var(--serifsc);letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--muted);margin-top:6px;}
+    .sr-cta{flex:0 0 auto;font-family:var(--serif);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;border:1px solid rgba(205,164,95,.5);padding:11px 20px;transition:all .2s;white-space:nowrap;}
+    .sr-cta:hover{color:#0f0a04;background:var(--gold);border-color:var(--gold);}
+    .booking-note{margin-top:clamp(30px,4vw,48px);font-size:14px;color:var(--muted);letter-spacing:.02em;}
+    .booking-note a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(205,164,95,.4);}
+
+    /* ============ MEDIA ============ */
+    .media{padding:var(--sp) 0;background:var(--bg);}
+    .media-grid{display:grid;grid-template-columns:2fr 1fr;gap:clamp(16px,2vw,24px);}
+    .media-tile{position:relative;overflow:hidden;border:1px solid var(--line);}
+    .media-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+    .media-tile:hover img{transform:scale(1.05);}
+    .media-tall{grid-row:span 2;}
+    .media-tile .badge{position:absolute;left:16px;bottom:14px;font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:11px;color:var(--cream);text-shadow:0 2px 10px rgba(0,0,0,.8);}
+    .media-a{min-height:clamp(340px,50vh,540px);}
+    .media-b{min-height:clamp(160px,24vh,258px);}
+
+    /* ============ STORE ============ */
+    .store{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg2) 0%, var(--bg3) 100%);border-top:1px solid var(--line);}
+    .store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,26px);margin-top:clamp(34px,4vw,54px);}
+    .merch{position:relative;border:1px solid var(--line);background:#0a0806;overflow:hidden;text-decoration:none;display:block;transition:border-color .25s,transform .25s;}
+    .merch:hover{border-color:rgba(205,164,95,.5);transform:translateY(-4px);}
+    .merch-art{position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(120% 120% at 50% 20%, #17120c, #0a0806);}
+    .merch-art::before{content:"";position:absolute;inset:0;background-image:url('assets/brick.avif');background-size:cover;background-position:center;opacity:.28;mix-blend-mode:luminosity;}
+    .merch-art img{position:relative;width:46%;opacity:.9;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));transition:transform .3s;}
+    .merch:hover .merch-art img{transform:scale(1.05);}
+    .merch-info{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border-top:1px solid var(--line);}
+    .merch-name{font-family:var(--serif);font-size:16px;color:#efe9e0;letter-spacing:.01em;}
+    .merch-price{font-family:var(--serifsc);letter-spacing:.06em;color:var(--gold2);font-size:15px;white-space:nowrap;}
+    .store-note{margin-top:clamp(28px,3vw,40px);font-size:13px;color:var(--muted);font-style:italic;}
+
+    /* ============ NEWSLETTER ============ */
+    .join{padding:var(--sp) 0;background:radial-gradient(120% 120% at 50% 0%, #12100b 0%, var(--bg) 60%);border-top:1px solid var(--line);text-align:center;}
+    .join .inner{max-width:680px;margin:0 auto;}
+    .join p{margin:24px auto 34px;max-width:520px;}
+    .join-form{display:flex;gap:12px;max-width:520px;margin:0 auto;}
+    .join-form input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#fff;font-family:var(--body);font-size:15px;padding:16px 18px;border-radius:2px;outline:none;transition:border-color .2s;}
+    .join-form input:focus{border-color:var(--gold);}
+    .join-form input::placeholder{color:var(--muted);}
+    .join-form button{font-family:var(--serif);letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:#17120a;background:linear-gradient(180deg,#e9c17e,#cda45f);border:0;padding:16px 28px;border-radius:2px;cursor:pointer;transition:filter .2s,transform .2s;white-space:nowrap;}
+    .join-form button:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+    /* ============ FOOTER ============ */
+    footer{background:var(--bg2);padding:clamp(56px,7vw,84px) 0 40px;border-top:1px solid var(--line);}
+    .foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;}
+    .foot-brand img{height:76px;width:auto;margin-bottom:20px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));}
+    .foot-tag{font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--gold);}
+    .foot-cols{display:flex;gap:clamp(40px,7vw,90px);flex-wrap:wrap;}
+    .foot-col h4{margin:0 0 16px;font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--muted);}
+    .foot-col a{display:block;font-family:var(--serif);letter-spacing:.08em;color:var(--cream-dim);text-decoration:none;font-size:15px;margin-bottom:11px;transition:color .2s;}
+    .foot-col a:hover{color:var(--gold2);}
+    .foot-social{display:flex;gap:18px;font-size:19px;margin-top:4px;}
+    .foot-social a{color:var(--cream-dim);transition:color .2s,transform .2s;}
+    .foot-social a:hover{color:var(--gold);transform:translateY(-2px);}
+    .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:clamp(44px,6vw,70px);padding-top:26px;border-top:1px solid var(--line);font-size:12px;letter-spacing:.05em;color:var(--muted);}
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width:900px){
+      .music-grid{grid-template-columns:1fr;gap:44px;}
+      .cover{max-width:440px;}
+      .about-head{grid-template-columns:1fr;gap:20px;}
+      .members{grid-template-columns:1fr;}
+      .media-grid{grid-template-columns:1fr;}
+      .media-tall{grid-row:auto;}
+      .store-grid{grid-template-columns:repeat(2,1fr);}
     }
-    .eyebrow{font-family:'Marcellus SC',serif;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-size:13px;margin-bottom:14px;}
-    .band h2{margin:0 0 10px;font-size:clamp(34px,5vw,64px);letter-spacing:.02em;color:#f3ead9;}
-    .band .sub{margin:0 auto 52px;max-width:620px;color:#b7ad9e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;}
-    .band .inner{max-width:1080px;margin:0 auto;text-align:center;}
-
-    .shows{max-width:820px;margin:0 auto;text-align:left;}
-    .show-row{
-      display:flex;align-items:center;gap:20px;padding:22px 6px;
-      border-bottom:1px solid rgba(231,221,203,.1);transition:background .2s;
-    }
-    .show-row:hover{background:rgba(205,164,95,.05);}
-    .show-date{flex:0 0 92px;font-family:'Marcellus SC',serif;letter-spacing:.06em;color:var(--gold2);font-size:16px;}
-    .show-info{flex:1;}
-    .show-venue{display:block;color:#efe9e0;font-size:clamp(17px,1.5vw,21px);}
-    .show-city{display:block;color:#8f8676;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
-    .show-cta{
-      flex:0 0 auto;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);
-      text-decoration:none;border:1px solid rgba(205,164,95,.5);padding:9px 18px;transition:all .2s;white-space:nowrap;
-    }
-    .show-cta:hover{color:#0f0a04;background:var(--gold);border-color:var(--gold);}
-
-    footer{padding:48px 22px 60px;text-align:center;color:#6f6659;font-size:13px;letter-spacing:.06em;background:var(--bg2);}
-    footer .placeholder-note{color:#8a7f6c;font-size:12px;margin-top:10px;font-style:italic;}
-
     @media (max-width:820px){
       .hero{height:100svh;min-height:0;}
       .hero-art{object-position:center 20%;}
       .follow-label{display:none;}
       .social-row{top:18px;right:16px;}
-      .hero-nav .group,.hero-nav .spacer{display:none;}
-      .hero-nav{justify-content:center;width:100%;padding-bottom:clamp(96px,16vh,120px);}
+      .hero-nav .group{display:none;}
+      .hero-nav{justify-content:center;width:100%;padding-bottom:clamp(30px,7vh,54px);}
       .topnav .links{display:none;}
       .topnav .burger{display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--cream);font-size:20px;cursor:pointer;}
       .menu-toggle{display:flex;}
       body.nav-docked .menu-toggle{opacity:0;pointer-events:none;transition:opacity .2s;}
+    }
+    @media (max-width:560px){
+      .store-grid{grid-template-columns:1fr;}
+      .join-form{flex-direction:column;}
+      .foot-top{flex-direction:column;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:.001s!important;animation-iteration-count:1!important;}
+      .reveal{opacity:1;transform:none;transition:none;}
+      .hero-art{animation:none;}
     }
   </style>
 </head>
@@ -259,6 +346,7 @@
       <a href="#shows">Shows</a>
       <a href="#media">Media</a>
       <a href="#store">Store</a>
+      <a class="nav-cta" href="#music">Listen Now <span class="eq"><span></span><span></span><span></span><span></span><span></span></span></a>
     </nav>
     <button class="burger" id="burgerTop" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   </header>
@@ -281,14 +369,16 @@
       </div>
     </div>
 
-    <!-- bottom hero nav: links split around a spacer that the fixed button sits over -->
     <nav class="hero-nav" id="heroNav">
       <div class="group left">
         <a class="nav-link active" href="#top">Home</a>
         <a class="nav-link" href="#music">Music</a>
         <a class="nav-link" href="#about">About</a>
       </div>
-      <div class="spacer" aria-hidden="true"></div>
+      <a class="hero-listen" href="#music">
+        Listen Now
+        <span class="eq"><span></span><span></span><span></span><span></span><span></span></span>
+      </a>
       <div class="group right">
         <a class="nav-link" href="#shows">Shows</a>
         <a class="nav-link" href="#media">Media</a>
@@ -296,12 +386,6 @@
       </div>
     </nav>
   </section>
-
-  <!-- FIXED LISTEN NOW (pinned, fades on dock) -->
-  <a class="listen-fixed" id="listenFixed" href="#">
-    Listen Now
-    <span class="eq"><span></span><span></span><span></span><span></span><span></span></span>
-  </a>
 
   <!-- MOBILE MENU -->
   <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
@@ -312,86 +396,272 @@
     <a href="#shows">Shows</a>
     <a href="#media">Media</a>
     <a href="#store">Store</a>
+    <a class="m-cta" href="#music">Listen Now</a>
   </nav>
 
-  <!-- STARTER CONTENT -->
-  <section class="band" id="shows">
-    <div class="inner">
-      <div class="eyebrow">Real Country. Real Stories. No Limits.</div>
-      <h2>Upcoming Shows</h2>
-      <p class="sub">Dixon Hall — John Dixon Hall Jr. &amp; Terry Glaze — live across Maryland &amp; PA. High-energy nights of soul-country and southern rock.</p>
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>No Limit Country</span><span class="di">&#9670;</span><span>New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In Nashville</span><span class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span class="di">&#9670;</span><span>No Limit Country</span><span class="di">&#9670;</span><span>New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In Nashville</span><span class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span class="di">&#9670;</span>
+    </div>
+  </div>
 
-      <div class="shows">
-        <div class="show-row">
-          <span class="show-date">Jul 8</span>
-          <span class="show-info"><span class="show-venue">Admiral's Cup</span><span class="show-city">Baltimore, MD</span></span>
-          <a class="show-cta" href="#">Details</a>
+  <!-- MUSIC / SINGLE -->
+  <section class="music" id="music">
+    <div class="container">
+      <div class="music-grid">
+        <div>
+          <p class="eyebrow reveal"><span class="num">01</span><span class="bar"></span>New Single</p>
+          <h2 class="display metal reveal d1">Beautiful<br>Life</h2>
+          <div class="single-date reveal d2">Out Friday &middot; July 31, 2026</div>
+
+          <div class="countdown reveal d2" id="countdown" aria-label="Countdown to release">
+            <div class="cd-unit"><div class="cd-num" data-d>30</div><div class="cd-label">Days</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" data-h>00</div><div class="cd-label">Hrs</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" data-m>00</div><div class="cd-label">Min</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" data-s>00</div><div class="cd-label">Sec</div></div>
+          </div>
+
+          <p class="body-text reveal d3" style="max-width:460px;">The first cut from Dixon Hall&rsquo;s debut EP &mdash; recorded in Nashville. Classic country storytelling with a modern edge, built on the raw chemistry between Hall&rsquo;s soulful voice and Glaze&rsquo;s unmistakable guitar.</p>
+
+          <div class="btn-row reveal d3">
+            <a class="btn-primary" href="#"><span class="eq"><span></span><span></span><span></span><span></span><span></span></span> Pre-Save</a>
+            <div class="streams" aria-label="Streaming platforms">
+              <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+              <a href="#" aria-label="Apple Music"><i class="fa-brands fa-apple"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#" aria-label="Amazon Music"><i class="fa-brands fa-amazon"></i></a>
+            </div>
+          </div>
         </div>
-        <div class="show-row">
-          <span class="show-date">Jul 11</span>
-          <span class="show-info"><span class="show-venue">Twains Tavern</span><span class="show-city">Pasadena, MD</span></span>
-          <a class="show-cta" href="#">Details</a>
-        </div>
-        <div class="show-row">
-          <span class="show-date">Jul 17</span>
-          <span class="show-info"><span class="show-venue">Tolchester</span><span class="show-city">Chestertown, MD</span></span>
-          <a class="show-cta" href="#">Details</a>
-        </div>
-        <div class="show-row">
-          <span class="show-date">Jul 24</span>
-          <span class="show-info"><span class="show-venue">Natalie's</span><span class="show-city">Fallston, MD</span></span>
-          <a class="show-cta" href="#">Details</a>
-        </div>
-        <div class="show-row">
-          <span class="show-date">Jul 25</span>
-          <span class="show-info"><span class="show-venue">Smoke on the Rail BBQ Fest</span><span class="show-city">New Freedom, PA</span></span>
-          <a class="show-cta" href="#">Details</a>
+
+        <div class="reveal d2">
+          <div class="cover">
+            <div class="cover-bg"></div>
+            <div class="cover-grad"></div>
+            <span class="cover-tag">Single</span>
+            <div class="cover-inner">
+              <img src="assets/logo.png" alt="">
+              <div class="cover-title metal">Beautiful Life</div>
+              <div class="cover-meta">Dixon Hall &middot; 2026</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-head">
+        <div>
+          <p class="eyebrow reveal"><span class="num">02</span><span class="bar"></span>The Band</p>
+          <h2 class="display metal reveal d1">An Unlikely<br>Harmony</h2>
+        </div>
+        <p class="lead reveal d2">When a soulful country singer and a legendary rock vocalist discover they harmonize like they&rsquo;ve sung together their whole lives, something special happens.</p>
+      </div>
+
+      <div class="about-photo reveal">
+        <img src="assets/band.png" alt="John Dixon Hall Jr. and Terry Glaze of Dixon Hall">
+        <span class="cap">Nashville, TN</span>
+      </div>
+
+      <div class="about-body reveal" style="max-width:760px;">
+        <p class="body-text">Dixon Hall is a modern country band built on the unlikely but powerful partnership between vocalist and songwriter John Dixon Hall Jr. and legendary rock guitarist Terry Glaze. Their musical backgrounds could hardly be more different &mdash; but it&rsquo;s their vocal blend and natural harmony that truly sets the band apart. Hall&rsquo;s soulful country tone paired with Glaze&rsquo;s gritty rock edge creates a powerful dynamic on stage, and what started as a collaboration quickly evolved into a full band with a fast-growing regional following.</p>
+      </div>
+
+      <div class="members">
+        <div class="member reveal d1">
+          <div class="role">Vocals &middot; Songwriter</div>
+          <h3>John Dixon<br>Hall Jr.</h3>
+          <p>A Maryland native with deep roots in soul and country, Hall built his reputation performing across the Mid-Atlantic &mdash; with a voice that blends heartfelt storytelling and powerful delivery.</p>
+          <span class="tag">Maryland, USA</span>
+        </div>
+        <div class="member reveal d2">
+          <div class="role">Guitar &middot; Vocals</div>
+          <h3>Terry<br>Glaze</h3>
+          <p>Decades on the world&rsquo;s stages &mdash; the original vocalist for Pantera and frontman of Lord Tracy. Glaze brings a gritty rock edge that meets Hall&rsquo;s soul head-on.</p>
+          <span class="tag">Rock Icon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWS -->
+  <section class="shows" id="shows">
+    <div class="container">
+      <div class="shows-head">
+        <div>
+          <p class="eyebrow reveal"><span class="num">03</span><span class="bar"></span>On The Road</p>
+          <h2 class="display metal reveal d1">Live</h2>
+        </div>
+        <p class="body-text reveal d2" style="max-width:340px;">High-energy nights of today&rsquo;s country favorites and originals that reflect real life &mdash; and the little moments that matter most.</p>
+      </div>
+
+      <div class="show-list reveal">
+        <div class="show-row">
+          <div class="sr-date"><div class="sr-day">08</div><div class="sr-mon">Jul</div></div>
+          <div class="sr-info"><div class="sr-venue">Admiral&rsquo;s Cup</div><div class="sr-city">Baltimore, MD &middot; 7:00 PM</div></div>
+          <a class="sr-cta" href="#">Details</a>
+        </div>
+        <div class="show-row">
+          <div class="sr-date"><div class="sr-day">11</div><div class="sr-mon">Jul</div></div>
+          <div class="sr-info"><div class="sr-venue">Twains Tavern</div><div class="sr-city">Pasadena, MD &middot; 8:30 PM</div></div>
+          <a class="sr-cta" href="#">Details</a>
+        </div>
+        <div class="show-row">
+          <div class="sr-date"><div class="sr-day">17</div><div class="sr-mon">Jul</div></div>
+          <div class="sr-info"><div class="sr-venue">Tolchester</div><div class="sr-city">Chestertown, MD &middot; 7:00 PM</div></div>
+          <a class="sr-cta" href="#">Details</a>
+        </div>
+        <div class="show-row">
+          <div class="sr-date"><div class="sr-day">24</div><div class="sr-mon">Jul</div></div>
+          <div class="sr-info"><div class="sr-venue">Natalie&rsquo;s</div><div class="sr-city">Fallston, MD &middot; 7:00 PM</div></div>
+          <a class="sr-cta" href="#">Details</a>
+        </div>
+        <div class="show-row">
+          <div class="sr-date"><div class="sr-day">25</div><div class="sr-mon">Jul</div></div>
+          <div class="sr-info"><div class="sr-venue">Smoke on the Rail BBQ Fest</div><div class="sr-city">New Freedom, PA &middot; 5:30 PM</div></div>
+          <a class="sr-cta" href="#">Details</a>
+        </div>
+      </div>
+
+      <p class="booking-note reveal">Booking &amp; private events &mdash; <a href="mailto:john@johndixonhalljr.com">john@johndixonhalljr.com</a></p>
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section class="media" id="media">
+    <div class="container">
+      <p class="eyebrow reveal"><span class="num">04</span><span class="bar"></span>Gallery</p>
+      <h2 class="display metal reveal d1" style="margin-bottom:clamp(30px,4vw,50px);">In The Frame</h2>
+      <div class="media-grid reveal d1">
+        <div class="media-tile media-tall media-a">
+          <img src="assets/band.png" alt="Dixon Hall live and in the studio">
+          <span class="badge">The Duo &middot; Nashville</span>
+        </div>
+        <div class="media-tile media-b" style="display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(120% 120% at 50% 26%, #17120c, #0a0806);">
+          <span style="position:absolute;inset:0;background-image:url('assets/brick.avif');background-size:cover;background-position:center;opacity:.24;mix-blend-mode:luminosity;"></span>
+          <img src="assets/logo.png" alt="Dixon Hall — No Limit Country crest" style="position:relative;width:44%;height:auto;object-fit:contain;filter:drop-shadow(0 8px 22px rgba(0,0,0,.6));">
+          <span class="badge">No Limit Country</span>
+        </div>
+        <div class="media-tile media-b" style="display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 120% at 50% 30%, #17120c, #0a0806);">
+          <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;color:var(--cream-dim);">
+            <i class="fa-brands fa-instagram" style="font-size:30px;color:var(--gold2);"></i>
+            <div style="font-family:var(--serifsc);letter-spacing:.22em;text-transform:uppercase;font-size:12px;margin-top:14px;">Follow for more</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORE -->
+  <section class="store" id="store">
+    <div class="container">
+      <div class="shows-head">
+        <div>
+          <p class="eyebrow reveal"><span class="num">05</span><span class="bar"></span>Merch</p>
+          <h2 class="display metal reveal d1">Gear Up</h2>
+        </div>
+        <p class="body-text reveal d2" style="max-width:360px;">Official Dixon Hall apparel, accessories, and future exclusive releases &mdash; made for the fans.</p>
+      </div>
+
+      <div class="store-grid">
+        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Women&rsquo;s Cotton Tank</span><span class="merch-price">$35.00</span></div></a>
+        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Pom-Pom Beanie</span><span class="merch-price">$30.00</span></div></a>
+        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Trucker Cap</span><span class="merch-price">$30.00</span></div></a>
+        <a class="merch reveal d2" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Crop Hoodie</span><span class="merch-price">$36.50</span></div></a>
+        <a class="merch reveal d2" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Short Sleeve Tee</span><span class="merch-price">$23.50</span></div></a>
+        <a class="merch reveal d2" href="#" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:36px;"><div><i class="fa-solid fa-bag-shopping" style="font-size:26px;color:var(--gold2);"></i><div style="font-family:var(--serif);letter-spacing:.16em;text-transform:uppercase;font-size:14px;color:#efe9e0;margin-top:16px;">Shop All Merch</div></div></a>
+      </div>
+      <p class="store-note reveal">Product photos are placeholders &mdash; live store images drop in here.</p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="join">
+    <div class="container">
+      <div class="inner">
+        <p class="eyebrow reveal" style="justify-content:center;"><span class="bar"></span>Fan Club<span class="bar" style="background:linear-gradient(270deg,var(--gold),transparent);"></span></p>
+        <h2 class="display metal reveal d1">Never Miss<br>A Drop</h2>
+        <p class="body-text reveal d2">Get early access to new music, upcoming shows, merch drops, and exclusive behind-the-scenes updates delivered straight to your inbox.</p>
+        <form class="join-form reveal d2" onsubmit="return false;">
+          <input type="email" placeholder="Your email address" aria-label="Email address" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    &copy; 2026 Dixon Hall — No Limit Country · Booking: john@johndixonhalljr.com
-    <div class="placeholder-note">Shows section is a starter block so the scroll behavior is demonstrable — full site sections still to come.</div>
+    <div class="container">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img src="assets/logo.png" alt="Dixon Hall">
+          <div class="foot-tag">Real Country. Real Stories. No Limits.</div>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Explore</h4>
+            <a href="#music">Music</a>
+            <a href="#about">About</a>
+            <a href="#shows">Shows</a>
+            <a href="#media">Media</a>
+            <a href="#store">Store</a>
+          </div>
+          <div class="foot-col">
+            <h4>Connect</h4>
+            <a href="mailto:john@johndixonhalljr.com">Booking</a>
+            <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener">TikTok</a>
+            <div class="foot-social">
+              <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+              <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; 2026 Dixon Hall &middot; No Limit Country</span>
+        <span>Modern Country Music with Soul, Storytelling &amp; Southern Rock Energy</span>
+      </div>
+    </div>
   </footer>
 
   <script>
     (function(){
+      /* ---- Scroll: nav crossfade (Listen Now docks as last nav item) ---- */
       var topnav = document.getElementById('topnav');
       var heroNav = document.getElementById('heroNav');
-      var listen = document.getElementById('listenFixed');
       var body = document.body;
-
       var ticking = false;
       function update(){
         ticking = false;
-        var vh = window.innerHeight;
-        var y = window.pageYOffset;
-        // Handoff band: bottom nav crossfades into the sticky top nav near the end of the hero.
-        var start = vh * 0.42;
-        var end   = vh * 0.82;
+        var vh = window.innerHeight, y = window.pageYOffset;
+        var start = vh * 0.42, end = vh * 0.82;
         var p = (y - start) / (end - start);
-        p = p < 0 ? 0 : (p > 1 ? 1 : p);   // 0 = hero view, 1 = docked
-
+        p = p < 0 ? 0 : (p > 1 ? 1 : p);
         topnav.style.opacity = p;
         topnav.style.transform = 'translateY(' + ((p - 1) * 12) + 'px)';
         topnav.style.pointerEvents = p > 0.6 ? 'auto' : 'none';
-
-        listen.style.opacity = 1 - p;
-        listen.style.pointerEvents = p < 0.4 ? 'auto' : 'none';
-
-        heroNav.style.opacity = 1 - p;
-
+        if(heroNav) heroNav.style.opacity = 1 - p;
         body.classList.toggle('nav-docked', p > 0.6);
       }
       function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
-      window.__dhUpdate = update; // exposed for deterministic testing
+      window.__dhUpdate = update;
       window.addEventListener('scroll', onScroll, {passive:true});
       window.addEventListener('resize', update);
       update();
 
-      // Mobile menu
+      /* ---- Mobile menu ---- */
       var mToggle = document.getElementById('menuToggle');
       var bTop = document.getElementById('burgerTop');
       var menu = document.getElementById('mobileMenu');
@@ -401,6 +671,35 @@
       }
       [mToggle, bTop].forEach(function(b){ if(b) b.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); }); });
       menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+
+      /* ---- Scroll reveals ---- */
+      var reveals = document.querySelectorAll('.reveal');
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+        reveals.forEach(function(el){ io.observe(el); });
+      } else {
+        reveals.forEach(function(el){ el.classList.add('in'); });
+      }
+
+      /* ---- Countdown to 2026-07-31 ---- */
+      var target = new Date('2026-07-31T00:00:00').getTime();
+      var cd = document.getElementById('countdown');
+      if(cd){
+        var dEl=cd.querySelector('[data-d]'), hEl=cd.querySelector('[data-h]'), mEl=cd.querySelector('[data-m]'), sEl=cd.querySelector('[data-s]');
+        function pad(n){ return (n<10?'0':'')+n; }
+        function tick(){
+          var diff = target - Date.now();
+          if(diff <= 0){ dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00'; return; }
+          var s=Math.floor(diff/1000);
+          dEl.textContent = Math.floor(s/86400);
+          hEl.textContent = pad(Math.floor((s%86400)/3600));
+          mEl.textContent = pad(Math.floor((s%3600)/60));
+          sEl.textContent = pad(s%60);
+        }
+        tick(); setInterval(tick, 1000);
+      }
     })();
   </script>
 
@@ -423,7 +722,7 @@
       }
       if(document.readyState === 'complete') reveal();
       else window.addEventListener('load', reveal);
-      setTimeout(reveal, CAP); // hard fallback
+      setTimeout(reveal, CAP);
     })();
   </script>
 
