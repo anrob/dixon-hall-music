@@ -39,4 +39,4 @@ Genre: modern country with soul, storytelling, southern rock energy.
 The Claude preview screenshot tool renders **black** whenever a `position:fixed` element (the sticky topnav) is visible, and only captures reliably at scroll 0. To screenshot sections, hide siblings + bring target to top (a `__showOnly` helper injected via eval). Not a page bug — renders fine in real browsers.
 
 ## Status
-Full site built + responsive + verified, not deployed. GitHub remote + Vercel still staged for Fresh's go.
+Full site built + responsive + verified. **GitHub: `anrob/dixon-hall-music` (private), branch `main`** — pushed 2026-07-02. Vercel deploy still staged for Fresh's go.

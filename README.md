@@ -3,8 +3,9 @@
 Website for **Dixon Hall — No Limit Country**: John Dixon Hall Jr. × rock icon Terry Glaze. Modern country music with soul, storytelling, and southern rock energy.
 
 - **Live site (client's current):** https://www.dixonhallmusic.com/
-- **Status:** 🟡 Hero section built (v2 design), not yet deployed
-- **Repo:** own repo (`dixon-hall-music`) — carved out of the FreshOS monorepo per repo-per-project rule
+- **Status:** 🟢 Full one-page site built (all sections), not yet deployed
+- **Repo:** [`anrob/dixon-hall-music`](https://github.com/anrob/dixon-hall-music) (private) — own repo, carved out of the FreshOS monorepo per repo-per-project rule
+- **Run locally:** `npm run dev` → http://localhost:3000 (zero-dependency static server, binds `0.0.0.0` for LAN preview)
 
 ## What's here
 - `site/` — deployable site. `site/index.html` is the live hero, built from the v2 Claude Design.
@@ -17,9 +18,9 @@ Website for **Dixon Hall — No Limit Country**: John Dixon Hall Jr. × rock ico
 - **v1 (alternate)** — code-built hero over the raw Parthenon band photo: Anton headline "Soul Meets Southern Rock", new-single badge, marquee. Preserved in `docs/design-handoff/`.
 
 ## Next action
-1. Fresh reviews the hero preview.
-2. Build out the rest of the site (Music / About / Shows / Media / Store) — the nav is stubbed with `#` links.
-3. Create GitHub repo + deploy to Vercel (staged — awaiting Fresh's go).
+1. Deploy to Vercel (`rootDirectory = site`) — staged, awaiting Fresh's go.
+2. Wire real streaming / pre-save links + store links (currently `#` stubs).
+3. Swap merch placeholder art for real product photos.
 
 ## Band facts (from dixonhallmusic.com)
 - **Members:** John Dixon Hall Jr. (vocals/songwriter), Terry Glaze (guitar/vocals)
