@@ -7,6 +7,16 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+// Load .env (zero-dep) so the local /api/content route can reach Airtable.
+try {
+  fs.readFileSync(path.join(__dirname, '.env'), 'utf8').split('\n').forEach((line) => {
+    const m = line.match(/^\s*([\w.]+)\s*=\s*(.*?)\s*$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+  });
+} catch (e) { /* no .env — /api/content will 503 and the site falls back */ }
+
+const apiContent = require('./site/api/content.js');
+
 const ROOT = path.join(__dirname, 'site');
 const HOST = '0.0.0.0';
 const START_PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -26,6 +36,9 @@ const MIME = {
 const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
   if (urlPath === '/') urlPath = '/index.html';
+
+  // Same serverless function Vercel runs — full backend loop works locally.
+  if (urlPath === '/api/content') return apiContent(req, res);
 
   const filePath = path.join(ROOT, path.normalize(urlPath));
   if (!filePath.startsWith(ROOT)) {          // block path traversal

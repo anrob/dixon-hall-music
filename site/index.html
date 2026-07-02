@@ -206,7 +206,8 @@
     .cover-inner img{width:44%;filter:drop-shadow(0 10px 26px rgba(0,0,0,.6));margin-bottom:8%;}
     .cover-title{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,4vw,52px);line-height:.92;letter-spacing:.02em;}
     .cover-meta{font-family:var(--serifsc);letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-top:16px;}
-    .cover-tag{position:absolute;top:16px;left:16px;font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--gold2);border:1px solid rgba(205,164,95,.5);padding:6px 12px;}
+    .cover-tag{position:absolute;top:16px;left:16px;z-index:2;font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--gold2);border:1px solid rgba(205,164,95,.5);padding:6px 12px;}
+    .cover-real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 
     /* ============ ABOUT ============ */
     .about{padding:var(--sp) 0;background:var(--bg);}
@@ -411,9 +412,9 @@
     <div class="container">
       <div class="music-grid">
         <div>
-          <p class="eyebrow reveal"><span class="num">01</span><span class="bar"></span>New Single</p>
-          <h2 class="display metal reveal d1">Beautiful<br>Life</h2>
-          <div class="single-date reveal d2">Out Friday &middot; July 31, 2026</div>
+          <p class="eyebrow reveal"><span class="num">01</span><span class="bar"></span><span id="songEyebrow">New Single</span></p>
+          <h2 class="display metal reveal d1" id="songTitle">Beautiful<br>Life</h2>
+          <div class="single-date reveal d2" id="songDate">Out Friday &middot; July 31, 2026</div>
 
           <div class="countdown reveal d2" id="countdown" aria-label="Countdown to release">
             <div class="cd-unit"><div class="cd-num" data-d>30</div><div class="cd-label">Days</div></div>
@@ -425,28 +426,28 @@
             <div class="cd-unit"><div class="cd-num" data-s>00</div><div class="cd-label">Sec</div></div>
           </div>
 
-          <p class="body-text reveal d3" style="max-width:460px;">The first cut from Dixon Hall&rsquo;s debut EP &mdash; recorded in Nashville. Classic country storytelling with a modern edge, built on the raw chemistry between Hall&rsquo;s soulful voice and Glaze&rsquo;s unmistakable guitar.</p>
+          <p class="body-text reveal d3" style="max-width:460px;" id="songBlurb">The first cut from Dixon Hall&rsquo;s debut EP &mdash; recorded in Nashville. Classic country storytelling with a modern edge, built on the raw chemistry between Hall&rsquo;s soulful voice and Glaze&rsquo;s unmistakable guitar.</p>
 
           <div class="btn-row reveal d3">
-            <a class="btn-primary" href="#"><span class="eq"><span></span><span></span><span></span><span></span><span></span></span> Pre-Save</a>
-            <div class="streams" aria-label="Streaming platforms">
-              <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
-              <a href="#" aria-label="Apple Music"><i class="fa-brands fa-apple"></i></a>
-              <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-              <a href="#" aria-label="Amazon Music"><i class="fa-brands fa-amazon"></i></a>
+            <a class="btn-primary" href="#" id="songCTA"><span class="eq"><span></span><span></span><span></span><span></span><span></span></span> <span id="songCTAText">Pre-Save</span></a>
+            <div class="streams" aria-label="Streaming platforms" id="songStreams">
+              <a href="#" data-platform="spotify" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+              <a href="#" data-platform="apple" aria-label="Apple Music"><i class="fa-brands fa-apple"></i></a>
+              <a href="#" data-platform="youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#" data-platform="amazon" aria-label="Amazon Music"><i class="fa-brands fa-amazon"></i></a>
             </div>
           </div>
         </div>
 
         <div class="reveal d2">
-          <div class="cover">
+          <div class="cover" id="coverCard">
             <div class="cover-bg"></div>
             <div class="cover-grad"></div>
             <span class="cover-tag">Single</span>
-            <div class="cover-inner">
+            <div class="cover-inner" id="coverInner">
               <img src="assets/logo.png" alt="">
-              <div class="cover-title metal">Beautiful Life</div>
-              <div class="cover-meta">Dixon Hall &middot; 2026</div>
+              <div class="cover-title metal" id="coverTitle">Beautiful Life</div>
+              <div class="cover-meta" id="coverMeta">Dixon Hall &middot; 2026</div>
             </div>
           </div>
         </div>
@@ -502,7 +503,7 @@
         <p class="body-text reveal d2" style="max-width:340px;">High-energy nights of today&rsquo;s country favorites and originals that reflect real life &mdash; and the little moments that matter most.</p>
       </div>
 
-      <div class="show-list reveal">
+      <div class="show-list reveal" id="showList">
         <div class="show-row">
           <div class="sr-date"><div class="sr-day">08</div><div class="sr-mon">Jul</div></div>
           <div class="sr-info"><div class="sr-venue">Admiral&rsquo;s Cup</div><div class="sr-city">Baltimore, MD &middot; 7:00 PM</div></div>
@@ -683,10 +684,12 @@
         reveals.forEach(function(el){ el.classList.add('in'); });
       }
 
-      /* ---- Countdown to 2026-07-31 ---- */
-      var target = new Date('2026-07-31T00:00:00').getTime();
-      var cd = document.getElementById('countdown');
-      if(cd){
+      /* ---- Countdown (re-targetable; data layer can point it at a new date) ---- */
+      var cdTimer = null;
+      window.__dhCountdown = function(dateStr){
+        var cd = document.getElementById('countdown');
+        if(!cd) return;
+        var target = new Date(dateStr + 'T00:00:00').getTime();
         var dEl=cd.querySelector('[data-d]'), hEl=cd.querySelector('[data-h]'), mEl=cd.querySelector('[data-m]'), sEl=cd.querySelector('[data-s]');
         function pad(n){ return (n<10?'0':'')+n; }
         function tick(){
@@ -698,7 +701,131 @@
           mEl.textContent = pad(Math.floor((s%3600)/60));
           sEl.textContent = pad(s%60);
         }
-        tick(); setInterval(tick, 1000);
+        if(cdTimer) clearInterval(cdTimer);
+        tick(); cdTimer = setInterval(tick, 1000);
+      };
+      window.__dhCountdown('2026-07-31');
+    })();
+  </script>
+
+  <!-- DATA LAYER — Airtable-driven content via /api/content.
+       If the backend isn't configured or the fetch fails, the baked-in
+       content above stays as-is; the site can never look broken. -->
+  <script>
+    (function(){
+      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var MONTHS_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+      function el(id){ return document.getElementById(id); }
+      function parseDate(str){ return str ? new Date(str + 'T00:00:00') : null; }
+      function esc(s){ var d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+
+      fetch('/api/content')
+        .then(function(r){ if(!r.ok) throw new Error('unavailable'); return r.json(); })
+        .then(function(data){
+          try{ renderSong((data && data.songs) || []); }catch(e){}
+          try{ renderShows((data && data.shows) || []); }catch(e){}
+        })
+        .catch(function(){ /* fallback: keep baked-in content */ });
+
+      /* ---- SONG (featured, else newest) ---- */
+      function renderSong(songs){
+        var visible = songs.filter(function(s){ return s.title && s.status !== 'Hidden'; });
+        if(!visible.length) return;
+        var pool = visible.filter(function(s){ return s.featured; });
+        if(!pool.length) pool = visible;
+        pool.sort(function(a,b){ return (parseDate(b.releaseDate)||0) - (parseDate(a.releaseDate)||0); });
+        var s = pool[0];
+
+        var rel = parseDate(s.releaseDate);
+        var today = new Date(); today.setHours(0,0,0,0);
+        var released = s.status === 'Released' || (rel && rel <= today);
+
+        // Title — break long titles across two lines
+        var words = (s.title||'').trim().split(/\s+/);
+        el('songTitle').innerHTML = words.length > 1
+          ? esc(words.slice(0, Math.ceil(words.length/2)).join(' ')) + '<br>' + esc(words.slice(Math.ceil(words.length/2)).join(' '))
+          : esc(s.title);
+
+        el('songEyebrow').textContent = released ? 'Latest Single' : 'New Single';
+
+        if(released){
+          el('songDate').textContent = 'Available Now';
+          var cd = el('countdown'); if(cd) cd.style.display = 'none';
+        } else if(rel){
+          el('songDate').textContent = 'Out ' + DAYS[rel.getDay()] + ' · ' + MONTHS_FULL[rel.getMonth()] + ' ' + rel.getDate() + ', ' + rel.getFullYear();
+          var cd2 = el('countdown'); if(cd2) cd2.style.display = '';
+          if(window.__dhCountdown) window.__dhCountdown(s.releaseDate);
+        }
+
+        if(s.blurb) el('songBlurb').textContent = s.blurb;
+
+        // CTA + streaming links
+        var L = s.links || {};
+        var firstListen = L.spotify || L.apple || L.youtube || L.amazon;
+        var cta = el('songCTA');
+        if(released){
+          el('songCTAText').textContent = 'Listen Now';
+          cta.href = firstListen || '#';
+        } else {
+          el('songCTAText').textContent = 'Pre-Save';
+          cta.href = L.presave || firstListen || '#';
+        }
+        var anyStream = false;
+        document.querySelectorAll('#songStreams a').forEach(function(a){
+          var url = L[a.getAttribute('data-platform')];
+          if(url){ a.href = url; a.style.display = ''; anyStream = true; }
+          else a.style.display = 'none';
+        });
+        el('songStreams').style.display = anyStream ? '' : 'none';
+
+        // Cover art — real upload replaces the crest composition
+        if(s.cover){
+          var card = el('coverCard');
+          if(!card.querySelector('.cover-real')){
+            var img = document.createElement('img');
+            img.className = 'cover-real';
+            img.alt = s.title + ' — cover art';
+            img.src = s.cover;
+            card.insertBefore(img, card.querySelector('.cover-tag'));
+          } else {
+            card.querySelector('.cover-real').src = s.cover;
+          }
+          el('coverInner').style.display = 'none';
+        } else {
+          el('coverTitle').textContent = s.title;
+          el('coverMeta').innerHTML = 'Dixon Hall · ' + (rel ? rel.getFullYear() : new Date().getFullYear());
+        }
+      }
+
+      /* ---- SHOWS (upcoming only, soonest first) ---- */
+      function renderShows(shows){
+        var today = new Date(); today.setHours(0,0,0,0);
+        var upcoming = shows
+          .filter(function(sh){ var d = parseDate(sh.date); return sh.venue && d && d >= today; })
+          .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
+
+        var list = el('showList');
+        if(!list) return;
+        if(!upcoming.length){
+          list.innerHTML = '<div class="show-row"><div class="sr-info"><div class="sr-venue">No upcoming shows</div>' +
+            '<div class="sr-city">Follow us for announcements</div></div></div>';
+          return;
+        }
+        list.innerHTML = upcoming.map(function(sh){
+          var d = parseDate(sh.date);
+          var city = esc(sh.city || '');
+          var time = esc(sh.time || '');
+          var meta = city + (city && time ? ' · ' : '') + time;
+          var link = sh.ticketUrl
+            ? '<a class="sr-cta" href="' + esc(sh.ticketUrl) + '" target="_blank" rel="noopener">Details</a>'
+            : '<a class="sr-cta" href="#">Details</a>';
+          return '<div class="show-row">' +
+            '<div class="sr-date"><div class="sr-day">' + (d.getDate()<10?'0':'') + d.getDate() + '</div><div class="sr-mon">' + MONTHS[d.getMonth()] + '</div></div>' +
+            '<div class="sr-info"><div class="sr-venue">' + esc(sh.venue) + '</div><div class="sr-city">' + meta + '</div></div>' +
+            link + '</div>';
+        }).join('');
       }
     })();
   </script>

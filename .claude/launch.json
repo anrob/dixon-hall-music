@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "dixon-site",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4600", "--bind", "0.0.0.0", "--directory", "/Users/freshscott/FreshOS/projects/dixon-hall-music/site"],
-      "port": 4600
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/freshscott/FreshOS/projects/dixon-hall-music/server.js"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }

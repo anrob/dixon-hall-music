@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-07-02 — Airtable content backend (songs + shows)
+- Client asked how he'll add songs on release; Fresh promised "a backend." Architecture: **Airtable** (never pauses, unlike Supabase's 2-active free cap — Fresh's call) → `site/api/content.js` Vercel serverless proxy (token in env var, CDN-cached 5 min) → data layer in index.html renders Music + Shows.
+- Music section fully data-driven: featured/newest song, Upcoming (countdown + Pre-Save) vs Released ("Available Now" + Listen), streaming buttons auto-hide when empty, uploaded cover art replaces the crest placeholder. Shows: upcoming only, soonest first, past auto-hides.
+- **Bulletproof fallback:** fetch fails or unconfigured → baked-in content stays, zero console errors (verified).
+- `npm run dev` serves the same function locally (`.env`). Added `.env.example` + `docs/backend.md` (schema, setup checklist, John's workflow).
+- **Blocked:** Airtable MCP connector needs re-auth (workspace scope) before Claude can create + seed the base. Then: PAT + Vercel env vars at deploy.
+
 ## 2026-07-01 — Full site build (awwwards-grade) + Listen Now nav rework
 - Built out the complete one-page site with real copy pulled from dixonhallmusic.com. Used the frontend-design + ui-ux-pro-max skills for direction (one hero element per section, 112px+ rhythm, restraint, contained widths, no parallax).
 - **Type system:** Anton (heavy display) × Marcellus/Marcellus SC (serif labels/nav) × Barlow (body); metallic silver gradient on display headings to echo the crest.
