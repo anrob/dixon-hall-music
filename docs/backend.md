@@ -17,6 +17,9 @@ John edits Airtable  →  /api/content (Vercel function, token hidden in env var
 
 ## The base: "Dixon Hall Music"
 
+- **Base ID:** `appvsNrgM1dbEPgFZ` (created + seeded 2026-07-02)
+- Seeded with: "Beautiful Life" (Upcoming · 7.31.26 · Featured ⭐) and all 5 July shows.
+
 ### Table: Songs
 | Field | Type | Notes |
 |---|---|---|
@@ -43,11 +46,11 @@ John edits Airtable  →  /api/content (Vercel function, token hidden in env var
 - **Shows:** only today/future, soonest first. Empty → "No upcoming shows."
 
 ## Setup checklist
-1. ~~Create base~~ — **blocked on Airtable connector re-auth** (claude.ai → Settings → Connectors → Airtable → reconnect with workspace access). Then Claude creates + seeds it.
-2. Create a PAT at https://airtable.com/create/tokens — scope `data.records:read`, access to this base only.
-3. Local: copy `.env.example` → `.env`, fill in token + base ID.
-4. Vercel: set `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` env vars at deploy.
-5. Share the base with John's email (editor role) — his phone app is the admin panel.
+1. ✅ Base created + seeded (`appvsNrgM1dbEPgFZ`) — 2026-07-02.
+2. ☐ Create a PAT at https://airtable.com/create/tokens — scope `data.records:read`, access to this base only.
+3. ☐ Local: copy `.env.example` → `.env`, fill in token (base ID below).
+4. ☐ Vercel: set `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` env vars at deploy.
+5. ☐ Share the base with John's email (editor role) — his phone app is the admin panel.
 
 ## John's workflow (what Fresh tells him)
 > Open the Airtable app → "Dixon Hall Music" → Songs → hit + → type the title,
