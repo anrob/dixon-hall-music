@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Dixon Hall — No Limit Country">
   <meta property="og:description" content="Modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
-  <meta property="og:image" content="assets/hero-mock.png">
+  <meta property="og:image" content="assets/hero-16x9.jpg">
   <meta property="og:url" content="https://www.dixonhallmusic.com/">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -355,7 +355,11 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img class="hero-art" src="assets/hero-mock.png" alt="Dixon Hall — No Limit Country">
+    <picture>
+      <!-- art direction: wide screens get the 16:9 plate, phones the tighter 3:2 -->
+      <source media="(min-width: 821px)" srcset="assets/hero-16x9.jpg">
+      <img class="hero-art" src="assets/hero-3x2.jpg" alt="Dixon Hall — No Limit Country">
+    </picture>
     <div class="mask-social"></div>
     <div class="mask-nav"></div>
 
