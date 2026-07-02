@@ -1,0 +1,10 @@
+{
+  "name": "dixon-hall-music",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dixon Hall — No Limit Country. Static site (vanilla HTML/CSS/JS, no build step).",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}
