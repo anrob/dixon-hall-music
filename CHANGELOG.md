@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-03 — Kie-generated Admiral's Cup content + LOCKED social direction
+- Generated via gpt-image-2-kie (Fresh's Kie account, ~$0.50 total): two poster-style graphics (`dixon-hall-admirals-cup-jul8.*` typographic, `-crest.*` image-to-image with the real logo) and **three engagement scene concepts** (`fb-jul8-truck|dog|crabs.*`) — cinematic tailgate, dog-in-cowboy-hat at the bar, Baltimore crab feast, each with tag-a-friend captions.
+- **Direction LOCKED (Fresh: "now we are talking, i love these"):** scenes with diegetic gig info beat poster graphics for feed engagement. Recorded in memory.md; posters reserved for print/story use.
+
 ## 2026-07-03 — GHL prompts (design kit, gig post, hero fix) + first social media pair
 - Added the three GHL Ask AI prompts that were drafted in chat but never actually written to disk last session (caught mid-session): `content/ghl-design-kit-prompt.md`, `content/ghl-gig-post-prompt.md`, `content/ghl-hero-fix-prompt.md`. Alongside the already-committed `ghl-vibe-clone-prompt.md`, `content/` now has the full GHL toolkit: clone the site, build the design kit, generate gig posts (reusable across all 5 July dates), fix the hero image fit on mobile.
 - `media/` — first live photo + caption pair: `dixonhallband-natalies-seafood-kitchen.jpg` (shot at Natalie's Seafood Kitchen, Fallston MD — credit John Dixon Hall Jr) + matching `.txt` with venue/city fields, a real caption in brand voice, and hashtags. Established convention: image + text file share a basename; skip fields (venue/date) that aren't actually known rather than guessing.

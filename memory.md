@@ -38,5 +38,8 @@ Genre: modern country with soul, storytelling, southern rock energy.
 ## Preview quirk
 The Claude preview screenshot tool renders **black** whenever a `position:fixed` element (the sticky topnav) is visible, and only captures reliably at scroll 0. To screenshot sections, hide siblings + bring target to top (a `__showOnly` helper injected via eval). Not a page bug — renders fine in real browsers.
 
+## Social content direction (LOCKED — Fresh loves this, 2026-07-03)
+**Scenes, not posters.** Branded poster graphics = "boring" for feed engagement, even good ones. What works: photorealistic scenes where the gig info is IN the scene (hand-painted tailgate sign, bar chalkboard, coaster among crabs). Three proven lanes: cinematic Americana still · humor/animal (dog in cowboy hat) · Baltimore local pride (crabs/Old Bay/Natty Boh/Sagamore). Captions: short + gritty + tag-a-friend hook, no emojis. Pipeline: gpt-image-2-kie skill, JSON prompts, quoted in-scene text, 1:1 @ 1K drafts → 2K for the keeper, image+txt pairs in `media/`. Reference examples: `media/fb-jul8-truck|dog|crabs.*`. Posters (`dixon-hall-admirals-cup-jul8*`) reserved for print/story use.
+
 ## Status
 Full site built + responsive + verified. **GitHub: `anrob/dixon-hall-music` (private), branch `main`** — pushed 2026-07-02. Vercel deploy still staged for Fresh's go.
