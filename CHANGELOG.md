@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-03 — GHL prompts (design kit, gig post, hero fix) + first social media pair
+- Added the three GHL Ask AI prompts that were drafted in chat but never actually written to disk last session (caught mid-session): `content/ghl-design-kit-prompt.md`, `content/ghl-gig-post-prompt.md`, `content/ghl-hero-fix-prompt.md`. Alongside the already-committed `ghl-vibe-clone-prompt.md`, `content/` now has the full GHL toolkit: clone the site, build the design kit, generate gig posts (reusable across all 5 July dates), fix the hero image fit on mobile.
+- `media/` — first live photo + caption pair: `dixonhallband-natalies-seafood-kitchen.jpg` (shot at Natalie's Seafood Kitchen, Fallston MD — credit John Dixon Hall Jr) + matching `.txt` with venue/city fields, a real caption in brand voice, and hashtags. Established convention: image + text file share a basename; skip fields (venue/date) that aren't actually known rather than guessing.
+
 ## 2026-07-02 — DEPLOYED to Vercel production 🚀
 - Live at **https://dixon-hall-music.vercel.app** (project `anrobs-projects/dixon-hall-music`, deployed from `site/`).
 - Env vars `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` set (Production). `/api/content` verified serving live Airtable data (incl. uploaded cover art) through Vercel. No runtime errors in post-deploy scan.
