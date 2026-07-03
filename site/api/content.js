@@ -33,6 +33,10 @@ module.exports = async (req, res) => {
   const TOKEN = process.env.AIRTABLE_TOKEN;
 
   res.setHeader('Content-Type', 'application/json');
+  // Public read-only data — CORS open so external clones (e.g. the GHL
+  // Vibe build) can share this backend without touching the token.
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  if (req.method === 'OPTIONS') { res.statusCode = 204; return res.end(); }
 
   if (!BASE || !TOKEN) {
     res.statusCode = 503;
