@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-07-02 — DEPLOYED to Vercel production 🚀
+- Live at **https://dixon-hall-music.vercel.app** (project `anrobs-projects/dixon-hall-music`, deployed from `site/`).
+- Env vars `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` set (Production). `/api/content` verified serving live Airtable data (incl. uploaded cover art) through Vercel. No runtime errors in post-deploy scan.
+- Preview-env vars wouldn't stick via CLI — previews fall back to baked-in content (by design). Add via dashboard if ever needed.
+- dixonhallmusic.com DNS **not** repointed yet — old site still live until Fresh flips it.
+- Also this session: reverted the 3 hero-experiment commits (`6b1e000`) — site back to the Band HQ-era crest hero.
+
 ## 2026-07-02 — Airtable content backend (songs + shows)
 - Client asked how he'll add songs on release; Fresh promised "a backend." Architecture: **Airtable** (never pauses, unlike Supabase's 2-active free cap — Fresh's call) → `site/api/content.js` Vercel serverless proxy (token in env var, CDN-cached 5 min) → data layer in index.html renders Music + Shows.
 - Music section fully data-driven: featured/newest song, Upcoming (countdown + Pre-Save) vs Released ("Available Now" + Listen), streaming buttons auto-hide when empty, uploaded cover art replaces the crest placeholder. Shows: upcoming only, soonest first, past auto-hides.

@@ -3,7 +3,7 @@
 Website for **Dixon Hall — No Limit Country**: John Dixon Hall Jr. × rock icon Terry Glaze. Modern country music with soul, storytelling, and southern rock energy.
 
 - **Live site (client's current):** https://www.dixonhallmusic.com/
-- **Status:** 🟢 Full one-page site built (all sections), not yet deployed
+- **Status:** 🟢 LIVE — https://dixon-hall-music.vercel.app (custom domain not pointed yet)
 - **Repo:** [`anrob/dixon-hall-music`](https://github.com/anrob/dixon-hall-music) (private) — own repo, carved out of the FreshOS monorepo per repo-per-project rule
 - **Run locally:** `npm run dev` → http://localhost:3000 (zero-dependency static server, binds `0.0.0.0` for LAN preview)
 
