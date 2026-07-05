@@ -5,6 +5,8 @@
   "description": "Dixon Hall — No Limit Country. Static site (vanilla HTML/CSS/JS, no build step).",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "sync-loveable": "node tools/sync-to-loveable.mjs",
+    "sync-loveable:push": "node tools/sync-to-loveable.mjs --push"
   }
 }
