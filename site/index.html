@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Dixon Hall — No Limit Country</title>
-  <meta name="description" content="Dixon Hall is John Dixon Hall Jr. and rock icon Terry Glaze — modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
+  <meta name="description"
+    content="Dixon Hall is John Dixon Hall Jr. and rock icon Terry Glaze — modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
   <meta name="theme-color" content="#0a0705">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Dixon Hall — No Limit Country">
-  <meta property="og:description" content="Modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
+  <meta property="og:description"
+    content="Modern country music with soul, storytelling, and southern rock energy. New single &quot;Beautiful Life&quot; out 7.31.26.">
   <meta property="og:image" content="assets/hero-mock.png">
   <meta property="og:url" content="https://www.dixonhallmusic.com/">
   <meta name="twitter:card" content="summary_large_image">
@@ -20,321 +23,1549 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Marcellus&family=Marcellus+SC&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Marcellus&family=Marcellus+SC&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    :root{
-      --bg:#0a0705; --bg2:#060402; --bg3:#0d0a07;
-      --cream:#e7ddcb; --cream-dim:#c3bbb0; --muted:#8f8676;
-      --gold:#cda45f; --gold2:#e9c17e;
-      --line:rgba(231,221,203,.12);
-      --sp:clamp(88px,13vh,150px);
-      --serif:'Marcellus',serif; --serifsc:'Marcellus SC',serif;
-      --display:'Anton',sans-serif; --body:'Barlow',sans-serif;
+    :root {
+      --bg: #0a0705;
+      --bg2: #060402;
+      --bg3: #0d0a07;
+      --cream: #e7ddcb;
+      --cream-dim: #c3bbb0;
+      --muted: #8f8676;
+      --gold: #cda45f;
+      --gold2: #e9c17e;
+      --line: rgba(231, 221, 203, .12);
+      --sp: clamp(88px, 13vh, 150px);
+      --serif: 'Marcellus', serif;
+      --serifsc: 'Marcellus SC', serif;
+      --display: 'Anton', sans-serif;
+      --body: 'Barlow', sans-serif;
     }
-    *{box-sizing:border-box;}
-    html{scroll-behavior:smooth;scroll-padding-top:74px;}
-    body{margin:0;padding:0;background:var(--bg);color:var(--cream);font-family:var(--body);-webkit-font-smoothing:antialiased;}
-    a{-webkit-tap-highlight-color:transparent;}
-    img{max-width:100%;}
-    ::selection{background:rgba(205,164,95,.3);color:#fff;}
 
-    .container{max-width:1180px;margin:0 auto;padding:0 clamp(22px,5vw,72px);}
-    .metal{
-      background:linear-gradient(180deg,#ffffff 0%,#eceef0 38%,#c2c6cc 66%,#9a9ea4 100%);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      filter:drop-shadow(0 3px 2px rgba(0,0,0,.5));
+    * {
+      box-sizing: border-box;
     }
-    .eyebrow{
-      display:flex;align-items:center;gap:14px;
-      font-family:var(--serifsc);letter-spacing:.34em;text-transform:uppercase;
-      color:var(--gold);font-size:13px;margin:0 0 22px;
-    }
-    .eyebrow .num{font-family:var(--body);font-weight:600;letter-spacing:.1em;color:var(--muted);font-size:12px;}
-    .eyebrow .bar{flex:0 0 34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
-    h2.display{
-      margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;
-      font-size:clamp(40px,6.4vw,92px);line-height:.92;letter-spacing:.01em;
-    }
-    .lead{font-family:var(--serif);font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:#efe9e0;}
-    .body-text{font-size:clamp(15.5px,1.2vw,18px);line-height:1.7;color:var(--cream-dim);}
 
-    @keyframes dhZoom{0%{transform:scale(1.0);}100%{transform:scale(1.05);}}
-    @keyframes dhWave{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
-    @keyframes dhMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 74px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    ::selection {
+      background: rgba(205, 164, 95, .3);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 clamp(22px, 5vw, 72px);
+    }
+
+    .metal {
+      background: linear-gradient(180deg, #ffffff 0%, #eceef0 38%, #c2c6cc 66%, #9a9ea4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .5));
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--serifsc);
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-size: 13px;
+      margin: 0 0 22px;
+    }
+
+    .eyebrow .num {
+      font-family: var(--body);
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .eyebrow .bar {
+      flex: 0 0 34px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    h2.display {
+      margin: 0;
+      font-family: var(--display);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: clamp(40px, 6.4vw, 92px);
+      line-height: .92;
+      letter-spacing: .01em;
+    }
+
+    .lead {
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.1vw, 27px);
+      line-height: 1.5;
+      color: #efe9e0;
+    }
+
+    .body-text {
+      font-size: clamp(15.5px, 1.2vw, 18px);
+      line-height: 1.7;
+      color: var(--cream-dim);
+    }
+
+    @keyframes dhZoom {
+      0% {
+        transform: scale(1.0);
+      }
+
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes dhWave {
+
+      0%,
+      100% {
+        transform: scaleY(.35);
+      }
+
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes dhMarquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
     /* ============ LOADING SCREEN ============ */
-    @keyframes dhLogoIn{0%{opacity:0;transform:translateY(16px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
-    @keyframes dhShine{0%{background-position:170% 0;}55%,100%{background-position:-70% 0;}}
-    @keyframes dhGlow{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.88);}50%{opacity:.65;transform:translate(-50%,-50%) scale(1.06);}}
+    @keyframes dhLogoIn {
+      0% {
+        opacity: 0;
+        transform: translateY(16px) scale(.9);
+      }
 
-    body.loading{overflow:hidden;}
-    #loader{
-      position:fixed;inset:0;z-index:100;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;
-      background:radial-gradient(120% 120% at 50% 42%, #0d0a07 0%, #060402 68%, #040302 100%);
-      transition:opacity .7s ease, visibility .7s ease;
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
-    .loader-glow{
-      position:absolute;top:42%;left:50%;width:min(72vw,520px);height:min(72vw,520px);
-      transform:translate(-50%,-50%);pointer-events:none;
-      background:radial-gradient(circle, rgba(205,164,95,.22) 0%, rgba(205,164,95,0) 62%);
-      animation:dhGlow 2.6s ease-in-out infinite;
+
+    @keyframes dhShine {
+      0% {
+        background-position: 170% 0;
+      }
+
+      55%,
+      100% {
+        background-position: -70% 0;
+      }
     }
-    .loader-logo{position:relative;width:clamp(190px,32vw,300px);animation:dhLogoIn .85s cubic-bezier(.2,.75,.25,1) both;}
-    .loader-logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 30px rgba(0,0,0,.6));}
-    .loader-shine{
-      position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
-      -webkit-mask:url('assets/logo.png') center/contain no-repeat;
-              mask:url('assets/logo.png') center/contain no-repeat;
-      background:linear-gradient(110deg, transparent 34%, rgba(233,193,126,.65) 46%, rgba(255,246,226,.95) 50%, rgba(233,193,126,.65) 54%, transparent 66%);
-      background-size:230% 100%;background-repeat:no-repeat;
-      animation:dhShine 2.6s ease-in-out .55s infinite;
+
+    @keyframes dhGlow {
+
+      0%,
+      100% {
+        opacity: .3;
+        transform: translate(-50%, -50%) scale(.88);
+      }
+
+      50% {
+        opacity: .65;
+        transform: translate(-50%, -50%) scale(1.06);
+      }
     }
-    .loader-eq{display:inline-flex;align-items:flex-end;gap:5px;height:26px;}
-    .loader-eq span{display:block;width:4px;height:100%;transform-origin:bottom;border-radius:1px;background:linear-gradient(180deg,#e9c17e,#cda45f);animation:dhWave 1s ease-in-out infinite;}
-    .loader-eq span:nth-child(1){animation-delay:0s;}
-    .loader-eq span:nth-child(2){animation-delay:.15s;}
-    .loader-eq span:nth-child(3){animation-delay:.3s;}
-    .loader-eq span:nth-child(4){animation-delay:.12s;}
-    .loader-eq span:nth-child(5){animation-delay:.24s;}
-    .loader-word{font-family:var(--serifsc);letter-spacing:.42em;text-transform:uppercase;font-size:12px;color:var(--muted);padding-left:.42em;animation:dhLogoIn .9s ease .18s both;}
+
+    body.loading {
+      overflow: hidden;
+    }
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      background: radial-gradient(120% 120% at 50% 42%, #0d0a07 0%, #060402 68%, #040302 100%);
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-glow {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      width: min(72vw, 520px);
+      height: min(72vw, 520px);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(205, 164, 95, .22) 0%, rgba(205, 164, 95, 0) 62%);
+      animation: dhGlow 2.6s ease-in-out infinite;
+    }
+
+    .loader-logo {
+      position: relative;
+      width: clamp(190px, 32vw, 300px);
+      animation: dhLogoIn .85s cubic-bezier(.2, .75, .25, 1) both;
+    }
+
+    .loader-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .6));
+    }
+
+    .loader-shine {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      -webkit-mask: url('assets/logo.png') center/contain no-repeat;
+      mask: url('assets/logo.png') center/contain no-repeat;
+      background: linear-gradient(110deg, transparent 34%, rgba(233, 193, 126, .65) 46%, rgba(255, 246, 226, .95) 50%, rgba(233, 193, 126, .65) 54%, transparent 66%);
+      background-size: 230% 100%;
+      background-repeat: no-repeat;
+      animation: dhShine 2.6s ease-in-out .55s infinite;
+    }
+
+    .loader-eq {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 26px;
+    }
+
+    .loader-eq span {
+      display: block;
+      width: 4px;
+      height: 100%;
+      transform-origin: bottom;
+      border-radius: 1px;
+      background: linear-gradient(180deg, #e9c17e, #cda45f);
+      animation: dhWave 1s ease-in-out infinite;
+    }
+
+    .loader-eq span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .loader-eq span:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .loader-eq span:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    .loader-eq span:nth-child(4) {
+      animation-delay: .12s;
+    }
+
+    .loader-eq span:nth-child(5) {
+      animation-delay: .24s;
+    }
+
+    .loader-word {
+      font-family: var(--serifsc);
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+      padding-left: .42em;
+      animation: dhLogoIn .9s ease .18s both;
+    }
 
     /* ============ EQ (shared button motif) ============ */
-    .eq{display:inline-flex;align-items:flex-end;gap:2.5px;height:14px;}
-    .eq span{display:block;width:2.5px;height:100%;background:currentColor;transform-origin:bottom;animation:dhWave 1s ease-in-out infinite;}
-    .eq span:nth-child(1){animation-delay:0s;}
-    .eq span:nth-child(2){animation-delay:.18s;}
-    .eq span:nth-child(3){animation-delay:.36s;}
-    .eq span:nth-child(4){animation-delay:.12s;}
-    .eq span:nth-child(5){animation-delay:.3s;}
+    .eq {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 14px;
+    }
+
+    .eq span {
+      display: block;
+      width: 2.5px;
+      height: 100%;
+      background: currentColor;
+      transform-origin: bottom;
+      animation: dhWave 1s ease-in-out infinite;
+    }
+
+    .eq span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .eq span:nth-child(2) {
+      animation-delay: .18s;
+    }
+
+    .eq span:nth-child(3) {
+      animation-delay: .36s;
+    }
+
+    .eq span:nth-child(4) {
+      animation-delay: .12s;
+    }
+
+    .eq span:nth-child(5) {
+      animation-delay: .3s;
+    }
 
     /* ============ STICKY TOP NAV ============ */
-    .topnav{
-      position:fixed;top:0;left:0;right:0;z-index:20;
-      display:flex;align-items:center;justify-content:space-between;gap:24px;
-      height:72px;padding:0 clamp(18px,3vw,44px);
-      background:linear-gradient(180deg, rgba(8,6,4,.97), rgba(8,6,4,.9));
-      border-bottom:1px solid rgba(205,164,95,.28);backdrop-filter:blur(8px);
-      opacity:0;transform:translateY(-16px);pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      height: 72px;
+      padding: 0 clamp(18px, 3vw, 44px);
+      background: linear-gradient(180deg, rgba(8, 6, 4, .97), rgba(8, 6, 4, .9));
+      border-bottom: 1px solid rgba(205, 164, 95, .28);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(-16px);
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
     }
-    .topnav img{height:44px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));}
-    .topnav .links{display:flex;align-items:center;gap:clamp(18px,2vw,34px);}
-    .topnav .links a{font-family:var(--serif);font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
-    .topnav .links a:hover,.topnav .links a.active{color:#fff;border-bottom-color:var(--gold);}
-    .nav-cta{
-      display:inline-flex!important;align-items:center;gap:10px;border-bottom:0!important;
-      color:#0f0a04!important;background:linear-gradient(180deg,#e9c17e,#cda45f);
-      padding:9px 18px!important;letter-spacing:.16em!important;font-size:13px!important;
-      transition:filter .2s,transform .2s;
+
+    .topnav img {
+      height: 44px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .6));
     }
-    .nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
-    .topnav .burger{display:none;}
+
+    .topnav .links {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2vw, 34px);
+    }
+
+    .topnav .links a {
+      font-family: var(--serif);
+      font-size: clamp(13px, 1vw, 15px);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .topnav .links a:hover,
+    .topnav .links a.active {
+      color: #fff;
+      border-bottom-color: var(--gold);
+    }
+
+    .nav-cta {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 0 !important;
+      color: #0f0a04 !important;
+      background: linear-gradient(180deg, #e9c17e, #cda45f);
+      padding: 9px 18px !important;
+      letter-spacing: .16em !important;
+      font-size: 13px !important;
+      transition: filter .2s, transform .2s;
+    }
+
+    .nav-cta:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .topnav .burger {
+      display: none;
+    }
 
     /* ============ HERO ============ */
-    .hero{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden;background:var(--bg);}
-    .hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;transform-origin:center 22%;animation:dhZoom 30s ease-out forwards;}
-    .mask-social{position:absolute;top:0;right:0;width:52%;height:15%;z-index:2;pointer-events:none;background:radial-gradient(120% 150% at 88% 0%, rgba(8,6,4,.92) 0%, rgba(8,6,4,.55) 42%, rgba(8,6,4,0) 72%);}
-    .mask-nav{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(180deg, rgba(8,6,4,0) 0%, rgba(8,6,4,.28) 22%, rgba(7,5,3,.82) 50%, rgba(6,4,2,.98) 78%, var(--bg2) 100%);}
-    .social-row{position:absolute;top:clamp(18px,3.4vh,42px);right:clamp(22px,3.6vw,58px);z-index:5;display:flex;align-items:center;gap:clamp(14px,1.4vw,22px);}
-    .follow-label{font-family:var(--serifsc);font-size:clamp(12px,1vw,15px);letter-spacing:.28em;color:var(--cream);text-transform:uppercase;}
-    .social-icons{display:flex;align-items:center;gap:clamp(12px,1.15vw,18px);font-size:clamp(15px,1.15vw,18px);}
-    .social-icons a{color:#dcd2c0;text-decoration:none;transition:color .2s, transform .2s;}
-    .social-icons a:hover{color:var(--gold);transform:translateY(-2px);}
-
-    .hero-nav{position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:clamp(22px,3vw,54px);width:min(1440px,94%);margin:0 auto;padding:0 clamp(16px,2vw,40px) clamp(22px,3.4vh,42px);transition:opacity .2s ease;}
-    .hero-nav .group{display:flex;align-items:center;gap:clamp(22px,2.8vw,52px);flex:1;}
-    .hero-nav .group.left{justify-content:flex-end;}
-    .hero-nav .group.right{justify-content:flex-start;}
-    .nav-link{position:relative;font-family:var(--serif);font-size:clamp(14px,1.05vw,18px);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;padding-bottom:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;}
-    .nav-link:hover{color:#fff;border-bottom-color:var(--gold);}
-    .nav-link.active{color:#f3ead9;border-bottom-color:var(--gold);}
-    .hero-listen{
-      flex:0 0 auto;display:inline-flex;align-items:center;gap:14px;
-      font-family:var(--serif);font-size:clamp(14px,1.05vw,18px);letter-spacing:.22em;text-transform:uppercase;
-      color:var(--gold2);text-decoration:none;border:1px solid rgba(205,164,95,.75);
-      padding:clamp(11px,1.1vh,15px) clamp(22px,2vw,34px);
-      background:linear-gradient(180deg, rgba(205,164,95,.1), rgba(205,164,95,.02));
-      box-shadow:0 6px 26px rgba(0,0,0,.5), inset 0 0 22px rgba(205,164,95,.08);
-      transition:color .22s ease, background .22s ease, box-shadow .22s ease;
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: var(--bg);
     }
-    .hero-listen:hover{color:#0f0a04;border-color:var(--gold2);background:#dcac60;box-shadow:0 10px 30px rgba(205,164,95,.4);}
 
-    .menu-toggle{position:fixed;top:16px;left:16px;z-index:21;width:44px;height:44px;display:none;align-items:center;justify-content:center;background:rgba(8,6,4,.5);border:1px solid rgba(205,164,95,.45);border-radius:2px;color:var(--cream);font-size:18px;cursor:pointer;backdrop-filter:blur(4px);}
-    .mobile-menu{position:fixed;inset:0;z-index:19;display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:rgba(6,4,2,.97);backdrop-filter:blur(6px);}
-    .mobile-menu.open{display:flex;}
-    .mobile-menu a{font-family:var(--serif);font-size:22px;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .2s;}
-    .mobile-menu a:hover,.mobile-menu a.active{color:var(--gold2);}
-    .mobile-menu a.m-cta{color:var(--gold2);}
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      transform-origin: center 22%;
+      animation: dhZoom 30s ease-out forwards;
+    }
+
+    .mask-social {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 52%;
+      height: 15%;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(120% 150% at 88% 0%, rgba(8, 6, 4, .92) 0%, rgba(8, 6, 4, .55) 42%, rgba(8, 6, 4, 0) 72%);
+    }
+
+    .mask-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34%;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(8, 6, 4, 0) 0%, rgba(8, 6, 4, .28) 22%, rgba(7, 5, 3, .82) 50%, rgba(6, 4, 2, .98) 78%, var(--bg2) 100%);
+    }
+
+    .social-row {
+      position: absolute;
+      top: clamp(18px, 3.4vh, 42px);
+      right: clamp(22px, 3.6vw, 58px);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
+    }
+
+    .follow-label {
+      font-family: var(--serifsc);
+      font-size: clamp(12px, 1vw, 15px);
+      letter-spacing: .28em;
+      color: var(--cream);
+      text-transform: uppercase;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 1.15vw, 18px);
+      font-size: clamp(15px, 1.15vw, 18px);
+    }
+
+    .social-icons a {
+      color: #dcd2c0;
+      text-decoration: none;
+      transition: color .2s, transform .2s;
+    }
+
+    .social-icons a:hover {
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(22px, 3vw, 54px);
+      width: min(1440px, 94%);
+      margin: 0 auto;
+      padding: 0 clamp(16px, 2vw, 40px) clamp(22px, 3.4vh, 42px);
+      transition: opacity .2s ease;
+    }
+
+    .hero-nav .group {
+      display: flex;
+      align-items: center;
+      gap: clamp(22px, 2.8vw, 52px);
+      flex: 1;
+    }
+
+    .hero-nav .group.left {
+      justify-content: flex-end;
+    }
+
+    .hero-nav .group.right {
+      justify-content: flex-start;
+    }
+
+    .nav-link {
+      position: relative;
+      font-family: var(--serif);
+      font-size: clamp(14px, 1.05vw, 18px);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      border-bottom-color: var(--gold);
+    }
+
+    .nav-link.active {
+      color: #f3ead9;
+      border-bottom-color: var(--gold);
+    }
+
+    .hero-listen {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--serif);
+      font-size: clamp(14px, 1.05vw, 18px);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      text-decoration: none;
+      border: 1px solid rgba(205, 164, 95, .75);
+      padding: clamp(11px, 1.1vh, 15px) clamp(22px, 2vw, 34px);
+      background: linear-gradient(180deg, rgba(205, 164, 95, .1), rgba(205, 164, 95, .02));
+      box-shadow: 0 6px 26px rgba(0, 0, 0, .5), inset 0 0 22px rgba(205, 164, 95, .08);
+      transition: color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .hero-listen:hover {
+      color: #0f0a04;
+      border-color: var(--gold2);
+      background: #dcac60;
+      box-shadow: 0 10px 30px rgba(205, 164, 95, .4);
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 21;
+      width: 44px;
+      height: 44px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 6, 4, .5);
+      border: 1px solid rgba(205, 164, 95, .45);
+      border-radius: 2px;
+      color: var(--cream);
+      font-size: 18px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 19;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      background: rgba(6, 4, 2, .97);
+      backdrop-filter: blur(6px);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 22px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      color: var(--gold2);
+    }
+
+    .mobile-menu a.m-cta {
+      color: var(--gold2);
+    }
 
     /* ============ MARQUEE ============ */
-    .marquee{overflow:hidden;white-space:nowrap;background:var(--bg2);border-top:1px solid rgba(205,164,95,.22);border-bottom:1px solid rgba(255,255,255,.04);padding:15px 0;}
-    .marquee-track{display:inline-block;white-space:nowrap;animation:dhMarquee 34s linear infinite;font-family:var(--serifsc);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);}
-    .marquee-track span{padding:0 26px;}
-    .marquee-track .di{color:var(--gold);}
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      background: var(--bg2);
+      border-top: 1px solid rgba(205, 164, 95, .22);
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      padding: 15px 0;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: dhMarquee 34s linear infinite;
+      font-family: var(--serifsc);
+      font-size: 13px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .marquee-track span {
+      padding: 0 26px;
+    }
+
+    .marquee-track .di {
+      color: var(--gold);
+    }
 
     /* ============ REVEAL ============ */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
-    .reveal.in{opacity:1;transform:none;}
-    .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;} .reveal.d4{transition-delay:.32s;}
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1);
+    }
 
-    section{position:relative;}
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal.d1 {
+      transition-delay: .08s;
+    }
+
+    .reveal.d2 {
+      transition-delay: .16s;
+    }
+
+    .reveal.d3 {
+      transition-delay: .24s;
+    }
+
+    .reveal.d4 {
+      transition-delay: .32s;
+    }
+
+    section {
+      position: relative;
+    }
 
     /* ============ MUSIC / SINGLE ============ */
-    .music{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg2) 0%, var(--bg3) 100%);border-top:1px solid var(--line);}
-    .music-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,88px);align-items:center;}
-    .single-date{font-family:var(--serifsc);letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);font-size:15px;margin:20px 0 24px;}
-    .countdown{display:flex;gap:clamp(14px,2vw,26px);margin:0 0 30px;}
-    .cd-unit{text-align:left;}
-    .cd-num{font-family:var(--display);font-size:clamp(34px,4.4vw,54px);line-height:1;color:#f3ead9;}
-    .cd-label{font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--muted);margin-top:8px;}
-    .cd-sep{align-self:flex-start;font-family:var(--display);font-size:clamp(28px,3.6vw,44px);color:rgba(205,164,95,.4);line-height:1;}
-    .btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px;}
-    .btn-primary{display:inline-flex;align-items:center;gap:11px;font-family:var(--serif);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#17120a;text-decoration:none;background:linear-gradient(180deg,#e9c17e,#cda45f);padding:16px 32px;border-radius:2px;transition:filter .2s,transform .2s;}
-    .btn-primary:hover{filter:brightness(1.08);transform:translateY(-2px);}
-    .streams{display:flex;align-items:center;gap:18px;font-size:19px;}
-    .streams a{color:var(--cream-dim);transition:color .2s,transform .2s;}
-    .streams a:hover{color:var(--gold);transform:translateY(-2px);}
+    .music {
+      padding: var(--sp) 0;
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%);
+      border-top: 1px solid var(--line);
+    }
 
-    .cover{position:relative;aspect-ratio:1/1;border:1px solid rgba(205,164,95,.28);background:#0a0806;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6);}
-    .cover-bg{position:absolute;inset:0;background-image:url('assets/brick.avif');background-size:cover;background-position:center;opacity:.5;mix-blend-mode:luminosity;}
-    .cover-grad{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 24%, rgba(205,164,95,.16), rgba(0,0,0,0) 60%), linear-gradient(180deg, rgba(6,4,2,.2), rgba(6,4,2,.86));}
-    .cover-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9%;}
-    .cover-inner img{width:44%;filter:drop-shadow(0 10px 26px rgba(0,0,0,.6));margin-bottom:8%;}
-    .cover-title{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,4vw,52px);line-height:.92;letter-spacing:.02em;}
-    .cover-meta{font-family:var(--serifsc);letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--muted);margin-top:16px;}
-    .cover-tag{position:absolute;top:16px;left:16px;z-index:2;font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:10px;color:var(--gold2);border:1px solid rgba(205,164,95,.5);padding:6px 12px;}
-    .cover-real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .music-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: clamp(40px, 6vw, 88px);
+      align-items: center;
+    }
+
+    .single-date {
+      font-family: var(--serifsc);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      font-size: 15px;
+      margin: 20px 0 24px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: clamp(14px, 2vw, 26px);
+      margin: 0 0 30px;
+    }
+
+    .cd-unit {
+      text-align: left;
+    }
+
+    .cd-num {
+      font-family: var(--display);
+      font-size: clamp(34px, 4.4vw, 54px);
+      line-height: 1;
+      color: #f3ead9;
+    }
+
+    .cd-label {
+      font-family: var(--serifsc);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .cd-sep {
+      align-self: flex-start;
+      font-family: var(--display);
+      font-size: clamp(28px, 3.6vw, 44px);
+      color: rgba(205, 164, 95, .4);
+      line-height: 1;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-family: var(--serif);
+      font-size: 15px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #17120a;
+      text-decoration: none;
+      background: linear-gradient(180deg, #e9c17e, #cda45f);
+      padding: 16px 32px;
+      border-radius: 2px;
+      transition: filter .2s, transform .2s;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    .streams {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 19px;
+    }
+
+    .streams a {
+      color: var(--cream-dim);
+      transition: color .2s, transform .2s;
+    }
+
+    .streams a:hover {
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .cover {
+      position: relative;
+      aspect-ratio: 1/1;
+      border: 1px solid rgba(205, 164, 95, .28);
+      background: #0a0806;
+      overflow: hidden;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
+    }
+
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/brick.avif');
+      background-size: cover;
+      background-position: center;
+      opacity: .5;
+      mix-blend-mode: luminosity;
+    }
+
+    .cover-grad {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(120% 100% at 50% 24%, rgba(205, 164, 95, .16), rgba(0, 0, 0, 0) 60%), linear-gradient(180deg, rgba(6, 4, 2, .2), rgba(6, 4, 2, .86));
+    }
+
+    .cover-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9%;
+    }
+
+    .cover-inner img {
+      width: 44%;
+      filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .6));
+      margin-bottom: 8%;
+    }
+
+    .cover-title {
+      font-family: var(--display);
+      text-transform: uppercase;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: .92;
+      letter-spacing: .02em;
+    }
+
+    .cover-meta {
+      font-family: var(--serifsc);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .cover-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      font-family: var(--serifsc);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-size: 10px;
+      color: var(--gold2);
+      border: 1px solid rgba(205, 164, 95, .5);
+      padding: 6px 12px;
+    }
+
+    .cover-real {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     /* ============ ABOUT ============ */
-    .about{padding:var(--sp) 0;background:var(--bg);}
-    .about-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:end;margin-bottom:clamp(40px,6vw,72px);}
-    .about-photo{position:relative;margin:clamp(40px,6vw,72px) 0;overflow:hidden;border:1px solid var(--line);}
-    .about-photo img{display:block;width:100%;height:clamp(320px,52vh,560px);object-fit:cover;object-position:50% 40%;}
-    .about-photo .cap{position:absolute;left:0;bottom:0;padding:22px 26px;font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--cream);background:linear-gradient(0deg, rgba(6,4,2,.9), rgba(6,4,2,0));width:100%;}
-    .members{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,40px);margin-top:clamp(20px,3vw,40px);}
-    .member{border:1px solid var(--line);border-top:2px solid rgba(205,164,95,.55);background:linear-gradient(180deg, rgba(255,255,255,.015), rgba(0,0,0,0));padding:clamp(28px,3vw,40px);transition:background .25s, border-color .25s;}
-    .member:hover{background:rgba(205,164,95,.04);border-top-color:var(--gold2);}
-    .member .role{font-family:var(--serifsc);letter-spacing:.26em;text-transform:uppercase;font-size:11px;color:var(--gold);margin-bottom:14px;}
-    .member h3{margin:0 0 16px;font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,2.6vw,36px);line-height:1;color:#efe9e0;letter-spacing:.01em;}
-    .member p{margin:0;font-size:15px;line-height:1.7;color:var(--cream-dim);}
-    .member .tag{margin-top:18px;display:inline-block;font-family:var(--serifsc);letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--muted);}
+    .about {
+      padding: var(--sp) 0;
+      background: var(--bg);
+    }
+
+    .about-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(30px, 5vw, 72px);
+      align-items: end;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    .about-photo {
+      position: relative;
+      margin: clamp(40px, 6vw, 72px) 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .about-photo img {
+      display: block;
+      width: 100%;
+      height: clamp(320px, 52vh, 560px);
+      object-fit: cover;
+      object-position: 50% 40%;
+    }
+
+    .about-photo .cap {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 22px 26px;
+      font-family: var(--serifsc);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--cream);
+      background: linear-gradient(0deg, rgba(6, 4, 2, .9), rgba(6, 4, 2, 0));
+      width: 100%;
+    }
+
+    .members {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 3vw, 40px);
+      margin-top: clamp(20px, 3vw, 40px);
+    }
+
+    .member {
+      border: 1px solid var(--line);
+      border-top: 2px solid rgba(205, 164, 95, .55);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .015), rgba(0, 0, 0, 0));
+      padding: clamp(28px, 3vw, 40px);
+      transition: background .25s, border-color .25s;
+    }
+
+    .member:hover {
+      background: rgba(205, 164, 95, .04);
+      border-top-color: var(--gold2);
+    }
+
+    .member .role {
+      font-family: var(--serifsc);
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .member h3 {
+      margin: 0 0 16px;
+      font-family: var(--display);
+      text-transform: uppercase;
+      font-size: clamp(24px, 2.6vw, 36px);
+      line-height: 1;
+      color: #efe9e0;
+      letter-spacing: .01em;
+    }
+
+    .member p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--cream-dim);
+    }
+
+    .member .tag {
+      margin-top: 18px;
+      display: inline-block;
+      font-family: var(--serifsc);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--muted);
+    }
 
     /* ============ SHOWS ============ */
-    .shows{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg3) 0%, var(--bg2) 100%);border-top:1px solid var(--line);}
-    .shows-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:clamp(30px,4vw,54px);}
-    .show-list{border-top:1px solid var(--line);}
-    .show-row{display:flex;align-items:center;gap:clamp(16px,3vw,40px);padding:clamp(20px,2.6vw,30px) 4px;border-bottom:1px solid var(--line);transition:background .2s,padding-left .2s;}
-    .show-row:hover{background:rgba(205,164,95,.045);padding-left:16px;}
-    .sr-date{flex:0 0 auto;width:clamp(72px,8vw,110px);}
-    .sr-day{font-family:var(--display);font-size:clamp(26px,3vw,40px);line-height:.9;color:#f3ead9;}
-    .sr-mon{font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--gold);margin-top:4px;}
-    .sr-info{flex:1;min-width:0;}
-    .sr-venue{font-family:var(--serif);font-size:clamp(19px,1.9vw,26px);color:#efe9e0;}
-    .sr-city{font-family:var(--serifsc);letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--muted);margin-top:6px;}
-    .sr-cta{flex:0 0 auto;font-family:var(--serif);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;border:1px solid rgba(205,164,95,.5);padding:11px 20px;transition:all .2s;white-space:nowrap;}
-    .sr-cta:hover{color:#0f0a04;background:var(--gold);border-color:var(--gold);}
-    .booking-note{margin-top:clamp(30px,4vw,48px);font-size:14px;color:var(--muted);letter-spacing:.02em;}
-    .booking-note a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(205,164,95,.4);}
+    .shows {
+      padding: var(--sp) 0;
+      background: linear-gradient(180deg, var(--bg3) 0%, var(--bg2) 100%);
+      border-top: 1px solid var(--line);
+    }
+
+    .shows-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: clamp(30px, 4vw, 54px);
+    }
+
+    .show-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .show-row {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 3vw, 40px);
+      padding: clamp(20px, 2.6vw, 30px) 4px;
+      border-bottom: 1px solid var(--line);
+      transition: background .2s, padding-left .2s;
+    }
+
+    .show-row:hover {
+      background: rgba(205, 164, 95, .045);
+      padding-left: 16px;
+    }
+
+    .sr-date {
+      flex: 0 0 auto;
+      width: clamp(72px, 8vw, 110px);
+    }
+
+    .sr-day {
+      font-family: var(--display);
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: .9;
+      color: #f3ead9;
+    }
+
+    .sr-mon {
+      font-family: var(--serifsc);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .sr-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sr-venue {
+      font-family: var(--serif);
+      font-size: clamp(19px, 1.9vw, 26px);
+      color: #efe9e0;
+    }
+
+    .sr-city {
+      font-family: var(--serifsc);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .sr-cta {
+      flex: 0 0 auto;
+      font-family: var(--serif);
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      border: 1px solid rgba(205, 164, 95, .5);
+      padding: 11px 20px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .sr-cta:hover {
+      color: #0f0a04;
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .booking-note {
+      margin-top: clamp(30px, 4vw, 48px);
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+
+    .booking-note a {
+      color: var(--gold2);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(205, 164, 95, .4);
+    }
 
     /* ============ MEDIA ============ */
-    .media{padding:var(--sp) 0;background:var(--bg);}
-    /* true masonry via CSS multi-column — native aspect ratios, no dead space */
-    .gallery{columns:5;column-gap:10px;}
-    .gallery figure{
-      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
-      margin:0 0 10px;position:relative;overflow:hidden;line-height:0;
-      border:1px solid var(--line);background:var(--bg3);
-      transition:box-shadow .4s ease, transform .4s ease;
+    .media {
+      padding: var(--sp) 0;
+      background: var(--bg);
     }
-    .gallery figure img{display:block;width:100%;height:auto;transition:transform .55s cubic-bezier(.2,.7,.2,1);}
-    .gallery figure::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(205,164,95,0);transition:box-shadow .4s ease;}
-    .gallery figure:hover{box-shadow:0 20px 46px rgba(0,0,0,.55);transform:translateY(-3px);}
-    .gallery figure:hover img{transform:scale(1.05);}
-    .gallery figure:hover::after{box-shadow:inset 0 0 0 1px rgba(205,164,95,.5);}
-    .gallery-more{text-align:center;margin-top:clamp(30px,4vw,50px);}
-    .gallery-more a{font-family:var(--serifsc);letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--cream-dim);text-decoration:none;transition:color .2s;}
-    .gallery-more a:hover{color:var(--gold2);}
-    .gallery-more i{color:var(--gold2);margin-right:9px;}
-    @media (max-width:1100px){.gallery{columns:4;}}
-    @media (max-width:820px){.gallery{columns:3;}}
-    @media (max-width:600px){.gallery{columns:2;column-gap:8px;}.gallery figure{margin-bottom:8px;}}
-    @media (max-width:360px){.gallery{columns:1;}}
+
+    /* true masonry via CSS multi-column — native aspect ratios, no dead space */
+    .gallery {
+      columns: 5;
+      column-gap: 10px;
+    }
+
+    .gallery figure {
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+      margin: 0 0 10px;
+      position: relative;
+      overflow: hidden;
+      line-height: 0;
+      border: 1px solid var(--line);
+      background: var(--bg3);
+      transition: box-shadow .4s ease, transform .4s ease;
+    }
+
+    .gallery figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .55s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .gallery figure::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(205, 164, 95, 0);
+      transition: box-shadow .4s ease;
+    }
+
+    .gallery figure:hover {
+      box-shadow: 0 20px 46px rgba(0, 0, 0, .55);
+      transform: translateY(-3px);
+    }
+
+    .gallery figure:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery figure:hover::after {
+      box-shadow: inset 0 0 0 1px rgba(205, 164, 95, .5);
+    }
+
+    .gallery-more {
+      text-align: center;
+      margin-top: clamp(30px, 4vw, 50px);
+    }
+
+    .gallery-more a {
+      font-family: var(--serifsc);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .gallery-more a:hover {
+      color: var(--gold2);
+    }
+
+    .gallery-more i {
+      color: var(--gold2);
+      margin-right: 9px;
+    }
+
+    @media (max-width:1100px) {
+      .gallery {
+        columns: 4;
+      }
+    }
+
+    @media (max-width:820px) {
+      .gallery {
+        columns: 3;
+      }
+    }
+
+    @media (max-width:600px) {
+      .gallery {
+        columns: 2;
+        column-gap: 8px;
+      }
+
+      .gallery figure {
+        margin-bottom: 8px;
+      }
+    }
+
+    @media (max-width:360px) {
+      .gallery {
+        columns: 1;
+      }
+    }
 
     /* ============ STORE ============ */
-    .store{padding:var(--sp) 0;background:linear-gradient(180deg,var(--bg2) 0%, var(--bg3) 100%);border-top:1px solid var(--line);}
-    .store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,26px);margin-top:clamp(34px,4vw,54px);}
-    .merch{position:relative;border:1px solid var(--line);background:#0a0806;overflow:hidden;text-decoration:none;display:block;transition:border-color .25s,transform .25s;}
-    .merch:hover{border-color:rgba(205,164,95,.5);transform:translateY(-4px);}
-    .merch-art{position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(120% 120% at 50% 20%, #17120c, #0a0806);}
-    .merch-art::before{content:"";position:absolute;inset:0;background-image:url('assets/brick.avif');background-size:cover;background-position:center;opacity:.28;mix-blend-mode:luminosity;}
-    .merch-art img{position:relative;width:46%;opacity:.9;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));transition:transform .3s;}
-    .merch:hover .merch-art img{transform:scale(1.05);}
-    .merch-info{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border-top:1px solid var(--line);}
-    .merch-name{font-family:var(--serif);font-size:16px;color:#efe9e0;letter-spacing:.01em;}
-    .merch-price{font-family:var(--serifsc);letter-spacing:.06em;color:var(--gold2);font-size:15px;white-space:nowrap;}
-    .store-note{margin-top:clamp(28px,3vw,40px);font-size:13px;color:var(--muted);font-style:italic;}
+    .store {
+      padding: var(--sp) 0;
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%);
+      border-top: 1px solid var(--line);
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(18px, 2vw, 26px);
+      margin-top: clamp(34px, 4vw, 54px);
+    }
+
+    .merch {
+      position: relative;
+      border: 1px solid var(--line);
+      background: #0a0806;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .merch:hover {
+      border-color: rgba(205, 164, 95, .5);
+      transform: translateY(-4px);
+    }
+
+    .merch-art {
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(120% 120% at 50% 20%, #17120c, #0a0806);
+    }
+
+    .merch-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/brick.avif');
+      background-size: cover;
+      background-position: center;
+      opacity: .28;
+      mix-blend-mode: luminosity;
+    }
+
+    .merch-art img {
+      position: relative;
+      width: 46%;
+      opacity: .9;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .5));
+      transition: transform .3s;
+    }
+
+    .merch:hover .merch-art img {
+      transform: scale(1.05);
+    }
+
+    .merch-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .merch-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: #efe9e0;
+      letter-spacing: .01em;
+    }
+
+    .merch-price {
+      font-family: var(--serifsc);
+      letter-spacing: .06em;
+      color: var(--gold2);
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .store-note {
+      margin-top: clamp(28px, 3vw, 40px);
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
 
     /* ============ NEWSLETTER ============ */
-    .join{padding:var(--sp) 0;background:radial-gradient(120% 120% at 50% 0%, #12100b 0%, var(--bg) 60%);border-top:1px solid var(--line);text-align:center;}
-    .join .inner{max-width:680px;margin:0 auto;}
-    .join p{margin:24px auto 34px;max-width:520px;}
-    .join-form{display:flex;gap:12px;max-width:520px;margin:0 auto;}
-    .join-form input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#fff;font-family:var(--body);font-size:15px;padding:16px 18px;border-radius:2px;outline:none;transition:border-color .2s;}
-    .join-form input:focus{border-color:var(--gold);}
-    .join-form input::placeholder{color:var(--muted);}
-    .join-form button{font-family:var(--serif);letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:#17120a;background:linear-gradient(180deg,#e9c17e,#cda45f);border:0;padding:16px 28px;border-radius:2px;cursor:pointer;transition:filter .2s,transform .2s;white-space:nowrap;}
-    .join-form button:hover{filter:brightness(1.08);transform:translateY(-1px);}
+    .join {
+      padding: var(--sp) 0;
+      background: radial-gradient(120% 120% at 50% 0%, #12100b 0%, var(--bg) 60%);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .join .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .join p {
+      margin: 24px auto 34px;
+      max-width: 520px;
+    }
+
+    .join-form {
+      display: flex;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .join-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--line);
+      color: #fff;
+      font-family: var(--body);
+      font-size: 15px;
+      padding: 16px 18px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .join-form input:focus {
+      border-color: var(--gold);
+    }
+
+    .join-form input::placeholder {
+      color: var(--muted);
+    }
+
+    .join-form button {
+      font-family: var(--serif);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #17120a;
+      background: linear-gradient(180deg, #e9c17e, #cda45f);
+      border: 0;
+      padding: 16px 28px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: filter .2s, transform .2s;
+      white-space: nowrap;
+    }
+
+    .join-form button:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
 
     /* ============ FOOTER ============ */
-    footer{background:var(--bg2);padding:clamp(56px,7vw,84px) 0 40px;border-top:1px solid var(--line);}
-    .foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;}
-    .foot-brand img{height:76px;width:auto;margin-bottom:20px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));}
-    .foot-tag{font-family:var(--serifsc);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--gold);}
-    .foot-cols{display:flex;gap:clamp(40px,7vw,90px);flex-wrap:wrap;}
-    .foot-col h4{margin:0 0 16px;font-family:var(--serifsc);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--muted);}
-    .foot-col a{display:block;font-family:var(--serif);letter-spacing:.08em;color:var(--cream-dim);text-decoration:none;font-size:15px;margin-bottom:11px;transition:color .2s;}
-    .foot-col a:hover{color:var(--gold2);}
-    .foot-social{display:flex;gap:18px;font-size:19px;margin-top:4px;}
-    .foot-social a{color:var(--cream-dim);transition:color .2s,transform .2s;}
-    .foot-social a:hover{color:var(--gold);transform:translateY(-2px);}
-    .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:clamp(44px,6vw,70px);padding-top:26px;border-top:1px solid var(--line);font-size:12px;letter-spacing:.05em;color:var(--muted);}
+    footer {
+      background: var(--bg2);
+      padding: clamp(56px, 7vw, 84px) 0 40px;
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .foot-brand img {
+      height: 76px;
+      width: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, .6));
+    }
+
+    .foot-tag {
+      font-family: var(--serifsc);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    .foot-cols {
+      display: flex;
+      gap: clamp(40px, 7vw, 90px);
+      flex-wrap: wrap;
+    }
+
+    .foot-col h4 {
+      margin: 0 0 16px;
+      font-family: var(--serifsc);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .foot-col a {
+      display: block;
+      font-family: var(--serif);
+      letter-spacing: .08em;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 15px;
+      margin-bottom: 11px;
+      transition: color .2s;
+    }
+
+    .foot-col a:hover {
+      color: var(--gold2);
+    }
+
+    .foot-social {
+      display: flex;
+      gap: 18px;
+      font-size: 19px;
+      margin-top: 4px;
+    }
+
+    .foot-social a {
+      color: var(--cream-dim);
+      transition: color .2s, transform .2s;
+    }
+
+    .foot-social a:hover {
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .foot-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: clamp(44px, 6vw, 70px);
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: .05em;
+      color: var(--muted);
+    }
 
     /* ============ RESPONSIVE ============ */
-    @media (max-width:900px){
-      .music-grid{grid-template-columns:1fr;gap:44px;}
-      .cover{max-width:440px;}
-      .about-head{grid-template-columns:1fr;gap:20px;}
-      .members{grid-template-columns:1fr;}
-      .store-grid{grid-template-columns:repeat(2,1fr);}
+    @media (max-width:900px) {
+      .music-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+
+      .cover {
+        max-width: 440px;
+      }
+
+      .about-head {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .members {
+        grid-template-columns: 1fr;
+      }
+
+      .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    @media (max-width:820px){
-      .hero{height:100svh;min-height:0;}
-      .hero-art{object-position:center 20%;}
-      .follow-label{display:none;}
-      .social-row{top:18px;right:16px;}
-      .hero-nav .group{display:none;}
-      .hero-nav{justify-content:center;width:100%;padding-bottom:clamp(30px,7vh,54px);}
-      .topnav .links{display:none;}
-      .topnav .burger{display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--cream);font-size:20px;cursor:pointer;}
-      .menu-toggle{display:flex;}
-      body.nav-docked .menu-toggle{opacity:0;pointer-events:none;transition:opacity .2s;}
+
+    @media (max-width:820px) {
+      .hero {
+        height: 100svh;
+        min-height: 0;
+      }
+
+      .hero-art {
+        object-position: center 20%;
+      }
+
+      .follow-label {
+        display: none;
+      }
+
+      .social-row {
+        top: 18px;
+        right: 16px;
+      }
+
+      .hero-nav .group {
+        display: none;
+      }
+
+      .hero-nav {
+        justify-content: center;
+        width: 100%;
+        padding-bottom: clamp(30px, 7vh, 54px);
+      }
+
+      .topnav .links {
+        display: none;
+      }
+
+      .topnav .burger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--cream);
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      body.nav-docked .menu-toggle {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s;
+      }
     }
-    @media (max-width:560px){
-      .store-grid{grid-template-columns:1fr;}
-      .join-form{flex-direction:column;}
-      .foot-top{flex-direction:column;}
+
+    @media (max-width:560px) {
+      .store-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .join-form {
+        flex-direction: column;
+      }
+
+      .foot-top {
+        flex-direction: column;
+      }
     }
-    @media (prefers-reduced-motion: reduce){
-      *{animation-duration:.001s!important;animation-iteration-count:1!important;}
-      .reveal{opacity:1;transform:none;transition:none;}
-      .hero-art{animation:none;}
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: .001s !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .hero-art {
+        animation: none;
+      }
     }
   </style>
 </head>
+
 <body class="loading">
 
   <!-- LOADING SCREEN -->
@@ -358,7 +1589,8 @@
       <a href="#shows">Shows</a>
       <a href="#media">Media</a>
       <a href="#store">Store</a>
-      <a class="nav-cta" href="#music">Listen Now <span class="eq"><span></span><span></span><span></span><span></span><span></span></span></a>
+      <a class="nav-cta" href="#music">Listen Now <span
+          class="eq"><span></span><span></span><span></span><span></span><span></span></span></a>
     </nav>
     <button class="burger" id="burgerTop" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   </header>
@@ -367,16 +1599,21 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img class="hero-art" src="assets/hero-mock.png" alt="Dixon Hall — No Limit Country">
+    <img class="hero-art"
+      src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a47ed30f9249c3d8bd7b7e5.png"
+      alt="Dixon Hall — No Limit Country">
     <div class="mask-social"></div>
     <div class="mask-nav"></div>
 
     <div class="social-row">
       <span class="follow-label">Follow Us</span>
       <div class="social-icons">
-        <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" aria-label="Facebook"><i
+            class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" aria-label="Instagram"><i
+            class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener" aria-label="TikTok"><i
+            class="fa-brands fa-tiktok"></i></a>
         <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
       </div>
     </div>
@@ -414,7 +1651,13 @@
   <!-- MARQUEE -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>No Limit Country</span><span class="di">&#9670;</span><span>New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In Nashville</span><span class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span class="di">&#9670;</span><span>No Limit Country</span><span class="di">&#9670;</span><span>New Single &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In Nashville</span><span class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span class="di">&#9670;</span>
+      <span>No Limit Country</span><span class="di">&#9670;</span><span>New Single &ldquo;Beautiful Life&rdquo; Out
+        7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In Nashville</span><span
+        class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span
+        class="di">&#9670;</span><span>No Limit Country</span><span class="di">&#9670;</span><span>New Single
+        &ldquo;Beautiful Life&rdquo; Out 7.31.26</span><span class="di">&#9670;</span><span>Debut EP Recorded In
+        Nashville</span><span class="di">&#9670;</span><span>John Dixon Hall Jr. &times; Terry Glaze</span><span
+        class="di">&#9670;</span>
     </div>
   </div>
 
@@ -423,24 +1666,41 @@
     <div class="container">
       <div class="music-grid">
         <div>
-          <p class="eyebrow reveal"><span class="num">01</span><span class="bar"></span><span id="songEyebrow">New Single</span></p>
+          <p class="eyebrow reveal"><span class="num">01</span><span class="bar"></span><span id="songEyebrow">New
+              Single</span></p>
           <h2 class="display metal reveal d1" id="songTitle">Beautiful<br>Life</h2>
           <div class="single-date reveal d2" id="songDate">Out Friday &middot; July 31, 2026</div>
 
           <div class="countdown reveal d2" id="countdown" aria-label="Countdown to release">
-            <div class="cd-unit"><div class="cd-num" data-d>30</div><div class="cd-label">Days</div></div>
+            <div class="cd-unit">
+              <div class="cd-num" data-d>30</div>
+              <div class="cd-label">Days</div>
+            </div>
             <div class="cd-sep">:</div>
-            <div class="cd-unit"><div class="cd-num" data-h>00</div><div class="cd-label">Hrs</div></div>
+            <div class="cd-unit">
+              <div class="cd-num" data-h>00</div>
+              <div class="cd-label">Hrs</div>
+            </div>
             <div class="cd-sep">:</div>
-            <div class="cd-unit"><div class="cd-num" data-m>00</div><div class="cd-label">Min</div></div>
+            <div class="cd-unit">
+              <div class="cd-num" data-m>00</div>
+              <div class="cd-label">Min</div>
+            </div>
             <div class="cd-sep">:</div>
-            <div class="cd-unit"><div class="cd-num" data-s>00</div><div class="cd-label">Sec</div></div>
+            <div class="cd-unit">
+              <div class="cd-num" data-s>00</div>
+              <div class="cd-label">Sec</div>
+            </div>
           </div>
 
-          <p class="body-text reveal d3" style="max-width:460px;" id="songBlurb">The first cut from Dixon Hall&rsquo;s debut EP &mdash; recorded in Nashville. Classic country storytelling with a modern edge, built on the raw chemistry between Hall&rsquo;s soulful voice and Glaze&rsquo;s unmistakable guitar.</p>
+          <p class="body-text reveal d3" style="max-width:460px;" id="songBlurb">The first cut from Dixon Hall&rsquo;s
+            debut EP &mdash; recorded in Nashville. Classic country storytelling with a modern edge, built on the raw
+            chemistry between Hall&rsquo;s soulful voice and Glaze&rsquo;s unmistakable guitar.</p>
 
           <div class="btn-row reveal d3">
-            <a class="btn-primary" href="#" id="songCTA"><span class="eq"><span></span><span></span><span></span><span></span><span></span></span> <span id="songCTAText">Pre-Save</span></a>
+            <a class="btn-primary" href="#" id="songCTA"><span
+                class="eq"><span></span><span></span><span></span><span></span><span></span></span> <span
+                id="songCTAText">Pre-Save</span></a>
             <div class="streams" aria-label="Streaming platforms" id="songStreams">
               <a href="#" data-platform="spotify" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
               <a href="#" data-platform="apple" aria-label="Apple Music"><i class="fa-brands fa-apple"></i></a>
@@ -474,7 +1734,8 @@
           <p class="eyebrow reveal"><span class="num">02</span><span class="bar"></span>The Band</p>
           <h2 class="display metal reveal d1">An Unlikely<br>Harmony</h2>
         </div>
-        <p class="lead reveal d2">When a soulful country singer and a legendary rock vocalist discover they harmonize like they&rsquo;ve sung together their whole lives, something special happens.</p>
+        <p class="lead reveal d2">When a soulful country singer and a legendary rock vocalist discover they harmonize
+          like they&rsquo;ve sung together their whole lives, something special happens.</p>
       </div>
 
       <div class="about-photo reveal">
@@ -483,20 +1744,27 @@
       </div>
 
       <div class="about-body reveal" style="max-width:760px;">
-        <p class="body-text">Dixon Hall is a modern country band built on the unlikely but powerful partnership between vocalist and songwriter John Dixon Hall Jr. and legendary rock guitarist Terry Glaze. Their musical backgrounds could hardly be more different &mdash; but it&rsquo;s their vocal blend and natural harmony that truly sets the band apart. Hall&rsquo;s soulful country tone paired with Glaze&rsquo;s gritty rock edge creates a powerful dynamic on stage, and what started as a collaboration quickly evolved into a full band with a fast-growing regional following.</p>
+        <p class="body-text">Dixon Hall is a modern country band built on the unlikely but powerful partnership between
+          vocalist and songwriter John Dixon Hall Jr. and legendary rock guitarist Terry Glaze. Their musical
+          backgrounds could hardly be more different &mdash; but it&rsquo;s their vocal blend and natural harmony that
+          truly sets the band apart. Hall&rsquo;s soulful country tone paired with Glaze&rsquo;s gritty rock edge
+          creates a powerful dynamic on stage, and what started as a collaboration quickly evolved into a full band with
+          a fast-growing regional following.</p>
       </div>
 
       <div class="members">
         <div class="member reveal d1">
           <div class="role">Vocals &middot; Songwriter</div>
           <h3>John Dixon<br>Hall Jr.</h3>
-          <p>A Maryland native with deep roots in soul and country, Hall built his reputation performing across the Mid-Atlantic &mdash; with a voice that blends heartfelt storytelling and powerful delivery.</p>
+          <p>A Maryland native with deep roots in soul and country, Hall built his reputation performing across the
+            Mid-Atlantic &mdash; with a voice that blends heartfelt storytelling and powerful delivery.</p>
           <span class="tag">Maryland, USA</span>
         </div>
         <div class="member reveal d2">
           <div class="role">Guitar &middot; Vocals</div>
           <h3>Terry<br>Glaze</h3>
-          <p>Decades on the world&rsquo;s stages &mdash; the original vocalist for Pantera and frontman of Lord Tracy. Glaze brings a gritty rock edge that meets Hall&rsquo;s soul head-on.</p>
+          <p>Decades on the world&rsquo;s stages &mdash; the original vocalist for Pantera and frontman of Lord Tracy.
+            Glaze brings a gritty rock edge that meets Hall&rsquo;s soul head-on.</p>
           <span class="tag">Rock Icon</span>
         </div>
       </div>
@@ -511,38 +1779,70 @@
           <p class="eyebrow reveal"><span class="num">03</span><span class="bar"></span>On The Road</p>
           <h2 class="display metal reveal d1">Live</h2>
         </div>
-        <p class="body-text reveal d2" style="max-width:340px;">High-energy nights of today&rsquo;s country favorites and originals that reflect real life &mdash; and the little moments that matter most.</p>
+        <p class="body-text reveal d2" style="max-width:340px;">High-energy nights of today&rsquo;s country favorites
+          and originals that reflect real life &mdash; and the little moments that matter most.</p>
       </div>
 
       <div class="show-list reveal" id="showList">
         <div class="show-row">
-          <div class="sr-date"><div class="sr-day">08</div><div class="sr-mon">Jul</div></div>
-          <div class="sr-info"><div class="sr-venue">Admiral&rsquo;s Cup</div><div class="sr-city">Baltimore, MD &middot; 7:00 PM</div></div>
+          <div class="sr-date">
+            <div class="sr-day">08</div>
+            <div class="sr-mon">Jul</div>
+          </div>
+          <div class="sr-info">
+            <div class="sr-venue">Admiral&rsquo;s Cup</div>
+            <div class="sr-city">Baltimore, MD &middot; 7:00 PM</div>
+          </div>
           <a class="sr-cta" href="#">Details</a>
         </div>
         <div class="show-row">
-          <div class="sr-date"><div class="sr-day">11</div><div class="sr-mon">Jul</div></div>
-          <div class="sr-info"><div class="sr-venue">Twains Tavern</div><div class="sr-city">Pasadena, MD &middot; 8:30 PM</div></div>
+          <div class="sr-date">
+            <div class="sr-day">11</div>
+            <div class="sr-mon">Jul</div>
+          </div>
+          <div class="sr-info">
+            <div class="sr-venue">Twains Tavern</div>
+            <div class="sr-city">Pasadena, MD &middot; 8:30 PM</div>
+          </div>
           <a class="sr-cta" href="#">Details</a>
         </div>
         <div class="show-row">
-          <div class="sr-date"><div class="sr-day">17</div><div class="sr-mon">Jul</div></div>
-          <div class="sr-info"><div class="sr-venue">Tolchester</div><div class="sr-city">Chestertown, MD &middot; 7:00 PM</div></div>
+          <div class="sr-date">
+            <div class="sr-day">17</div>
+            <div class="sr-mon">Jul</div>
+          </div>
+          <div class="sr-info">
+            <div class="sr-venue">Tolchester</div>
+            <div class="sr-city">Chestertown, MD &middot; 7:00 PM</div>
+          </div>
           <a class="sr-cta" href="#">Details</a>
         </div>
         <div class="show-row">
-          <div class="sr-date"><div class="sr-day">24</div><div class="sr-mon">Jul</div></div>
-          <div class="sr-info"><div class="sr-venue">Natalie&rsquo;s</div><div class="sr-city">Fallston, MD &middot; 7:00 PM</div></div>
+          <div class="sr-date">
+            <div class="sr-day">24</div>
+            <div class="sr-mon">Jul</div>
+          </div>
+          <div class="sr-info">
+            <div class="sr-venue">Natalie&rsquo;s</div>
+            <div class="sr-city">Fallston, MD &middot; 7:00 PM</div>
+          </div>
           <a class="sr-cta" href="#">Details</a>
         </div>
         <div class="show-row">
-          <div class="sr-date"><div class="sr-day">25</div><div class="sr-mon">Jul</div></div>
-          <div class="sr-info"><div class="sr-venue">Smoke on the Rail BBQ Fest</div><div class="sr-city">New Freedom, PA &middot; 5:30 PM</div></div>
+          <div class="sr-date">
+            <div class="sr-day">25</div>
+            <div class="sr-mon">Jul</div>
+          </div>
+          <div class="sr-info">
+            <div class="sr-venue">Smoke on the Rail BBQ Fest</div>
+            <div class="sr-city">New Freedom, PA &middot; 5:30 PM</div>
+          </div>
           <a class="sr-cta" href="#">Details</a>
         </div>
       </div>
 
-      <p class="booking-note reveal">Booking &amp; private events &mdash; <a href="mailto:john@johndixonhalljr.com">john@johndixonhalljr.com</a></p>
+      <p class="booking-note reveal">Booking &amp; private events &mdash; <a
+          href="mailto:john@johndixonhalljr.com">john@johndixonhalljr.com</a></p>
     </div>
   </section>
 
@@ -552,29 +1852,50 @@
       <p class="eyebrow reveal"><span class="num">04</span><span class="bar"></span>Gallery</p>
       <h2 class="display metal reveal d1" style="margin-bottom:clamp(30px,4vw,50px);">In The Frame</h2>
       <div class="gallery reveal d1">
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f251bf938e5471bf622.webp" alt="Dixon Hall — photo 1" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f25e098dfac3725df9f.webp" alt="Dixon Hall — photo 2" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24e098dfac3725df99.webp" alt="Dixon Hall — photo 3" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24f130cb119fccbae3.webp" alt="Dixon Hall — photo 4" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24d0f4875396cba8a0.webp" alt="Dixon Hall — photo 5" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f2439a69d42f841055a.webp" alt="Dixon Hall — photo 6" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f23f130cb119fccbad5.webp" alt="Dixon Hall — photo 7" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f23f130cb119fccbabb.webp" alt="Dixon Hall — photo 8" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21e098dfac3725df33.webp" alt="Dixon Hall — photo 9" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21f130cb119fccba89.webp" alt="Dixon Hall — photo 10" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21e098dfac3725df2d.webp" alt="Dixon Hall — photo 11" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f216f5641e1054c7603.webp" alt="Dixon Hall — photo 12" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f219114462c7133b045.webp" alt="Dixon Hall — photo 13" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f20d0f4875396cba827.webp" alt="Dixon Hall — photo 14" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ed0f4875396cba7f1.webp" alt="Dixon Hall — photo 15" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1e9114462c7133b007.webp" alt="Dixon Hall — photo 16" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ef130cb119fccba4b.webp" alt="Dixon Hall — photo 17" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ee098dfac3725dedf.webp" alt="Dixon Hall — photo 18" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1e39a69d42f84104ae.webp" alt="Dixon Hall — photo 19" loading="lazy"></figure>
-        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ee098dfac3725deda.webp" alt="Dixon Hall — photo 20" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f251bf938e5471bf622.webp"
+            alt="Dixon Hall — photo 1" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f25e098dfac3725df9f.webp"
+            alt="Dixon Hall — photo 2" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24e098dfac3725df99.webp"
+            alt="Dixon Hall — photo 3" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24f130cb119fccbae3.webp"
+            alt="Dixon Hall — photo 4" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f24d0f4875396cba8a0.webp"
+            alt="Dixon Hall — photo 5" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f2439a69d42f841055a.webp"
+            alt="Dixon Hall — photo 6" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f23f130cb119fccbad5.webp"
+            alt="Dixon Hall — photo 7" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f23f130cb119fccbabb.webp"
+            alt="Dixon Hall — photo 8" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21e098dfac3725df33.webp"
+            alt="Dixon Hall — photo 9" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21f130cb119fccba89.webp"
+            alt="Dixon Hall — photo 10" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f21e098dfac3725df2d.webp"
+            alt="Dixon Hall — photo 11" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f216f5641e1054c7603.webp"
+            alt="Dixon Hall — photo 12" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f219114462c7133b045.webp"
+            alt="Dixon Hall — photo 13" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f20d0f4875396cba827.webp"
+            alt="Dixon Hall — photo 14" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ed0f4875396cba7f1.webp"
+            alt="Dixon Hall — photo 15" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1e9114462c7133b007.webp"
+            alt="Dixon Hall — photo 16" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ef130cb119fccba4b.webp"
+            alt="Dixon Hall — photo 17" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ee098dfac3725dedf.webp"
+            alt="Dixon Hall — photo 18" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1e39a69d42f84104ae.webp"
+            alt="Dixon Hall — photo 19" loading="lazy"></figure>
+        <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f1ee098dfac3725deda.webp"
+            alt="Dixon Hall — photo 20" loading="lazy"></figure>
       </div>
       <div class="gallery-more reveal">
-        <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i>Follow @dixonhallband for more</a>
+        <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener"><i
+            class="fa-brands fa-instagram"></i>Follow @dixonhallband for more</a>
       </div>
     </div>
   </section>
@@ -587,16 +1908,44 @@
           <p class="eyebrow reveal"><span class="num">05</span><span class="bar"></span>Merch</p>
           <h2 class="display metal reveal d1">Gear Up</h2>
         </div>
-        <p class="body-text reveal d2" style="max-width:360px;">Official Dixon Hall apparel, accessories, and future exclusive releases &mdash; made for the fans.</p>
+        <p class="body-text reveal d2" style="max-width:360px;">Official Dixon Hall apparel, accessories, and future
+          exclusive releases &mdash; made for the fans.</p>
       </div>
 
       <div class="store-grid">
-        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Women&rsquo;s Cotton Tank</span><span class="merch-price">$35.00</span></div></a>
-        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Pom-Pom Beanie</span><span class="merch-price">$30.00</span></div></a>
-        <a class="merch reveal d1" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Trucker Cap</span><span class="merch-price">$30.00</span></div></a>
-        <a class="merch reveal d2" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Crop Hoodie</span><span class="merch-price">$36.50</span></div></a>
-        <a class="merch reveal d2" href="#"><div class="merch-art"><img src="assets/logo.png" alt=""></div><div class="merch-info"><span class="merch-name">Short Sleeve Tee</span><span class="merch-price">$23.50</span></div></a>
-        <a class="merch reveal d2" href="#" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:36px;"><div><i class="fa-solid fa-bag-shopping" style="font-size:26px;color:var(--gold2);"></i><div style="font-family:var(--serif);letter-spacing:.16em;text-transform:uppercase;font-size:14px;color:#efe9e0;margin-top:16px;">Shop All Merch</div></div></a>
+        <a class="merch reveal d1" href="#">
+          <div class="merch-art"><img src="assets/logo.png" alt=""></div>
+          <div class="merch-info"><span class="merch-name">Women&rsquo;s Cotton Tank</span><span
+              class="merch-price">$35.00</span></div>
+        </a>
+        <a class="merch reveal d1" href="#">
+          <div class="merch-art"><img src="assets/logo.png" alt=""></div>
+          <div class="merch-info"><span class="merch-name">Pom-Pom Beanie</span><span class="merch-price">$30.00</span>
+          </div>
+        </a>
+        <a class="merch reveal d1" href="#">
+          <div class="merch-art"><img src="assets/logo.png" alt=""></div>
+          <div class="merch-info"><span class="merch-name">Trucker Cap</span><span class="merch-price">$30.00</span>
+          </div>
+        </a>
+        <a class="merch reveal d2" href="#">
+          <div class="merch-art"><img src="assets/logo.png" alt=""></div>
+          <div class="merch-info"><span class="merch-name">Crop Hoodie</span><span class="merch-price">$36.50</span>
+          </div>
+        </a>
+        <a class="merch reveal d2" href="#">
+          <div class="merch-art"><img src="assets/logo.png" alt=""></div>
+          <div class="merch-info"><span class="merch-name">Short Sleeve Tee</span><span
+              class="merch-price">$23.50</span></div>
+        </a>
+        <a class="merch reveal d2" href="#"
+          style="display:flex;align-items:center;justify-content:center;text-align:center;padding:36px;">
+          <div><i class="fa-solid fa-bag-shopping" style="font-size:26px;color:var(--gold2);"></i>
+            <div
+              style="font-family:var(--serif);letter-spacing:.16em;text-transform:uppercase;font-size:14px;color:#efe9e0;margin-top:16px;">
+              Shop All Merch</div>
+          </div>
+        </a>
       </div>
       <p class="store-note reveal">Product photos are placeholders &mdash; live store images drop in here.</p>
     </div>
@@ -606,9 +1955,11 @@
   <section class="join">
     <div class="container">
       <div class="inner">
-        <p class="eyebrow reveal" style="justify-content:center;"><span class="bar"></span>Fan Club<span class="bar" style="background:linear-gradient(270deg,var(--gold),transparent);"></span></p>
+        <p class="eyebrow reveal" style="justify-content:center;"><span class="bar"></span>Fan Club<span class="bar"
+            style="background:linear-gradient(270deg,var(--gold),transparent);"></span></p>
         <h2 class="display metal reveal d1">Never Miss<br>A Drop</h2>
-        <p class="body-text reveal d2">Get early access to new music, upcoming shows, merch drops, and exclusive behind-the-scenes updates delivered straight to your inbox.</p>
+        <p class="body-text reveal d2">Get early access to new music, upcoming shows, merch drops, and exclusive
+          behind-the-scenes updates delivered straight to your inbox.</p>
         <form class="join-form reveal d2" onsubmit="return false;">
           <input type="email" placeholder="Your email address" aria-label="Email address" required>
           <button type="submit">Join</button>
@@ -641,9 +1992,12 @@
             <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener">Instagram</a>
             <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener">TikTok</a>
             <div class="foot-social">
-              <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+              <a href="https://www.facebook.com/dixonhallband" target="_blank" rel="noopener" aria-label="Facebook"><i
+                  class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener"
+                aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.tiktok.com/@johndixonhalljr" target="_blank" rel="noopener" aria-label="TikTok"><i
+                  class="fa-brands fa-tiktok"></i></a>
               <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
             </div>
           </div>
@@ -657,13 +2011,13 @@
   </footer>
 
   <script>
-    (function(){
+    (function () {
       /* ---- Scroll: nav crossfade (Listen Now docks as last nav item) ---- */
       var topnav = document.getElementById('topnav');
       var heroNav = document.getElementById('heroNav');
       var body = document.body;
       var ticking = false;
-      function update(){
+      function update() {
         ticking = false;
         var vh = window.innerHeight, y = window.pageYOffset;
         var start = vh * 0.42, end = vh * 0.82;
@@ -672,12 +2026,12 @@
         topnav.style.opacity = p;
         topnav.style.transform = 'translateY(' + ((p - 1) * 12) + 'px)';
         topnav.style.pointerEvents = p > 0.6 ? 'auto' : 'none';
-        if(heroNav) heroNav.style.opacity = 1 - p;
+        if (heroNav) heroNav.style.opacity = 1 - p;
         body.classList.toggle('nav-docked', p > 0.6);
       }
-      function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
       window.__dhUpdate = update;
-      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', update);
       update();
 
@@ -685,42 +2039,42 @@
       var mToggle = document.getElementById('menuToggle');
       var bTop = document.getElementById('burgerTop');
       var menu = document.getElementById('mobileMenu');
-      function setMenu(open){
+      function setMenu(open) {
         menu.classList.toggle('open', open);
-        [mToggle, bTop].forEach(function(b){ if(b) b.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; });
+        [mToggle, bTop].forEach(function (b) { if (b) b.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; });
       }
-      [mToggle, bTop].forEach(function(b){ if(b) b.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); }); });
-      menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+      [mToggle, bTop].forEach(function (b) { if (b) b.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); }); });
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
 
       /* ---- Scroll reveals ---- */
       var reveals = document.querySelectorAll('.reveal');
-      if('IntersectionObserver' in window){
-        var io = new IntersectionObserver(function(entries){
-          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-        }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-        reveals.forEach(function(el){ io.observe(el); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
       } else {
-        reveals.forEach(function(el){ el.classList.add('in'); });
+        reveals.forEach(function (el) { el.classList.add('in'); });
       }
 
       /* ---- Countdown (re-targetable; data layer can point it at a new date) ---- */
       var cdTimer = null;
-      window.__dhCountdown = function(dateStr){
+      window.__dhCountdown = function (dateStr) {
         var cd = document.getElementById('countdown');
-        if(!cd) return;
+        if (!cd) return;
         var target = new Date(dateStr + 'T00:00:00').getTime();
-        var dEl=cd.querySelector('[data-d]'), hEl=cd.querySelector('[data-h]'), mEl=cd.querySelector('[data-m]'), sEl=cd.querySelector('[data-s]');
-        function pad(n){ return (n<10?'0':'')+n; }
-        function tick(){
+        var dEl = cd.querySelector('[data-d]'), hEl = cd.querySelector('[data-h]'), mEl = cd.querySelector('[data-m]'), sEl = cd.querySelector('[data-s]');
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function tick() {
           var diff = target - Date.now();
-          if(diff <= 0){ dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00'; return; }
-          var s=Math.floor(diff/1000);
-          dEl.textContent = Math.floor(s/86400);
-          hEl.textContent = pad(Math.floor((s%86400)/3600));
-          mEl.textContent = pad(Math.floor((s%3600)/60));
-          sEl.textContent = pad(s%60);
+          if (diff <= 0) { dEl.textContent = '00'; hEl.textContent = '00'; mEl.textContent = '00'; sEl.textContent = '00'; return; }
+          var s = Math.floor(diff / 1000);
+          dEl.textContent = Math.floor(s / 86400);
+          hEl.textContent = pad(Math.floor((s % 86400) / 3600));
+          mEl.textContent = pad(Math.floor((s % 3600) / 60));
+          sEl.textContent = pad(s % 60);
         }
-        if(cdTimer) clearInterval(cdTimer);
+        if (cdTimer) clearInterval(cdTimer);
         tick(); cdTimer = setInterval(tick, 1000);
       };
       window.__dhCountdown('2026-07-31');
@@ -731,60 +2085,60 @@
        If the backend isn't configured or the fetch fails, the baked-in
        content above stays as-is; the site can never look broken. -->
   <script>
-    (function(){
-      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-      var MONTHS_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    (function () {
+      var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var MONTHS_FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-      function el(id){ return document.getElementById(id); }
-      function parseDate(str){ return str ? new Date(str + 'T00:00:00') : null; }
-      function esc(s){ var d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+      function el(id) { return document.getElementById(id); }
+      function parseDate(str) { return str ? new Date(str + 'T00:00:00') : null; }
+      function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
       fetch('/api/content')
-        .then(function(r){ if(!r.ok) throw new Error('unavailable'); return r.json(); })
-        .then(function(data){
-          try{ renderSong((data && data.songs) || []); }catch(e){}
-          try{ renderShows((data && data.shows) || []); }catch(e){}
+        .then(function (r) { if (!r.ok) throw new Error('unavailable'); return r.json(); })
+        .then(function (data) {
+          try { renderSong((data && data.songs) || []); } catch (e) { }
+          try { renderShows((data && data.shows) || []); } catch (e) { }
         })
-        .catch(function(){ /* fallback: keep baked-in content */ });
+        .catch(function () { /* fallback: keep baked-in content */ });
 
       /* ---- SONG (featured, else newest) ---- */
-      function renderSong(songs){
-        var visible = songs.filter(function(s){ return s.title && s.status !== 'Hidden'; });
-        if(!visible.length) return;
-        var pool = visible.filter(function(s){ return s.featured; });
-        if(!pool.length) pool = visible;
-        pool.sort(function(a,b){ return (parseDate(b.releaseDate)||0) - (parseDate(a.releaseDate)||0); });
+      function renderSong(songs) {
+        var visible = songs.filter(function (s) { return s.title && s.status !== 'Hidden'; });
+        if (!visible.length) return;
+        var pool = visible.filter(function (s) { return s.featured; });
+        if (!pool.length) pool = visible;
+        pool.sort(function (a, b) { return (parseDate(b.releaseDate) || 0) - (parseDate(a.releaseDate) || 0); });
         var s = pool[0];
 
         var rel = parseDate(s.releaseDate);
-        var today = new Date(); today.setHours(0,0,0,0);
+        var today = new Date(); today.setHours(0, 0, 0, 0);
         var released = s.status === 'Released' || (rel && rel <= today);
 
         // Title — break long titles across two lines
-        var words = (s.title||'').trim().split(/\s+/);
+        var words = (s.title || '').trim().split(/\s+/);
         el('songTitle').innerHTML = words.length > 1
-          ? esc(words.slice(0, Math.ceil(words.length/2)).join(' ')) + '<br>' + esc(words.slice(Math.ceil(words.length/2)).join(' '))
+          ? esc(words.slice(0, Math.ceil(words.length / 2)).join(' ')) + '<br>' + esc(words.slice(Math.ceil(words.length / 2)).join(' '))
           : esc(s.title);
 
         el('songEyebrow').textContent = released ? 'Latest Single' : 'New Single';
 
-        if(released){
+        if (released) {
           el('songDate').textContent = 'Available Now';
-          var cd = el('countdown'); if(cd) cd.style.display = 'none';
-        } else if(rel){
+          var cd = el('countdown'); if (cd) cd.style.display = 'none';
+        } else if (rel) {
           el('songDate').textContent = 'Out ' + DAYS[rel.getDay()] + ' · ' + MONTHS_FULL[rel.getMonth()] + ' ' + rel.getDate() + ', ' + rel.getFullYear();
-          var cd2 = el('countdown'); if(cd2) cd2.style.display = '';
-          if(window.__dhCountdown) window.__dhCountdown(s.releaseDate);
+          var cd2 = el('countdown'); if (cd2) cd2.style.display = '';
+          if (window.__dhCountdown) window.__dhCountdown(s.releaseDate);
         }
 
-        if(s.blurb) el('songBlurb').textContent = s.blurb;
+        if (s.blurb) el('songBlurb').textContent = s.blurb;
 
         // CTA + streaming links
         var L = s.links || {};
         var firstListen = L.spotify || L.apple || L.youtube || L.amazon;
         var cta = el('songCTA');
-        if(released){
+        if (released) {
           el('songCTAText').textContent = 'Listen Now';
           cta.href = firstListen || '#';
         } else {
@@ -792,17 +2146,17 @@
           cta.href = L.presave || firstListen || '#';
         }
         var anyStream = false;
-        document.querySelectorAll('#songStreams a').forEach(function(a){
+        document.querySelectorAll('#songStreams a').forEach(function (a) {
           var url = L[a.getAttribute('data-platform')];
-          if(url){ a.href = url; a.style.display = ''; anyStream = true; }
+          if (url) { a.href = url; a.style.display = ''; anyStream = true; }
           else a.style.display = 'none';
         });
         el('songStreams').style.display = anyStream ? '' : 'none';
 
         // Cover art — real upload replaces the crest composition
-        if(s.cover){
+        if (s.cover) {
           var card = el('coverCard');
-          if(!card.querySelector('.cover-real')){
+          if (!card.querySelector('.cover-real')) {
             var img = document.createElement('img');
             img.className = 'cover-real';
             img.alt = s.title + ' — cover art';
@@ -819,20 +2173,20 @@
       }
 
       /* ---- SHOWS (upcoming only, soonest first) ---- */
-      function renderShows(shows){
-        var today = new Date(); today.setHours(0,0,0,0);
+      function renderShows(shows) {
+        var today = new Date(); today.setHours(0, 0, 0, 0);
         var upcoming = shows
-          .filter(function(sh){ var d = parseDate(sh.date); return sh.venue && d && d >= today; })
-          .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
+          .filter(function (sh) { var d = parseDate(sh.date); return sh.venue && d && d >= today; })
+          .sort(function (a, b) { return parseDate(a.date) - parseDate(b.date); });
 
         var list = el('showList');
-        if(!list) return;
-        if(!upcoming.length){
+        if (!list) return;
+        if (!upcoming.length) {
           list.innerHTML = '<div class="show-row"><div class="sr-info"><div class="sr-venue">No upcoming shows</div>' +
             '<div class="sr-city">Follow us for announcements</div></div></div>';
           return;
         }
-        list.innerHTML = upcoming.map(function(sh){
+        list.innerHTML = upcoming.map(function (sh) {
           var d = parseDate(sh.date);
           var city = esc(sh.city || '');
           var time = esc(sh.time || '');
@@ -841,7 +2195,7 @@
             ? '<a class="sr-cta" href="' + esc(sh.ticketUrl) + '" target="_blank" rel="noopener">Details</a>'
             : '<a class="sr-cta" href="#">Details</a>';
           return '<div class="show-row">' +
-            '<div class="sr-date"><div class="sr-day">' + (d.getDate()<10?'0':'') + d.getDate() + '</div><div class="sr-mon">' + MONTHS[d.getMonth()] + '</div></div>' +
+            '<div class="sr-date"><div class="sr-day">' + (d.getDate() < 10 ? '0' : '') + d.getDate() + '</div><div class="sr-mon">' + MONTHS[d.getMonth()] + '</div></div>' +
             '<div class="sr-info"><div class="sr-venue">' + esc(sh.venue) + '</div><div class="sr-city">' + meta + '</div></div>' +
             link + '</div>';
         }).join('');
@@ -851,26 +2205,27 @@
 
   <!-- LOADING SCREEN reveal -->
   <script>
-    (function(){
+    (function () {
       var loader = document.getElementById('loader');
-      if(!loader) return;
+      if (!loader) return;
       var MIN = 2000, CAP = 6000, done = false;
-      function now(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
+      function now() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
       var t0 = now();
-      function reveal(){
-        if(done) return; done = true;
+      function reveal() {
+        if (done) return; done = true;
         var wait = Math.max(0, MIN - (now() - t0));
-        setTimeout(function(){
+        setTimeout(function () {
           loader.classList.add('hidden');
           document.body.classList.remove('loading');
-          setTimeout(function(){ loader.style.display = 'none'; }, 750);
+          setTimeout(function () { loader.style.display = 'none'; }, 750);
         }, wait);
       }
-      if(document.readyState === 'complete') reveal();
+      if (document.readyState === 'complete') reveal();
       else window.addEventListener('load', reveal);
       setTimeout(reveal, CAP);
     })();
   </script>
 
 </body>
+
 </html>
