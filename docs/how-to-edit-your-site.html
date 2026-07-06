@@ -1,0 +1,150 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dixon Hall — How to Edit Your Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1712; --soft:#5c5347; --paper:#fdfbf6; --card:#ffffff;
+    --gold:#b1832f; --gold-2:#cda45f; --line:#e7ddcb; --hi:#fbf4e4;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Barlow",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.6; font-size:17px;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:32px 22px 80px}
+  header.mast{border-bottom:2px solid var(--gold); padding-bottom:18px; margin-bottom:26px}
+  .eyebrow{font-family:"Barlow"; letter-spacing:.22em; text-transform:uppercase;
+    font-size:12px; font-weight:600; color:var(--gold)}
+  h1{font-family:"Marcellus",serif; font-weight:400; font-size:34px; line-height:1.1;
+    margin:.35em 0 .1em}
+  .sub{color:var(--soft); font-size:16px; margin:0}
+  h2{font-family:"Marcellus",serif; font-weight:400; font-size:23px; margin:34px 0 6px;
+    display:flex; align-items:baseline; gap:12px}
+  h2 .n{font-family:"Barlow"; font-weight:600; font-size:14px; color:#fff;
+    background:var(--gold); width:26px; height:26px; border-radius:2px;
+    display:inline-flex; align-items:center; justify-content:center; flex:none; transform:translateY(-2px)}
+  p{margin:.5em 0}
+  .rule{background:var(--hi); border:1px solid var(--line); border-left:4px solid var(--gold);
+    border-radius:3px; padding:16px 18px; margin:22px 0}
+  .rule strong{color:var(--gold)}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:3px;
+    padding:18px 20px 6px; margin:14px 0}
+  ol{margin:.3em 0 .6em; padding-left:20px}
+  ol li{margin:.35em 0}
+  ul.tight{margin:.2em 0 .6em; padding-left:18px}
+  ul.tight li{margin:.2em 0}
+  .pill{display:inline-block; font-size:13px; font-weight:600; padding:2px 9px; border-radius:2px;
+    background:var(--hi); border:1px solid var(--line); color:var(--gold); white-space:nowrap}
+  code{background:#f3ece0; border:1px solid var(--line); border-radius:2px; padding:1px 6px;
+    font-family:ui-monospace,Menlo,monospace; font-size:14px}
+  a.btn{display:inline-block; background:var(--ink); color:var(--paper); text-decoration:none;
+    font-weight:600; letter-spacing:.02em; padding:14px 22px; border-radius:3px; margin:6px 0}
+  a.btn:hover{background:var(--gold)}
+  .muted{color:var(--soft); font-size:15px}
+  .divider{height:1px; background:var(--line); margin:34px 0}
+  footer{color:var(--soft); font-size:14px; border-top:1px solid var(--line); margin-top:40px; padding-top:16px}
+  @media print{
+    body{background:#fff; font-size:12.5px}
+    a.btn{border:1px solid var(--ink); color:var(--ink); background:#fff}
+    .card,.rule{break-inside:avoid}
+    .noprint{display:none}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Dixon Hall Music</div>
+    <h1>How to Edit Your Website</h1>
+    <p class="sub">Update your shows and music yourself — from your phone, in about a minute. No code, nothing to break.</p>
+  </header>
+
+  <p>Your website reads from one <strong>Google Sheet</strong> called
+  <strong>“Dixon Hall — Website,”</strong> which has two tabs at the bottom:
+  <strong>Songs</strong> and <strong>Shows</strong>. You type into a tab, the website updates
+  itself. That’s the whole trick — it’s just a spreadsheet.</p>
+
+  <div class="rule">
+    <strong>You can’t break it.</strong> You’re only typing words, dates, and links — never the
+    design. If a box is left blank or something looks off, the site just keeps what was there
+    before. It never goes blank or “breaks.” So go ahead and try things.
+  </div>
+
+  <p class="noprint" style="text-align:center; margin:26px 0 10px">
+    <a class="btn" href="https://docs.google.com/spreadsheets/d/15GA2gv4DY5XhEJtmtUbAK-VL8ZVCrjv3q6XV6Ngwwts/edit" target="_blank" rel="noopener">Open my website sheet →</a><br>
+    <span class="muted">Bookmark this. Use the two tabs at the bottom: <strong>Songs</strong> and <strong>Shows</strong>. Works in the <strong>Google Sheets</strong> app on your phone too.</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <h2><span class="n">1</span> Add a show</h2>
+  <div class="card">
+    <p>Open the <strong>Shows</strong> tab (bottom of the sheet) and type a new row under the last one:</p>
+    <ol>
+      <li><strong>Venue</strong> — the place (e.g. <em>The Roadhouse</em>)</li>
+      <li><strong>Date</strong> — type it like <code>2026-08-15</code></li>
+      <li><strong>City</strong> — <code>Baltimore, MD</code></li>
+      <li><strong>Time</strong> — <code>7:00 PM</code></li>
+      <li><strong>Ticket Link</strong> — paste a link <span class="muted">(optional — leave blank if none)</span></li>
+    </ol>
+    <p class="muted">Shows sort by date automatically, soonest first. Once a show’s date passes,
+    it drops off the site on its own — <strong>you never have to delete old shows.</strong></p>
+  </div>
+
+  <h2><span class="n">2</span> Post a new single</h2>
+  <div class="card">
+    <p>Open the <strong>Songs</strong> tab (bottom of the sheet) and type a new row:</p>
+    <ol>
+      <li><strong>Title</strong> — the song name</li>
+      <li><strong>Status</strong> — <span class="pill">Upcoming</span> <span class="muted">(turns on the countdown + Pre-Save button)</span></li>
+      <li><strong>Release Date</strong> — like <code>2026-09-01</code></li>
+      <li><strong>Cover</strong> — paste the cover image’s <strong>web link (URL)</strong> <span class="muted">(I’ll set up an easy uploader for this soon)</span></li>
+      <li><strong>Blurb</strong> — a sentence or two about the song</li>
+      <li><strong>Pre-Save Link</strong> — paste the pre-save URL</li>
+      <li><strong>Featured</strong> — type <code>yes</code> so this is the one shown big on the homepage</li>
+    </ol>
+    <p class="muted">Only <strong>one</strong> song should say <code>yes</code> under Featured at a time — that’s the one the site spotlights.</p>
+  </div>
+
+  <h2><span class="n">3</span> When the single comes out</h2>
+  <div class="card">
+    <p>The day it’s live on Spotify/Apple, open that row and:</p>
+    <ol>
+      <li>Change <strong>Status</strong> from <span class="pill">Upcoming</span> to <span class="pill">Released</span></li>
+      <li>Paste in the <strong>Spotify</strong>, <strong>Apple Music</strong>, <strong>YouTube</strong>, and <strong>Amazon</strong> links you have</li>
+    </ol>
+    <p class="muted">The countdown turns into <strong>“Listen Now”</strong> buttons automatically. Any link you leave
+    blank just won’t show — no empty buttons.</p>
+  </div>
+
+  <h2><span class="n">4</span> Hide something (instead of deleting)</h2>
+  <div class="card">
+    <p>Want a song off the site but don’t want to lose it? Set its <strong>Status</strong> to
+    <span class="pill">Hidden</span>. It stays in your sheet but drops off the website.</p>
+    <p class="muted">Old shows hide themselves once the date passes — nothing to do there.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 style="margin-top:10px">How soon does it show up?</h2>
+  <p>Give it up to <strong>about 5 minutes</strong>, then refresh the website. If you don’t see the change,
+  wait a minute and refresh once more — the site checks for updates on a short timer.</p>
+
+  <h2>Doing it from your phone</h2>
+  <ul class="tight">
+    <li>Install the free <strong>Google Sheets</strong> app (App Store / Google Play) and sign in with the email your invite came to.</li>
+    <li>Open <strong>“Dixon Hall — Website”</strong> and tap the <strong>Songs</strong> or <strong>Shows</strong> tab at the bottom.</li>
+    <li>Scroll to the bottom row, tap a cell, and type.</li>
+  </ul>
+
+  <footer>
+    <strong>Stuck, or want a bigger change</strong> (a new photo of the band, wording on the page, a new section)?
+    That part’s on me — just text me and I’ll take care of it. — Fresh
+  </footer>
+
+</div>
