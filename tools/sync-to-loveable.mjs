@@ -34,7 +34,7 @@ const SITE = join(PROJECT, "site");
 const INDEX = join(SITE, "index.html");
 
 // Local images we own and copy into the Loveable repo's public/assets.
-const ASSETS = ["logo.png", "band.png", "brick.avif", "hero-mock.png"];
+const ASSETS = ["logo.png", "band.png", "brick.avif", "hero-mock.png", "single-cover.jpg"];
 
 const PUSH = process.argv.includes("--push");
 
@@ -119,15 +119,18 @@ function main() {
     copyFileSync(from, join(pubAssets, a));
   }
 
-  const status = git(clone, "status", "--short");
-  if (!status.trim()) {
+  // Stage everything first so NEW files (e.g. added assets) show in the summary,
+  // not just edits to already-tracked files.
+  git(clone, "add", "-A");
+  const stat = git(clone, "-c", "color.ui=always", "diff", "--cached", "--stat");
+  if (!stat.trim()) {
     log("\n✓ Loveable is already in sync — nothing to copy.");
     rmSync(tmp, { recursive: true, force: true });
     return;
   }
 
   log("\n── Changes to push to Loveable ──");
-  log(git(clone, "-c", "color.ui=always", "diff", "--stat"));
+  log(stat);
 
   if (!PUSH) {
     log("Dry run only. Re-run with --push to commit + push these to Loveable.");
@@ -135,7 +138,6 @@ function main() {
     return;
   }
 
-  git(clone, "add", "-A");
   git(clone, "-c", "user.name=Larry Scott", "-c", "user.email=iamjustfresh@gmail.com",
     "commit", "-m", "Sync Dixon site from dixon-hall-music");
   log("→ Pushing …");
