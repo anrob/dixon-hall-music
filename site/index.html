@@ -889,6 +889,572 @@
       object-fit: cover;
     }
 
+    /* ============ THE REEL / ON FILM ============ */
+    .reel {
+      padding: var(--sp) 0;
+      background: linear-gradient(180deg, var(--bg3) 0%, var(--bg2) 55%, var(--bg) 100%);
+      border-top: 1px solid var(--line);
+    }
+
+    body.reel-lock {
+      overflow: hidden;
+    }
+
+    .reel-head {
+      margin-bottom: clamp(34px, 5vw, 58px);
+    }
+
+    .reel-head h2 {
+      margin-top: 8px;
+    }
+
+    .reel-head .body-text {
+      margin-top: 20px;
+    }
+
+    /* ---- A. Main screen: teaser as a living poster ---- */
+    .reel-screen {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(205, 164, 95, .28);
+      border-radius: 3px;
+      overflow: hidden;
+      background: #0a0806;
+      cursor: pointer;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
+      transition: box-shadow .5s ease, border-color .5s ease;
+    }
+
+    .reel-screen::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(205, 164, 95, .14);
+      border-radius: 2px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .reel-screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 3px;
+      z-index: 3;
+      pointer-events: none;
+      box-shadow: inset 0 0 90px 8px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(231, 221, 203, .04);
+    }
+
+    .reel-screen:hover {
+      border-color: rgba(205, 164, 95, .5);
+      box-shadow: 0 40px 90px rgba(0, 0, 0, .6), 0 0 58px rgba(205, 164, 95, .14);
+    }
+
+    .reel-screen:focus-visible {
+      outline: 1px solid var(--gold2);
+      outline-offset: 3px;
+    }
+
+    .reel-loop {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .reel-screen-grad {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(120% 90% at 50% 64%, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 60%), linear-gradient(0deg, rgba(6, 4, 2, .55), rgba(6, 4, 2, 0) 46%);
+    }
+
+    .reel-screen-cta {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .reel-play {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 1px solid rgba(205, 164, 95, .6);
+      background: rgba(6, 4, 2, .28);
+      display: grid;
+      place-items: center;
+      color: var(--gold2);
+      font-size: 22px;
+      transition: transform .5s ease, border-color .5s ease, background .5s ease;
+    }
+
+    .reel-play i {
+      margin-left: 4px;
+    }
+
+    .reel-watch {
+      font-family: var(--serifsc);
+      text-transform: uppercase;
+      letter-spacing: .34em;
+      font-size: clamp(15px, 2vw, 22px);
+      color: var(--gold2);
+      transition: letter-spacing .5s ease;
+    }
+
+    .reel-sub {
+      font-family: var(--serif);
+      color: var(--cream);
+      font-size: 13px;
+      letter-spacing: .06em;
+      opacity: .82;
+    }
+
+    .reel-screen:hover .reel-watch {
+      letter-spacing: .42em;
+    }
+
+    .reel-screen:hover .reel-play {
+      border-color: var(--gold2);
+      background: rgba(205, 164, 95, .16);
+      transform: scale(1.06);
+    }
+
+    /* ---- B. Interview scrub card ---- */
+    .reel-interview {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(28px, 4vw, 56px);
+      margin-top: clamp(40px, 6vw, 72px);
+    }
+
+    .reel-card {
+      position: relative;
+      flex: 0 0 clamp(320px, 42vw, 440px);
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(205, 164, 95, .28);
+      border-radius: 3px;
+      overflow: hidden;
+      background: #0a0806;
+      cursor: pointer;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+      touch-action: pan-y;
+    }
+
+    .reel-card:focus-visible {
+      outline: 1px solid var(--gold2);
+      outline-offset: 3px;
+    }
+
+    .reel-card-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .reel-card-sprite {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image: url('assets/reel/interview-sprite.jpg');
+      background-repeat: no-repeat;
+      background-size: 600% 500%;
+      background-position: 0% 0%;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .reel-card.scrubbing .reel-card-sprite {
+      opacity: 1;
+    }
+
+    .reel-card-grad {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(0deg, rgba(6, 4, 2, .72), rgba(6, 4, 2, 0) 52%);
+    }
+
+    .reel-card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      font-family: var(--serifsc);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-size: 10px;
+      color: var(--gold2);
+      border: 1px solid rgba(205, 164, 95, .5);
+      padding: 5px 10px;
+    }
+
+    .reel-card-hint {
+      position: absolute;
+      left: 13px;
+      bottom: 12px;
+      z-index: 3;
+      font-family: var(--serifsc);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 10px;
+      color: var(--cream);
+      opacity: .9;
+      transition: opacity .4s ease;
+      pointer-events: none;
+    }
+
+    .reel-card.touched .reel-card-hint {
+      opacity: 0;
+    }
+
+    .reel-card-play {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 3;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(205, 164, 95, .55);
+      background: rgba(6, 4, 2, .32);
+      display: grid;
+      place-items: center;
+      color: var(--gold2);
+      font-size: 13px;
+      pointer-events: none;
+      transition: background .3s ease, border-color .3s ease;
+    }
+
+    .reel-card:hover .reel-card-play {
+      border-color: var(--gold2);
+      background: rgba(205, 164, 95, .18);
+    }
+
+    .reel-card-play i {
+      margin-left: 2px;
+    }
+
+    .reel-card-tick {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 4;
+      height: 2px;
+      background: rgba(231, 221, 203, .15);
+    }
+
+    .reel-card-tick span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+    }
+
+    .reel-interview-copy {
+      flex: 1 1 300px;
+    }
+
+    .reel-label {
+      font-family: var(--serifsc);
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      color: var(--gold);
+      font-size: 14px;
+      margin: 0 0 14px;
+    }
+
+    .reel-dim {
+      color: var(--muted);
+    }
+
+    /* ---- C. Theater: lights-down lightbox ---- */
+    .reel-theater {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 4vw, 48px);
+      background: rgba(4, 2, 1, .96);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .reel-theater.show {
+      display: flex;
+    }
+
+    .reel-theater.open {
+      opacity: 1;
+    }
+
+    .reel-theater-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(12px, 2vh, 20px);
+      max-width: 100%;
+    }
+
+    .reel-theater-head {
+      text-align: center;
+    }
+
+    .reel-theater-eyebrow {
+      display: block;
+      font-family: var(--serifsc);
+      text-transform: uppercase;
+      letter-spacing: .34em;
+      color: var(--gold);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .reel-theater-title {
+      display: block;
+      font-family: var(--serif);
+      color: var(--cream);
+      font-size: clamp(20px, 3vw, 30px);
+      letter-spacing: .02em;
+    }
+
+    .reel-frame {
+      position: relative;
+      width: min(92vw, calc(82vh * 16 / 9));
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(205, 164, 95, .34);
+      border-radius: 3px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .7);
+    }
+
+    .reel-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+      z-index: 0;
+    }
+
+    .reel-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      width: 46px;
+      height: 46px;
+      margin: -23px 0 0 -23px;
+      border-radius: 50%;
+      border: 2px solid rgba(205, 164, 95, .25);
+      border-top-color: var(--gold2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+      animation: reelSpin .8s linear infinite;
+    }
+
+    .reel-frame.buffering .reel-spinner {
+      opacity: 1;
+    }
+
+    @keyframes reelSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .reel-error {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8%;
+      background: #0a0806;
+      font-family: var(--serif);
+      color: var(--cream);
+      font-size: clamp(16px, 2vw, 20px);
+      letter-spacing: .02em;
+    }
+
+    .reel-error[hidden] {
+      display: none;
+    }
+
+    .reel-controls {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.4vw, 16px);
+      padding: clamp(10px, 1.6vw, 16px) clamp(12px, 1.8vw, 20px);
+      background: linear-gradient(0deg, rgba(6, 4, 2, .92), rgba(6, 4, 2, 0));
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    .reel-frame.idle .reel-controls {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+
+    .reel-ctrl {
+      -webkit-appearance: none;
+      appearance: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--cream);
+      font-size: 16px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 2px;
+      flex: 0 0 auto;
+      transition: color .2s ease;
+    }
+
+    .reel-ctrl:hover {
+      color: var(--gold2);
+    }
+
+    .reel-time {
+      font-family: var(--serifsc);
+      letter-spacing: .1em;
+      font-size: 12px;
+      color: var(--cream);
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .reel-progress {
+      position: relative;
+      flex: 1 1 auto;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(231, 221, 203, .15);
+      cursor: pointer;
+      touch-action: none;
+      transition: height .2s ease;
+    }
+
+    .reel-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+    }
+
+    .reel-progress-head {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--gold2);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      box-shadow: 0 0 8px rgba(205, 164, 95, .6);
+      transition: opacity .2s ease;
+      pointer-events: none;
+    }
+
+    .reel-progress:hover {
+      height: 6px;
+    }
+
+    .reel-progress:hover .reel-progress-head,
+    .reel-progress:focus-visible .reel-progress-head {
+      opacity: 1;
+    }
+
+    .reel-close {
+      position: fixed;
+      top: clamp(14px, 2.5vw, 26px);
+      right: clamp(14px, 2.5vw, 26px);
+      z-index: 210;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(6, 4, 2, .5);
+      border: 1px solid rgba(205, 164, 95, .4);
+      color: var(--cream);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      transition: color .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .reel-close:hover {
+      color: var(--gold2);
+      border-color: var(--gold2);
+      background: rgba(6, 4, 2, .72);
+    }
+
+    @media (max-width: 700px) {
+      .reel-card {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .reel-play {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+      }
+
+      .reel-time {
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reel-spinner {
+        animation: none;
+      }
+
+      .reel-theater,
+      .reel-screen,
+      .reel-watch,
+      .reel-play {
+        transition: none;
+      }
+    }
+
     /* ============ ABOUT ============ */
     .about {
       padding: var(--sp) 0;
@@ -1727,12 +2293,88 @@
     </div>
   </section>
 
+  <!-- REEL / ON FILM -->
+  <section class="reel" id="reel">
+    <div class="container">
+      <div class="reel-head">
+        <p class="eyebrow reveal"><span class="num">02</span><span class="bar"></span>On Film</p>
+        <h2 class="display metal reveal d1">The Reel</h2>
+        <p class="body-text reveal d2" style="max-width:540px;">Shot live. No backing tracks. This is what
+          you&rsquo;re booking.</p>
+      </div>
+
+      <!-- A. Main screen — the teaser as a living poster -->
+      <div class="reel-screen reveal d1" id="reelMain" role="button" tabindex="0"
+        aria-label="Play The Reel — Dixon Hall live teaser, 1 minute 49 seconds">
+        <video class="reel-loop" id="reelLoop" muted loop playsinline preload="none" aria-hidden="true"
+          poster="assets/reel/teaser-poster.jpg" data-src="assets/reel/loop.mp4"></video>
+        <div class="reel-screen-grad"></div>
+        <div class="reel-screen-cta">
+          <span class="reel-play"><i class="fa-solid fa-play"></i></span>
+          <span class="reel-watch">Watch the Reel</span>
+          <span class="reel-sub">Dixon Hall &mdash; Live &middot; 1:49</span>
+        </div>
+      </div>
+
+      <!-- B. The Interview — scrub card row -->
+      <div class="reel-interview">
+        <div class="reel-card reveal" id="reelInterviewCard" role="button" tabindex="0"
+          aria-label="Play The Interview — Dixon Hall, 9 minutes">
+          <img class="reel-card-poster" src="assets/reel/interview-poster.jpg"
+            alt="John Dixon Hall Jr. and Terry Glaze sit down for an interview">
+          <div class="reel-card-sprite" id="reelSprite" aria-hidden="true"></div>
+          <div class="reel-card-grad"></div>
+          <span class="reel-card-badge">Interview</span>
+          <span class="reel-card-hint" id="reelHint">Slide to scrub</span>
+          <span class="reel-card-play"><i class="fa-solid fa-play"></i></span>
+          <div class="reel-card-tick"><span id="reelTick"></span></div>
+        </div>
+        <div class="reel-interview-copy">
+          <p class="reel-label reveal d1">The Interview</p>
+          <p class="body-text reveal d2" style="max-width:420px;">The story behind No Limit Country &mdash; John and
+            Terry sit down. <span class="reel-dim">9 min.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- C. The Theater — lights-down lightbox -->
+    <div class="reel-theater" id="reelTheater" role="dialog" aria-modal="true" aria-label="Video player">
+      <div class="reel-theater-inner">
+        <div class="reel-theater-head">
+          <span class="reel-theater-eyebrow">Dixon Hall</span>
+          <span class="reel-theater-title" id="reelTheaterTitle">The Reel</span>
+        </div>
+        <div class="reel-frame" id="reelFrame">
+          <video class="reel-video" id="reelVideo" playsinline preload="metadata"></video>
+          <div class="reel-spinner" id="reelSpinner"></div>
+          <div class="reel-error" id="reelError" hidden>Film unavailable &mdash; watch on our socials.</div>
+          <div class="reel-controls" id="reelControls">
+            <button class="reel-ctrl" id="reelPlayBtn" type="button" aria-label="Play"><i
+                class="fa-solid fa-play"></i></button>
+            <span class="reel-time"><span id="reelCur">0:00</span> / <span id="reelDur">0:00</span></span>
+            <div class="reel-progress" id="reelProgress" role="slider" tabindex="0" aria-label="Seek"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="reel-progress-fill" id="reelProgressFill"></div>
+              <div class="reel-progress-head" id="reelProgressHead"></div>
+            </div>
+            <button class="reel-ctrl" id="reelMuteBtn" type="button" aria-label="Mute"><i
+                class="fa-solid fa-volume-high"></i></button>
+            <button class="reel-ctrl" id="reelFsBtn" type="button" aria-label="Fullscreen"><i
+                class="fa-solid fa-expand"></i></button>
+          </div>
+        </div>
+      </div>
+      <button class="reel-close" id="reelClose" type="button" aria-label="Close video"><i
+          class="fa-solid fa-xmark"></i></button>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
       <div class="about-head">
         <div>
-          <p class="eyebrow reveal"><span class="num">02</span><span class="bar"></span>The Band</p>
+          <p class="eyebrow reveal"><span class="num">03</span><span class="bar"></span>The Band</p>
           <h2 class="display metal reveal d1">An Unlikely<br>Harmony</h2>
         </div>
         <p class="lead reveal d2">When a soulful country singer and a legendary rock vocalist discover they harmonize
@@ -1777,7 +2419,7 @@
     <div class="container">
       <div class="shows-head">
         <div>
-          <p class="eyebrow reveal"><span class="num">03</span><span class="bar"></span>On The Road</p>
+          <p class="eyebrow reveal"><span class="num">04</span><span class="bar"></span>On The Road</p>
           <h2 class="display metal reveal d1">Live</h2>
         </div>
         <p class="body-text reveal d2" style="max-width:340px;">High-energy nights of today&rsquo;s country favorites
@@ -1850,7 +2492,7 @@
   <!-- MEDIA -->
   <section class="media" id="media">
     <div class="container">
-      <p class="eyebrow reveal"><span class="num">04</span><span class="bar"></span>Gallery</p>
+      <p class="eyebrow reveal"><span class="num">05</span><span class="bar"></span>Gallery</p>
       <h2 class="display metal reveal d1" style="margin-bottom:clamp(30px,4vw,50px);">In The Frame</h2>
       <div class="gallery reveal d1">
         <figure><img src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a481f251bf938e5471bf622.webp"
@@ -1906,7 +2548,7 @@
     <div class="container">
       <div class="shows-head">
         <div>
-          <p class="eyebrow reveal"><span class="num">05</span><span class="bar"></span>Merch</p>
+          <p class="eyebrow reveal"><span class="num">06</span><span class="bar"></span>Merch</p>
           <h2 class="display metal reveal d1">Gear Up</h2>
         </div>
         <p class="body-text reveal d2" style="max-width:360px;">Official Dixon Hall apparel, accessories, and future
@@ -2079,6 +2721,341 @@
         tick(); cdTimer = setInterval(tick, 1000);
       };
       window.__dhCountdown('2026-07-31');
+    })();
+  </script>
+
+  <!-- THE REEL — cinematic video section -->
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* Full-length playback hotlinks the Wistia 1080p delivery URLs (never downloaded into the repo). */
+      var VIDEOS = {
+        teaser: {
+          title: 'The Reel',
+          src: 'https://embed-ssl.wistia.com/deliveries/66b3626fc774596f172947e65850e9e498bd5363.bin',
+          poster: 'assets/reel/teaser-poster.jpg'
+        },
+        interview: {
+          title: 'The Interview',
+          src: 'https://embed-ssl.wistia.com/deliveries/f5dc11d02aadec8b8e5d6ff0583815f7d2b75ac2.bin',
+          poster: 'assets/reel/interview-poster.jpg'
+        }
+      };
+      var resumeAt = { teaser: 0, interview: 0 };
+
+      var loop = document.getElementById('reelLoop');
+      var mainScreen = document.getElementById('reelMain');
+      var card = document.getElementById('reelInterviewCard');
+      var sprite = document.getElementById('reelSprite');
+      var tick = document.getElementById('reelTick');
+      var theater = document.getElementById('reelTheater');
+      var frame = document.getElementById('reelFrame');
+      var video = document.getElementById('reelVideo');
+      var titleEl = document.getElementById('reelTheaterTitle');
+      var playBtn = document.getElementById('reelPlayBtn');
+      var muteBtn = document.getElementById('reelMuteBtn');
+      var fsBtn = document.getElementById('reelFsBtn');
+      var closeBtn = document.getElementById('reelClose');
+      var curEl = document.getElementById('reelCur');
+      var durEl = document.getElementById('reelDur');
+      var progress = document.getElementById('reelProgress');
+      var progressFill = document.getElementById('reelProgressFill');
+      var progressHead = document.getElementById('reelProgressHead');
+      var errorEl = document.getElementById('reelError');
+
+      var currentKey = null;
+      var lastFocus = null;
+      var idleTimer = null;
+      var seeking = false;
+      var didScrub = false;
+
+      function fmt(t) {
+        if (!isFinite(t) || t < 0) t = 0;
+        var m = Math.floor(t / 60), s = Math.floor(t % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      /* =============== A. Main screen: lazy ambient loop =============== */
+      var loopLoaded = false;
+      function startLoop() {
+        if (loopLoaded || !loop) return;
+        loopLoaded = true;
+        loop.src = loop.getAttribute('data-src');
+        var p = loop.play();
+        if (p && p.catch) p.catch(function () { });
+      }
+      if (loop && !reduceMotion) {
+        if ('IntersectionObserver' in window && mainScreen) {
+          var lio = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) startLoop();
+              else if (loopLoaded) loop.pause();
+            });
+          }, { rootMargin: '200px 0px 200px 0px', threshold: 0.01 });
+          lio.observe(mainScreen);
+        } else {
+          startLoop();
+        }
+      }
+
+      /* =============== B. Interview scrub card =============== */
+      var FRAMES = 30, COLS = 6, ROWS = 5;
+
+      function showFrame(frac) {
+        if (frac < 0) frac = 0;
+        if (frac > 1) frac = 1;
+        var i = Math.round(frac * (FRAMES - 1));
+        var col = i % COLS, row = Math.floor(i / COLS);
+        sprite.style.backgroundPositionX = (col / (COLS - 1) * 100) + '%';
+        sprite.style.backgroundPositionY = (row / (ROWS - 1) * 100) + '%';
+        tick.style.width = (frac * 100) + '%';
+        card.classList.add('scrubbing');
+        card.classList.add('touched');
+      }
+      function endScrub() {
+        card.classList.remove('scrubbing');
+        tick.style.width = '0%';
+      }
+      function fracFromX(clientX) {
+        var r = card.getBoundingClientRect();
+        return (clientX - r.left) / r.width;
+      }
+
+      if (card) {
+        card.addEventListener('pointermove', function (e) {
+          if (e.pointerType === 'mouse') showFrame(fracFromX(e.clientX));
+        });
+        card.addEventListener('pointerleave', function (e) {
+          if (e.pointerType === 'mouse') endScrub();
+        });
+
+        var tStartX = 0, tStartY = 0, tDecided = false, tHoriz = false;
+        card.addEventListener('touchstart', function (e) {
+          var t = e.touches[0];
+          tStartX = t.clientX; tStartY = t.clientY;
+          tDecided = false; tHoriz = false; didScrub = false;
+        }, { passive: true });
+        card.addEventListener('touchmove', function (e) {
+          var t = e.touches[0];
+          var dx = t.clientX - tStartX, dy = t.clientY - tStartY;
+          if (!tDecided && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+            tDecided = true;
+            tHoriz = Math.abs(dx) > Math.abs(dy);
+          }
+          if (tHoriz) { showFrame(fracFromX(t.clientX)); didScrub = true; }
+        }, { passive: true });
+        card.addEventListener('touchend', function () {
+          if (tHoriz) endScrub();
+        }, { passive: true });
+
+        card.addEventListener('click', function () {
+          if (!didScrub) openTheater('interview');
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            openTheater('interview');
+          }
+        });
+      }
+
+      if (mainScreen) {
+        mainScreen.addEventListener('click', function () { openTheater('teaser'); });
+        mainScreen.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            openTheater('teaser');
+          }
+        });
+      }
+
+      /* =============== C. Theater =============== */
+      function setPlayIcon(playing) {
+        playBtn.innerHTML = playing ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+        playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+      }
+      function setMuteIcon() {
+        var m = video.muted || video.volume === 0;
+        muteBtn.innerHTML = m ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
+        muteBtn.setAttribute('aria-label', m ? 'Unmute' : 'Mute');
+      }
+      function updateProgress() {
+        var d = video.duration, c = video.currentTime;
+        var pct = (d && isFinite(d)) ? (c / d * 100) : 0;
+        progressFill.style.width = pct + '%';
+        progressHead.style.left = pct + '%';
+        curEl.textContent = fmt(c);
+        durEl.textContent = fmt(d);
+        progress.setAttribute('aria-valuenow', Math.round(pct));
+      }
+      function showControls() {
+        frame.classList.remove('idle');
+        if (idleTimer) clearTimeout(idleTimer);
+        if (!video.paused && !video.ended) {
+          idleTimer = setTimeout(function () { frame.classList.add('idle'); }, 2500);
+        }
+      }
+      function togglePlay() {
+        if (video.paused) {
+          var p = video.play();
+          if (p && p.catch) p.catch(function () { });
+        } else {
+          video.pause();
+        }
+      }
+      function toggleFs() {
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen) document.exitFullscreen();
+        } else if (frame.requestFullscreen) {
+          frame.requestFullscreen();
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen();
+        }
+      }
+      function seekToClientX(clientX) {
+        var r = progress.getBoundingClientRect();
+        var frac = (clientX - r.left) / r.width;
+        frac = frac < 0 ? 0 : (frac > 1 ? 1 : frac);
+        if (video.duration && isFinite(video.duration)) {
+          video.currentTime = frac * video.duration;
+          updateProgress();
+        }
+      }
+      function onMeta() {
+        var startAt = resumeAt[currentKey] || 0;
+        if (startAt > 0 && video.duration && startAt < video.duration - 0.5) {
+          try { video.currentTime = startAt; } catch (e) { }
+        }
+        updateProgress();
+      }
+      function openTheater(key) {
+        var v = VIDEOS[key];
+        if (!v || !theater) return;
+        currentKey = key;
+        lastFocus = document.activeElement;
+        titleEl.textContent = v.title;
+        theater.setAttribute('aria-label', v.title + ' — Dixon Hall');
+        errorEl.hidden = true;
+        frame.classList.remove('idle');
+        frame.classList.add('buffering');
+        video.poster = v.poster;
+        video.muted = false;
+        video.src = v.src;
+        video.load();
+        theater.classList.add('show');
+        document.body.classList.add('reel-lock');
+        void theater.offsetWidth;
+        theater.classList.add('open');
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { setPlayIcon(false); });
+        setPlayIcon(!video.paused);
+        setMuteIcon();
+        showControls();
+        setTimeout(function () { if (closeBtn) closeBtn.focus(); }, 60);
+      }
+      function closeTheater() {
+        if (!theater || !theater.classList.contains('show')) return;
+        if (currentKey) resumeAt[currentKey] = video.currentTime || 0;
+        video.pause();
+        if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+        theater.classList.remove('open');
+        document.body.classList.remove('reel-lock');
+        if (idleTimer) clearTimeout(idleTimer);
+        var finished = false;
+        function done() {
+          if (finished) return;
+          finished = true;
+          theater.classList.remove('show');
+          frame.classList.remove('buffering');
+          video.removeAttribute('src');
+          video.load();
+          theater.removeEventListener('transitionend', done);
+        }
+        theater.addEventListener('transitionend', done);
+        setTimeout(done, 320);
+        if (lastFocus && lastFocus.focus) {
+          try { lastFocus.focus(); } catch (e) { }
+        }
+      }
+
+      if (theater) {
+        playBtn.addEventListener('click', togglePlay);
+        muteBtn.addEventListener('click', function () { video.muted = !video.muted; setMuteIcon(); });
+        fsBtn.addEventListener('click', toggleFs);
+        closeBtn.addEventListener('click', closeTheater);
+
+        video.addEventListener('play', function () { setPlayIcon(true); showControls(); });
+        video.addEventListener('pause', function () {
+          setPlayIcon(false);
+          frame.classList.remove('idle', 'buffering');
+          if (idleTimer) clearTimeout(idleTimer);
+        });
+        video.addEventListener('timeupdate', updateProgress);
+        video.addEventListener('durationchange', updateProgress);
+        video.addEventListener('loadedmetadata', onMeta);
+        video.addEventListener('volumechange', setMuteIcon);
+        video.addEventListener('waiting', function () { frame.classList.add('buffering'); });
+        video.addEventListener('canplay', function () { frame.classList.remove('buffering'); });
+        video.addEventListener('playing', function () { frame.classList.remove('buffering'); showControls(); });
+        video.addEventListener('ended', function () { setPlayIcon(false); frame.classList.remove('idle'); });
+        video.addEventListener('error', function () { frame.classList.remove('buffering'); errorEl.hidden = false; });
+        video.addEventListener('click', togglePlay);
+
+        progress.addEventListener('pointerdown', function (e) {
+          seeking = true;
+          if (progress.setPointerCapture) { try { progress.setPointerCapture(e.pointerId); } catch (err) { } }
+          seekToClientX(e.clientX);
+          e.preventDefault();
+        });
+        progress.addEventListener('pointermove', function (e) { if (seeking) seekToClientX(e.clientX); });
+        progress.addEventListener('pointerup', function () { seeking = false; });
+        progress.addEventListener('pointercancel', function () { seeking = false; });
+
+        frame.addEventListener('mousemove', showControls);
+        frame.addEventListener('touchstart', showControls, { passive: true });
+
+        theater.addEventListener('click', function (e) {
+          if (e.target === theater) closeTheater();
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (!theater.classList.contains('show')) return;
+          switch (e.key) {
+            case 'Escape':
+              closeTheater();
+              break;
+            case ' ':
+            case 'Spacebar':
+              e.preventDefault();
+              togglePlay();
+              break;
+            case 'ArrowLeft':
+              e.preventDefault();
+              if (video.duration) { video.currentTime = Math.max(0, video.currentTime - 5); updateProgress(); }
+              break;
+            case 'ArrowRight':
+              e.preventDefault();
+              if (video.duration) { video.currentTime = Math.min(video.duration, video.currentTime + 5); updateProgress(); }
+              break;
+            case 'm':
+            case 'M':
+              video.muted = !video.muted;
+              setMuteIcon();
+              break;
+            case 'f':
+            case 'F':
+              toggleFs();
+              break;
+          }
+        });
+
+        document.addEventListener('fullscreenchange', function () {
+          var fs = !!document.fullscreenElement;
+          fsBtn.innerHTML = fs ? '<i class="fa-solid fa-compress"></i>' : '<i class="fa-solid fa-expand"></i>';
+          fsBtn.setAttribute('aria-label', fs ? 'Exit fullscreen' : 'Fullscreen');
+        });
+      }
     })();
   </script>
 
