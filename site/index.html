@@ -896,6 +896,11 @@
       border-top: 1px solid var(--line);
     }
 
+    /* Kill switch: REEL_ENABLED=false in the reel IIFE adds .reel-off to <body> */
+    body.reel-off .reel {
+      display: none;
+    }
+
     body.reel-lock {
       overflow: hidden;
     }
@@ -2727,6 +2732,20 @@
   <!-- THE REEL — cinematic video section -->
   <script>
     (function () {
+      var REEL_ENABLED = false; // set true to bring The Reel back (section + numbering restore automatically)
+
+      /* When off: hide the section via body.reel-off, renumber the remaining sections
+         01,02,… in DOM order, and skip ALL reel init below (no src, no observers, no listeners). */
+      if (!REEL_ENABLED) {
+        document.body.classList.add('reel-off');
+        var reelOffNums = document.querySelectorAll('section:not(.reel) .eyebrow .num');
+        for (var reelOffI = 0; reelOffI < reelOffNums.length; reelOffI++) {
+          var reelOffN = reelOffI + 1;
+          reelOffNums[reelOffI].textContent = (reelOffN < 10 ? '0' : '') + reelOffN;
+        }
+        return;
+      }
+
       var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       /* Full-length playback hotlinks the Wistia 1080p delivery URLs (never downloaded into the repo). */
