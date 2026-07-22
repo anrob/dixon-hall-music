@@ -35,19 +35,35 @@ eq('song.links shape', song.links, { spotify: null, apple: null, youtube: null, 
 eq('song has exactly the keys index.html reads',
   Object.keys(song).sort(), ['blurb', 'cover', 'featured', 'links', 'releaseDate', 'status', 'title']);
 
-// ---- Shows: text date + comma-in-city survive ----
+// ---- Shows: now from the Gig Calendar (Venue | Address | Date | Time) ----
+// Address IS the city line; there's no ticket column, so we synthesize a Maps
+// link. A fully blank row is a spacer and must be dropped (map -> null).
+const showsMap = C.TABS.find((t) => t.key === 'shows').map;
 const showRows = C.rowsFromGviz(gviz(
-  ['Venue', 'Date', 'City', 'Time', 'Ticket Link'],
+  ['Venue', 'Address', 'Date', 'Time'],
   [
-    ["Admiral's Cups", '2026-07-08', 'Baltimore, MD', 'Date(1899,11,30,19,0,0)', 'https://maps/x'],
-    ['Twains Tavern', 'Date(2026,6,11)', 'Pasadena, MD', '8:30 PM', null],
+    ['Tolchester', 'Chestertown, MD', 'Date(2026,6,17)', 'Date(1899,11,30,19,0,0)'],
+    ["Natalie's", 'Fallston, MD', 'Date(2026,6,24)', '8:30 PM'],   // apostrophe + text time
+    ['', '', '', ''],                                               // blank spacer -> skipped
+    ['Backyard Jam', '', 'Date(2026,7,1)', 'Date(1899,11,30,18,0,0)'], // no address -> ticketUrl null
   ]
 ));
-const shows = showRows.map(C.TABS.find((t) => t.key === 'shows').map);
-eq('shows count', shows.length, 2);
-eq('show[0] full', shows[0], { venue: "Admiral's Cups", date: '2026-07-08', city: 'Baltimore, MD', time: '7:00 PM', ticketUrl: 'https://maps/x' });
-eq('show[1].date (from gviz Date())', shows[1].date, '2026-07-11');
-eq('show[1].ticketUrl empty -> null', shows[1].ticketUrl, null);
+const shows = showRows.map(showsMap).filter(Boolean);              // handler drops the nulls
+eq('shows count (blank spacer dropped)', shows.length, 3);
+eq('show[0] full (Address->city, synth maps link)', shows[0], {
+  venue: 'Tolchester',
+  date: '2026-07-17',
+  city: 'Chestertown, MD',
+  time: '7:00 PM',
+  ticketUrl: 'https://www.google.com/maps/search/Tolchester+Chestertown%2C+MD',
+});
+eq('show[1].city comes from Address', shows[1].city, 'Fallston, MD');
+eq('show[1].date (from gviz Date())', shows[1].date, '2026-07-24');
+eq('show[1] apostrophe venue survives in maps link', shows[1].ticketUrl,
+  "https://www.google.com/maps/search/Natalie's+Fallston%2C+MD");
+eq('show[2] no address -> ticketUrl null', shows[2].ticketUrl, null);
+eq('show[2] venue-only row is kept', shows[2].venue, 'Backyard Jam');
+eq('row-skip rule: blank venue AND address -> null', showsMap({ Venue: '', Address: '', Date: '', Time: '' }), null);
 
 // ---- helpers ----
 eq('toISO ISO passthrough', C.toISO('2026-07-31'), '2026-07-31');
@@ -63,6 +79,20 @@ eq('toTime gviz 08:30 -> 8:30 AM', C.toTime('Date(1899,11,30,8,30,0)'), '8:30 AM
 eq('toTime gviz 00:00 -> 12:00 AM', C.toTime('Date(1899,11,30,0,0,0)'), '12:00 AM');
 eq('toTime text passthrough', C.toTime('5:30 PM'), '5:30 PM');
 eq('toTime empty', C.toTime(''), '');
+
+// ---- mapsUrl: exact link, spaces -> "+", comma stays encoded ----
+eq('mapsUrl basic', C.mapsUrl('Tolchester', 'Chestertown, MD'),
+  'https://www.google.com/maps/search/Tolchester+Chestertown%2C+MD');
+eq('mapsUrl multiword venue', C.mapsUrl('Smoke on the Rail BBQ Fest', 'New Freedom, PA'),
+  'https://www.google.com/maps/search/Smoke+on+the+Rail+BBQ+Fest+New+Freedom%2C+PA');
+
+// ---- gvizUrl: gigs pinned by gid (even gid 0), songs addressed by tab name ----
+eq('gvizUrl pins by gid (gid 0, not falsy-skipped)', C.gvizUrl({ sheetId: 'ABC', gid: 0 }),
+  'https://docs.google.com/spreadsheets/d/ABC/gviz/tq?tqx=out:json&headers=1&gid=0');
+eq('gvizUrl addresses tab by name', C.gvizUrl({ sheetId: 'XYZ', tab: 'Songs' }),
+  'https://docs.google.com/spreadsheets/d/XYZ/gviz/tq?tqx=out:json&headers=1&sheet=Songs');
+eq('gvizUrl encodes spaces in a tab name', C.gvizUrl({ sheetId: 'XYZ', tab: 'My Shows' }),
+  'https://docs.google.com/spreadsheets/d/XYZ/gviz/tq?tqx=out:json&headers=1&sheet=My%20Shows');
 
 console.log(fails ? `\n${fails} FAILED` : '\nAll passed');
 process.exit(fails ? 1 : 0);

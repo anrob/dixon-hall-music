@@ -1,23 +1,29 @@
 // Google Sheets → site content proxy (Vercel serverless function).
 // ───────────────────────────────────────────────────────────────────────────
-// John edits ONE Google Sheet — "Dixon Hall — Website" — with two tabs:
-//   • "Songs"     • "Shows"
-// The site fetches /api/content; this reads each tab's public gviz JSON — NO
-// API key. The sheet just has to be shared "Anyone with the link can VIEW".
-// It's public band data, nothing secret. The sheet id is the long code in the URL:
-//   docs.google.com/spreadsheets/d/<SHEET_ID>/edit
+// The site fetches /api/content; this reads each source's public gviz JSON — NO
+// API key. A sheet just has to be shared "Anyone with the link can VIEW".
+// It's public band data, nothing secret. Two sources feed the site:
+//   • Songs — the website sheet ("Dixon Hall — Website"), "Songs" tab (SHEET_ID).
+//   • Shows — the band's own "Dixon Hall Gig Calendar" sheet (GIG_SHEET_ID). The
+//            band just keeps that calendar current; we read its FIRST tab pinned
+//            by gid=0, so renaming the tab never breaks the site.
+// A sheet id is the long code in its URL: docs.google.com/spreadsheets/d/<ID>/edit
 //
 // If a fetch fails, the page keeps its baked-in content (see index.html) — the
 // site can never look broken.
 
 const SHEET_ID = process.env.SHEET_ID || '15GA2gv4DY5XhEJtmtUbAK-VL8ZVCrjv3q6XV6Ngwwts';
+const GIG_SHEET_ID = process.env.GIG_SHEET_ID || '1jkGXOEikpxS_c54ga34SUMnT6j_53G_vQAgSR0ttfis';
 
-// key = what the site reads (data.<key>); tab = the sheet tab name (must match
-// exactly); map = a row (keyed by the header in row 1) -> the shape the page renders.
+// key    = what the site reads (data.<key>).
+// source = where the rows come from: { sheetId, tab } addresses a tab by name;
+//          { sheetId, gid } pins a tab by its stable id (survives tab renames).
+// map    = a row (keyed by the header in row 1) -> the shape the page renders;
+//          return null to drop a row (e.g. a blank spacer).
 const TABS = [
   {
     key: 'songs',
-    tab: 'Songs',
+    source: { sheetId: SHEET_ID, tab: 'Songs' },
     map: (r) => ({
       title: r['Title'] || '',
       status: r['Status'] || 'Upcoming',          // Upcoming | Released | Hidden
@@ -36,14 +42,22 @@ const TABS = [
   },
   {
     key: 'shows',
-    tab: 'Shows',
-    map: (r) => ({
-      venue: r['Venue'] || '',
-      date: toISO(r['Date']),                       // -> YYYY-MM-DD
-      city: r['City'] || '',
-      time: toTime(r['Time']),                       // -> "7:00 PM"
-      ticketUrl: r['Ticket Link'] || null,
-    }),
+    // The band's Gig Calendar — pinned by gid so a tab rename can't break us.
+    // Columns: Venue | Address | Date | Time. There's no ticket-link column, so
+    // we synthesize a Google Maps search link from venue + address.
+    source: { sheetId: GIG_SHEET_ID, gid: 0 },
+    map: (r) => {
+      const venue = r['Venue'] || '';
+      const address = r['Address'] || '';           // "City, ST" text, e.g. "Chestertown, MD"
+      if (!venue && !address) return null;           // blank spacer row -> drop it
+      return {
+        venue,
+        date: toISO(r['Date']),                      // -> YYYY-MM-DD
+        city: address,                               // the Address column IS the city line
+        time: toTime(r['Time']),                      // -> "7:00 PM"
+        ticketUrl: address ? mapsUrl(venue, address) : null,
+      };
+    },
   },
 ];
 
@@ -83,6 +97,14 @@ function toTime(v) {
   return h + ':' + String(+m[2]).padStart(2, '0') + ' ' + ap;
 }
 
+// The Gig Calendar has no ticket column, so shows get a Google Maps search link
+// built from "<venue> <address>" — matching the hand-entered maps links we used
+// before (spaces as "+"). Pure so it can be unit-tested.
+function mapsUrl(venue, address) {
+  return 'https://www.google.com/maps/search/' +
+    encodeURIComponent(venue + ' ' + address).replace(/%20/g, '+');
+}
+
 // Parse a gviz response body into row objects keyed by the header in row 1.
 // Pure (no network) so it can be unit-tested.
 // Body is wrapped: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
@@ -99,12 +121,21 @@ function rowsFromGviz(text) {
   });
 }
 
-// Read one tab of the sheet via the public gviz endpoint.
-async function fetchTab(sheetId, tab) {
-  const url = 'https://docs.google.com/spreadsheets/d/' + sheetId +
-    '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(tab);
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(tab + ': HTTP ' + r.status);
+// Build the public gviz URL for a source. Pin by gid when given (survives tab
+// renames; note gid can be 0, so test against null — not truthiness); otherwise
+// address the tab by name. Pure so it can be unit-tested.
+function gvizUrl(source) {
+  const base = 'https://docs.google.com/spreadsheets/d/' + source.sheetId +
+    '/gviz/tq?tqx=out:json&headers=1';
+  return source.gid != null
+    ? base + '&gid=' + encodeURIComponent(source.gid)
+    : base + '&sheet=' + encodeURIComponent(source.tab);
+}
+
+// Read one source (a tab of a sheet) via the public gviz endpoint.
+async function fetchTab(source) {
+  const r = await fetch(gvizUrl(source));
+  if (!r.ok) throw new Error((source.tab || 'gid ' + source.gid) + ': HTTP ' + r.status);
   return rowsFromGviz(await r.text());
 }
 
@@ -125,9 +156,10 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const rowSets = await Promise.all(TABS.map((t) => fetchTab(SHEET_ID, t.tab)));
+    const rowSets = await Promise.all(TABS.map((t) => fetchTab(t.source)));
     const out = {};
-    TABS.forEach((t, i) => { out[t.key] = rowSets[i].map((row) => t.map(row)); });
+    // map() may return null for rows to drop (blank spacers) — filter them out.
+    TABS.forEach((t, i) => { out[t.key] = rowSets[i].map((row) => t.map(row)).filter(Boolean); });
 
     const body = JSON.stringify(out);
     cache = { ts: Date.now(), body };
@@ -144,4 +176,6 @@ module.exports.rowsFromGviz = rowsFromGviz;
 module.exports.toISO = toISO;
 module.exports.toTime = toTime;
 module.exports.truthy = truthy;
+module.exports.mapsUrl = mapsUrl;
+module.exports.gvizUrl = gvizUrl;
 module.exports.TABS = TABS;
