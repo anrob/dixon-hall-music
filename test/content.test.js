@@ -35,6 +35,15 @@ eq('song.links shape', song.links, { spotify: null, apple: null, youtube: null, 
 eq('song has exactly the keys index.html reads',
   Object.keys(song).sort(), ['blurb', 'cover', 'featured', 'links', 'releaseDate', 'status', 'title']);
 
+// ---- Songs now read from the band's Gig Calendar, "Music" tab (gid-pinned) ----
+// The old standalone website sheet is retired: BOTH sections read one band sheet.
+const songsSource = C.TABS.find((t) => t.key === 'songs').source;
+const showsSource = C.TABS.find((t) => t.key === 'shows').source;
+eq('songs source = band sheet + Music gid (rename-safe, no tab-by-name)',
+  songsSource, { sheetId: showsSource.sheetId, gid: 1231124488 });
+eq('songs + shows share ONE band sheet (old website sheet retired)',
+  songsSource.sheetId, showsSource.sheetId);
+
 // ---- Shows: now from the Gig Calendar (Venue | Address | Date | Time) ----
 // Address IS the city line; there's no ticket column, so we synthesize a Maps
 // link. A fully blank row is a spacer and must be dropped (map -> null).
@@ -86,9 +95,11 @@ eq('mapsUrl basic', C.mapsUrl('Tolchester', 'Chestertown, MD'),
 eq('mapsUrl multiword venue', C.mapsUrl('Smoke on the Rail BBQ Fest', 'New Freedom, PA'),
   'https://www.google.com/maps/search/Smoke+on+the+Rail+BBQ+Fest+New+Freedom%2C+PA');
 
-// ---- gvizUrl: gigs pinned by gid (even gid 0), songs addressed by tab name ----
+// ---- gvizUrl: both tabs pinned by gid (gid 0 and a real gid); tab-by-name still supported ----
 eq('gvizUrl pins by gid (gid 0, not falsy-skipped)', C.gvizUrl({ sheetId: 'ABC', gid: 0 }),
   'https://docs.google.com/spreadsheets/d/ABC/gviz/tq?tqx=out:json&headers=1&gid=0');
+eq('gvizUrl pins by a real gid (the Music tab)', C.gvizUrl({ sheetId: 'ABC', gid: 1231124488 }),
+  'https://docs.google.com/spreadsheets/d/ABC/gviz/tq?tqx=out:json&headers=1&gid=1231124488');
 eq('gvizUrl addresses tab by name', C.gvizUrl({ sheetId: 'XYZ', tab: 'Songs' }),
   'https://docs.google.com/spreadsheets/d/XYZ/gviz/tq?tqx=out:json&headers=1&sheet=Songs');
 eq('gvizUrl encodes spaces in a tab name', C.gvizUrl({ sheetId: 'XYZ', tab: 'My Shows' }),

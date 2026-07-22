@@ -2,17 +2,17 @@
 // ───────────────────────────────────────────────────────────────────────────
 // The site fetches /api/content; this reads each source's public gviz JSON — NO
 // API key. A sheet just has to be shared "Anyone with the link can VIEW".
-// It's public band data, nothing secret. Two sources feed the site:
-//   • Songs — the website sheet ("Dixon Hall — Website"), "Songs" tab (SHEET_ID).
-//   • Shows — the band's own "Dixon Hall Gig Calendar" sheet (GIG_SHEET_ID). The
-//            band just keeps that calendar current; we read its FIRST tab pinned
-//            by gid=0, so renaming the tab never breaks the site.
+// It's public band data, nothing secret. ONE band-owned sheet feeds the site —
+// "Dixon Hall Gig Calendar" (GIG_SHEET_ID) — with two tabs, each pinned by its
+// stable gid so renaming a tab never breaks the site:
+//   • Shows — the "Gig" tab (gid 0).
+//   • Songs — the "Music" tab (gid 1231124488).
+// John keeps that one doc current; nothing else to maintain.
 // A sheet id is the long code in its URL: docs.google.com/spreadsheets/d/<ID>/edit
 //
 // If a fetch fails, the page keeps its baked-in content (see index.html) — the
 // site can never look broken.
 
-const SHEET_ID = process.env.SHEET_ID || '15GA2gv4DY5XhEJtmtUbAK-VL8ZVCrjv3q6XV6Ngwwts';
 const GIG_SHEET_ID = process.env.GIG_SHEET_ID || '1jkGXOEikpxS_c54ga34SUMnT6j_53G_vQAgSR0ttfis';
 
 // key    = what the site reads (data.<key>).
@@ -23,7 +23,8 @@ const GIG_SHEET_ID = process.env.GIG_SHEET_ID || '1jkGXOEikpxS_c54ga34SUMnT6j_53
 const TABS = [
   {
     key: 'songs',
-    source: { sheetId: SHEET_ID, tab: 'Songs' },
+    // The Gig Calendar's "Music" tab — pinned by gid so a tab rename can't break us.
+    source: { sheetId: GIG_SHEET_ID, gid: 1231124488 },
     map: (r) => ({
       title: r['Title'] || '',
       status: r['Status'] || 'Upcoming',          // Upcoming | Released | Hidden
@@ -145,7 +146,7 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') { res.statusCode = 204; return res.end(); }
 
-  if (!SHEET_ID) {
+  if (!GIG_SHEET_ID) {
     res.statusCode = 503;
     return res.end(JSON.stringify({ error: 'backend not configured' }));
   }
