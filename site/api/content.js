@@ -140,6 +140,82 @@ async function fetchTab(source) {
   return rowsFromGviz(await r.text());
 }
 
+// ─── GoHighLevel Products → "Gear Up" merch ────────────────────────────────
+// Optional layer: only active when GHL_API_KEY + GHL_LOCATION_ID are set (the
+// Dixon Hall sub-account's Private Integration token — scopes: products,
+// prices, medias). Missing env, or the GHL fetch throwing, both just mean no
+// `products` key in the response — Songs/Shows still ship either way, and
+// index.html's baked-in merch cards stay put whenever this comes back empty.
+const GHL_API_KEY = process.env.GHL_API_KEY || '';
+const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID || '';
+const GHL_BASE = 'https://services.leadconnectorhq.com';
+
+// A list of price amounts (numbers) -> the display string index.html shows.
+// One distinct amount -> "$19.99". More than one distinct amount -> the
+// range "$min–$max" (en dash). Always two decimals — a flat $22 still reads
+// "$22.00", never shortened. Pure so it can be unit-tested.
+function formatPriceRange(amounts) {
+  if (!amounts || !amounts.length) return null;
+  const min = Math.min(...amounts);
+  const max = Math.max(...amounts);
+  return min === max
+    ? '$' + min.toFixed(2)
+    : '$' + min.toFixed(2) + '–$' + max.toFixed(2);
+}
+
+// A GHL product + its resolved prices -> the shape index.html renders, or
+// null when it doesn't belong on the storefront. Keep only: listed in the
+// store, a physical good, has product art, and has at least one live price.
+// Pure — `prices` is already-resolved data by the time this runs, no network
+// concerns here — so it can be unit-tested.
+function mapProduct(p, prices) {
+  if (!p || p.availableInStore !== true || p.productType !== 'PHYSICAL' || !p.image) return null;
+  const amounts = (prices || [])
+    .filter((pr) => pr && !pr.deleted && typeof pr.amount === 'number')
+    .map((pr) => pr.amount);
+  const price = formatPriceRange(amounts);
+  if (!price) return null;
+  return { name: p.name || '', image: p.image, price: price };
+}
+
+// Fetch + shape the merch list. Returns null when GHL isn't configured (the
+// caller drops the `products` key entirely); returns an array — possibly
+// empty — once it actually talked to GHL.
+async function fetchProducts() {
+  if (!GHL_API_KEY || !GHL_LOCATION_ID) return null;
+
+  const headers = {
+    Authorization: 'Bearer ' + GHL_API_KEY,
+    Version: '2021-07-28',
+    Accept: 'application/json',
+  };
+  const listUrl = GHL_BASE + '/products/?locationId=' + encodeURIComponent(GHL_LOCATION_ID) +
+    '&limit=50&includePrices=true';
+  const r = await fetch(listUrl, { headers: headers });
+  if (!r.ok) throw new Error('GHL products: HTTP ' + r.status);
+  const list = (await r.json()).products || [];
+
+  // Some locations embed `prices` on each product when includePrices=true;
+  // when they don't, fall back to the price sub-resource per candidate
+  // product (skip that extra call for anything the filter would drop anyway).
+  const mapped = await Promise.all(list.map(async (p) => {
+    if (Array.isArray(p.prices)) return mapProduct(p, p.prices);
+    if (p.availableInStore !== true || p.productType !== 'PHYSICAL' || !p.image) return null;
+    try {
+      const pr = await fetch(
+        GHL_BASE + '/products/' + p._id + '/price?locationId=' + encodeURIComponent(GHL_LOCATION_ID),
+        { headers: headers }
+      );
+      if (!pr.ok) return null;
+      const body = await pr.json();
+      return mapProduct(p, body.prices);
+    } catch (e) {
+      return null;
+    }
+  }));
+  return mapped.filter(Boolean);
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   // Public read-only data; CORS open so clones can share this backend.
@@ -162,6 +238,13 @@ module.exports = async (req, res) => {
     // map() may return null for rows to drop (blank spacers) — filter them out.
     TABS.forEach((t, i) => { out[t.key] = rowSets[i].map((row) => t.map(row)).filter(Boolean); });
 
+    // Merch is optional and best-effort — GHL being unconfigured or throwing
+    // never fails the Songs/Shows response, it just skips the `products` key.
+    try {
+      const products = await fetchProducts();
+      if (products) out.products = products;
+    } catch (e) { /* no products key — Songs/Shows still ship */ }
+
     const body = JSON.stringify(out);
     cache = { ts: Date.now(), body };
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
@@ -180,3 +263,5 @@ module.exports.truthy = truthy;
 module.exports.mapsUrl = mapsUrl;
 module.exports.gvizUrl = gvizUrl;
 module.exports.TABS = TABS;
+module.exports.formatPriceRange = formatPriceRange;
+module.exports.mapProduct = mapProduct;

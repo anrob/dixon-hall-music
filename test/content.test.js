@@ -105,5 +105,46 @@ eq('gvizUrl addresses tab by name', C.gvizUrl({ sheetId: 'XYZ', tab: 'Songs' }),
 eq('gvizUrl encodes spaces in a tab name', C.gvizUrl({ sheetId: 'XYZ', tab: 'My Shows' }),
   'https://docs.google.com/spreadsheets/d/XYZ/gviz/tq?tqx=out:json&headers=1&sheet=My%20Shows');
 
+// ---- formatPriceRange: GHL price amounts -> the "Gear Up" price string ----
+eq('formatPriceRange single amount', C.formatPriceRange([19.99]), '$19.99');
+eq('formatPriceRange same amount repeated (variants, one price) -> collapses, not a range',
+  C.formatPriceRange([21.55, 21.55, 21.55]), '$21.55');
+eq('formatPriceRange distinct amounts -> en-dash range, min–max order',
+  C.formatPriceRange([35.43, 16.32, 28.54]), '$16.32–$35.43');
+eq('formatPriceRange always two decimals — flat $22 stays "$22.00", never shortened',
+  C.formatPriceRange([22, 22]), '$22.00');
+eq('formatPriceRange empty -> null', C.formatPriceRange([]), null);
+eq('formatPriceRange null -> null', C.formatPriceRange(null), null);
+
+// ---- mapProduct: GHL product + resolved prices -> { name, image, price } | null ----
+// Fixture shaped like the real /products/ + /products/{id}/price payloads
+// (trimmed to the fields mapProduct reads).
+const merchTee = {
+  _id: 'p1', name: 'Short Sleeve Tee', productType: 'PHYSICAL',
+  availableInStore: true, image: 'https://cdn.example.com/tee.png',
+};
+const teePrices = [
+  { amount: 23.34, deleted: false }, { amount: 23.34, deleted: false }, { amount: 28.54, deleted: false },
+];
+eq('mapProduct: in-store physical good with art + prices -> mapped, range price',
+  C.mapProduct(merchTee, teePrices),
+  { name: 'Short Sleeve Tee', image: 'https://cdn.example.com/tee.png', price: '$23.34–$28.54' });
+eq('mapProduct: single price -> single amount, not a range',
+  C.mapProduct(merchTee, [{ amount: 23.26, deleted: false }]),
+  { name: 'Short Sleeve Tee', image: 'https://cdn.example.com/tee.png', price: '$23.26' });
+eq('mapProduct: not availableInStore -> dropped',
+  C.mapProduct(Object.assign({}, merchTee, { availableInStore: false }), teePrices), null);
+eq('mapProduct: productType DIGITAL -> dropped (e.g. a deposit / add-on product)',
+  C.mapProduct(Object.assign({}, merchTee, { productType: 'DIGITAL' }), teePrices), null);
+eq('mapProduct: no image -> dropped',
+  C.mapProduct(Object.assign({}, merchTee, { image: '' }), teePrices), null);
+eq('mapProduct: zero prices -> dropped',
+  C.mapProduct(merchTee, []), null);
+eq('mapProduct: only a deleted price -> treated as zero prices, dropped',
+  C.mapProduct(merchTee, [{ amount: 23.34, deleted: true }]), null);
+eq('mapProduct: mix of deleted + live price -> deleted one excluded from the range',
+  C.mapProduct(merchTee, [{ amount: 99.99, deleted: true }, { amount: 23.26, deleted: false }]),
+  { name: 'Short Sleeve Tee', image: 'https://cdn.example.com/tee.png', price: '$23.26' });
+
 console.log(fails ? `\n${fails} FAILED` : '\nAll passed');
 process.exit(fails ? 1 : 0);

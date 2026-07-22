@@ -3058,6 +3058,7 @@
         .then(function (data) {
           try { renderSong((data && data.songs) || []); } catch (e) { }
           try { renderShows((data && data.shows) || []); } catch (e) { }
+          try { renderStore((data && data.products) || []); } catch (e) { }
         })
         .catch(function () { /* fallback: keep baked-in content */ });
 
@@ -3158,6 +3159,24 @@
             '<div class="sr-info"><div class="sr-venue">' + esc(sh.venue) + '</div><div class="sr-city">' + meta + '</div></div>' +
             link + '</div>';
         }).join('');
+      }
+
+      /* ---- STORE ("Gear Up" merch, from GHL Products) ---- */
+      function renderStore(products) {
+        if (!products || !products.length) return; // nothing live — baked-in cards stay
+        var grid = document.querySelector('.store-grid');
+        if (!grid) return;
+        var shopAllTile = grid.lastElementChild; // "Shop All Merch" tile — kept exactly as-is
+        var cardsHtml = products.map(function (p, i) {
+          // Row-grouped stagger, same as the baked cards (3-col grid: row 1 = d1, row 2 = d2, ...).
+          var d = (Math.floor(i / 3) % 2 === 0) ? 'd1' : 'd2';
+          return '<a class="merch reveal ' + d + ' in" href="#">' +
+            '<div class="merch-art"><img src="' + esc(p.image) + '" alt="' + esc(p.name) + '"></div>' +
+            '<div class="merch-info"><span class="merch-name">' + esc(p.name) + '</span>' +
+            '<span class="merch-price">' + esc(p.price) + '</span></div></a>';
+        }).join('');
+        grid.innerHTML = cardsHtml;
+        if (shopAllTile) grid.appendChild(shopAllTile);
       }
     })();
   </script>
