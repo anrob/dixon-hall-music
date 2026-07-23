@@ -3223,6 +3223,9 @@
       /* ---- STORE ("Gear Up" merch, from GHL Products) ---- */
       function renderStore(products) {
         if (!products || !products.length) return; // nothing live — baked-in cards stay
+        // Preview mode: just a 2-product tease (+ Shop All tile = one clean row).
+        // Full catalog returns automatically when STORE_OPENING_SOON goes false.
+        if (STORE_OPENING_SOON) products = products.slice(0, 2);
         var grid = document.querySelector('.store-grid');
         if (!grid) return;
         var shopAllTile = grid.lastElementChild; // "Shop All Merch" tile — kept exactly as-is
