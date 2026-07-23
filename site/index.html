@@ -2618,10 +2618,13 @@
         <h2 class="display metal reveal d1">Never Miss<br>A Drop</h2>
         <p class="body-text reveal d2">Get early access to new music, upcoming shows, merch drops, and exclusive
           behind-the-scenes updates delivered straight to your inbox.</p>
-        <form class="join-form reveal d2" onsubmit="return false;">
-          <input type="email" placeholder="Your email address" aria-label="Email address" required>
-          <button type="submit">Join</button>
+        <form class="join-form reveal d2" id="joinForm">
+          <input type="email" id="joinEmail" placeholder="Your email address" aria-label="Email address" required>
+          <input type="text" name="company" id="joinHp" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          <button type="submit" id="joinBtn">Join</button>
         </form>
+        <p class="join-msg" id="joinMsg" role="status" style="min-height:1.2em;margin-top:12px;font-size:13px;letter-spacing:.08em;color:#cfc6b4;"></p>
       </div>
     </div>
   </section>
@@ -3110,6 +3113,36 @@
           var storeGrid = storeSec.querySelector('.store-grid');
           if (storeGrid) storeGrid.setAttribute('inert', '');
         }
+      }
+
+      // Fan club form → /api/subscribe → GHL contact (tagged "fan club").
+      var joinForm = el('joinForm');
+      if (joinForm) {
+        joinForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = el('joinEmail').value.trim();
+          var btn = el('joinBtn'), msg = el('joinMsg');
+          if (!email) return;
+          btn.disabled = true;
+          btn.textContent = 'Joining…';
+          msg.textContent = '';
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, company: el('joinHp').value })
+          })
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(function () {
+              btn.textContent = "You're In";
+              el('joinEmail').value = '';
+              msg.textContent = 'Welcome to the fan club — keep an eye on your inbox.';
+            })
+            .catch(function () {
+              btn.disabled = false;
+              btn.textContent = 'Join';
+              msg.textContent = "Something hiccuped — give it another try.";
+            });
+        });
       }
 
       fetch('/api/content')

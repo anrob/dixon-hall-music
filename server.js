@@ -16,6 +16,7 @@ try {
 } catch (e) { /* no .env — /api/content will 503 and the site falls back */ }
 
 const apiContent = require('./site/api/content.js');
+const apiSubscribe = require('./site/api/subscribe.js');
 
 const ROOT = path.join(__dirname, 'site');
 const HOST = '0.0.0.0';
@@ -37,8 +38,9 @@ const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
   if (urlPath === '/') urlPath = '/index.html';
 
-  // Same serverless function Vercel runs — full backend loop works locally.
+  // Same serverless functions Vercel runs — full backend loop works locally.
   if (urlPath === '/api/content') return apiContent(req, res);
+  if (urlPath === '/api/subscribe') return apiSubscribe(req, res);
 
   const filePath = path.join(ROOT, path.normalize(urlPath));
   if (!filePath.startsWith(ROOT)) {          // block path traversal
