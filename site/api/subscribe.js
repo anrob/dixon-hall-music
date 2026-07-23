@@ -48,6 +48,9 @@ module.exports = async (req, res) => {
     return res.end(JSON.stringify({ error: 'bad email' }));
   }
 
+  const firstName = String(body.firstName || '').trim().slice(0, 100);
+  const lastName = String(body.lastName || '').trim().slice(0, 100);
+
   if (!GHL_API_KEY || !GHL_LOCATION_ID) {
     res.statusCode = 503;
     return res.end(JSON.stringify({ error: 'not configured' }));
@@ -61,12 +64,16 @@ module.exports = async (req, res) => {
         Version: '2021-07-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        locationId: GHL_LOCATION_ID,
-        email: email,
-        tags: TAGS,
-        source: 'dixonhallmusic.com — fan club form',
-      }),
+      body: JSON.stringify(Object.assign(
+        {
+          locationId: GHL_LOCATION_ID,
+          email: email,
+          tags: TAGS,
+          source: 'dixonhallmusic.com — fan club form',
+        },
+        firstName ? { firstName: firstName } : null,
+        lastName ? { lastName: lastName } : null
+      )),
     });
     if (!r.ok) throw new Error('GHL ' + r.status);
     res.statusCode = 200;

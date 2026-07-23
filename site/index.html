@@ -1928,9 +1928,18 @@
 
     .join-form {
       display: flex;
+      flex-wrap: wrap;
       gap: 12px;
       max-width: 520px;
       margin: 0 auto;
+    }
+
+    .join-form .jf-half {
+      flex: 1 1 calc(50% - 6px);
+    }
+
+    .join-form input[type="email"] {
+      flex: 2 1 260px;
     }
 
     .join-form input {
@@ -2619,7 +2628,12 @@
         <p class="body-text reveal d2">Get early access to new music, upcoming shows, merch drops, and exclusive
           behind-the-scenes updates delivered straight to your inbox.</p>
         <form class="join-form reveal d2" id="joinForm">
-          <input type="email" id="joinEmail" placeholder="Your email address" aria-label="Email address" required>
+          <input type="text" class="jf-half" id="joinFirst" placeholder="First name" aria-label="First name"
+            autocomplete="given-name" required>
+          <input type="text" class="jf-half" id="joinLast" placeholder="Last name" aria-label="Last name"
+            autocomplete="family-name" required>
+          <input type="email" id="joinEmail" placeholder="Your email address" aria-label="Email address"
+            autocomplete="email" required>
           <input type="text" name="company" id="joinHp" tabindex="-1" autocomplete="off" aria-hidden="true"
             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <button type="submit" id="joinBtn">Join</button>
@@ -3121,6 +3135,8 @@
         joinForm.addEventListener('submit', function (e) {
           e.preventDefault();
           var email = el('joinEmail').value.trim();
+          var first = el('joinFirst').value.trim();
+          var last = el('joinLast').value.trim();
           var btn = el('joinBtn'), msg = el('joinMsg');
           if (!email) return;
           btn.disabled = true;
@@ -3129,12 +3145,14 @@
           fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, company: el('joinHp').value })
+            body: JSON.stringify({ email: email, firstName: first, lastName: last, company: el('joinHp').value })
           })
             .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
             .then(function () {
               btn.textContent = "You're In";
               el('joinEmail').value = '';
+              el('joinFirst').value = '';
+              el('joinLast').value = '';
               msg.textContent = 'Welcome to the fan club — keep an eye on your inbox.';
             })
             .catch(function () {
