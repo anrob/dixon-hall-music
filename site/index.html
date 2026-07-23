@@ -1776,9 +1776,50 @@
 
     /* ============ STORE ============ */
     .store {
+      position: relative;
       padding: var(--sp) 0;
       background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%);
       border-top: 1px solid var(--line);
+    }
+
+    /* Opening Soon veil — controlled by STORE_OPENING_SOON in the data layer */
+    .store-soon-overlay {
+      display: none;
+    }
+
+    .store.store-soon .store-soon-overlay {
+      display: flex;
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(6, 4, 2, 0.72) 0%, rgba(6, 4, 2, 0.88) 100%);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .store-soon-box {
+      border: 1px solid rgba(205, 164, 95, 0.38);
+      background: rgba(10, 7, 5, 0.55);
+      padding: clamp(24px, 4vw, 40px) clamp(34px, 6vw, 64px);
+    }
+
+    .store-soon-title {
+      font-family: var(--serifsc);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      font-size: clamp(22px, 3.4vw, 36px);
+    }
+
+    .store-soon-sub {
+      margin-top: 10px;
+      color: #cfc6b4;
+      font-size: 13px;
+      letter-spacing: 0.1em;
     }
 
     .store-grid {
@@ -2559,6 +2600,13 @@
       </div>
       <p class="store-note reveal">Product photos are placeholders &mdash; live store images drop in here.</p>
     </div>
+
+    <div class="store-soon-overlay" role="status">
+      <div class="store-soon-box">
+        <div class="store-soon-title">Opening Soon</div>
+        <div class="store-soon-sub">The official Dixon Hall shop is being stocked.</div>
+      </div>
+    </div>
   </section>
 
   <!-- NEWSLETTER -->
@@ -3052,6 +3100,17 @@
       function el(id) { return document.getElementById(id); }
       function parseDate(str) { return str ? new Date(str + 'T00:00:00') : null; }
       function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+      // Flip to false when the shop goes live — veil lifts and cards become clickable again.
+      var STORE_OPENING_SOON = true;
+      if (STORE_OPENING_SOON) {
+        var storeSec = document.getElementById('store');
+        if (storeSec) {
+          storeSec.classList.add('store-soon');
+          var storeGrid = storeSec.querySelector('.store-grid');
+          if (storeGrid) storeGrid.setAttribute('inert', '');
+        }
+      }
 
       fetch('/api/content')
         .then(function (r) { if (!r.ok) throw new Error('unavailable'); return r.json(); })
