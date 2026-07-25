@@ -2283,7 +2283,7 @@
     .mp-wave {
       display: block;
       width: 100%;
-      height: 26px;
+      height: 34px;
       margin-top: 7px;
     }
 
@@ -2347,7 +2347,7 @@
       }
 
       .mp-wave {
-        height: 19px;
+        height: 26px;
         margin-top: 5px;
       }
 
@@ -3565,12 +3565,21 @@
 
       /* Fixed bar silhouette — seeded so it's identical every load, with a swell
          through the middle so it reads as a song rather than noise. */
-      var BARS = 64, shape = [];
+      /* High-resolution silhouette, sampled down to whatever bar count fits.
+         Three broad peaks over a low bed give it the dynamics of a song —
+         choruses that fill the strip, quieter passages between — and the
+         per-bar detail keeps loud sections from flattening into a block. */
+      var BARS = 256, shape = [];
+      function hash(x) { var n = Math.sin(x * 12.9898) * 43758.5453; return n - Math.floor(n); }
       for (var i = 0; i < BARS; i++) {
-        var n = Math.sin(i * 12.9898) * 43758.5453;
-        n = n - Math.floor(n);
-        var env = 0.42 + 0.58 * Math.sin(Math.PI * (i / (BARS - 1)));
-        shape.push(Math.max(0.14, Math.min(1, (0.34 + n * 0.66) * env)));
+        var t = i / (BARS - 1);
+        var section = Math.min(1,
+          0.17 + 0.20 * Math.sin(Math.PI * Math.min(1, t * 1.04)) +
+          0.55 * Math.exp(-Math.pow((t - 0.28) / 0.15, 2)) +
+          0.66 * Math.exp(-Math.pow((t - 0.60) / 0.12, 2)) +
+          0.45 * Math.exp(-Math.pow((t - 0.84) / 0.09, 2)));
+        var detail = 0.55 + 0.45 * (0.62 * hash(i) + 0.38 * hash(i * 0.31));
+        shape.push(Math.max(0.07, Math.min(1, section * detail * 1.3)));
       }
 
       /* The analyser can only be attached once, and only to same-origin or
@@ -3599,6 +3608,8 @@
       /* Bounded so a canvas that never gets a layout box (hidden tab, odd
          embed) stops retrying instead of holding a rAF loop open forever. */
       var sizeRetry = null, sizeTries = 0;
+      var gradCache = null;   // gold fill, rebuilt only when the height changes
+      var hoverX = null;      // scrub hint position, null when the pointer is away
       function draw() {
         var box = canvas.getBoundingClientRect();
         var w = Math.round(box.width) || canvas.clientWidth;
@@ -3637,18 +3648,52 @@
           }
         }
 
-        /* Thin the bar count on narrow screens — 64 bars inside a phone-width
-           dock would render sub-pixel slivers. Sampling the same silhouette
-           keeps the shape recognisable at every width. */
-        var count = Math.max(18, Math.min(BARS, Math.floor(w / 7)));
-        var gap = count > 40 ? 2 : 1.5;
-        var bw = Math.max(1, (w - gap * (count - 1)) / count);
+        /* Fine bars (~6px pitch) read as a waveform; chunky ones read as a bar
+           chart. Count follows the width so phones get fewer, not thinner. */
+        var pitch = 7;
+        var count = Math.max(16, Math.min(BARS, Math.floor(w / pitch)));
+        var gap = Math.max(1, Math.min(2, w / count * 0.34));
+        var bw = Math.max(1.5, (w - gap * (count - 1)) / count);
+        var mid = h / 2;
+
+        if (!gradCache || gradCache.h !== h) {
+          var g = cx.createLinearGradient(0, 0, 0, h);
+          g.addColorStop(0, '#f0cf95');
+          g.addColorStop(0.5, '#e9c17e');
+          g.addColorStop(1, '#c9a05c');
+          gradCache = { h: h, grad: g };
+        }
+
         for (var b = 0; b < count; b++) {
-          var amp = shape[Math.floor(b * BARS / count)] * (playing ? (0.7 + live * 0.72) : 1);
+          var amp = shape[Math.floor(b * BARS / count)];
+          /* Only bars near the playhead answer the live signal, so the whole
+             strip doesn't pump uniformly — that's what read as cheap. */
+          if (playing) {
+            var dist = Math.abs((b + 0.5) / count - prog);
+            amp *= 1 + live * 0.55 * Math.max(0, 1 - dist * 7);
+          }
           var bh = Math.max(2, Math.min(h, amp * h));
-          var x = b * (bw + gap), y = (h - bh) / 2;
-          cx.fillStyle = ((b + 1) / count) <= prog ? 'rgba(233,193,126,.95)' : 'rgba(231,221,203,.2)';
+          var x = b * (bw + gap), y = mid - bh / 2;
+          /* Square caps on purpose — rounding a 4px-tall bar turns it into a
+             bead, and the hard edge suits the brand anyway. */
+          cx.fillStyle = ((b + 0.5) / count) <= prog ? gradCache.grad : 'rgba(231,221,203,.17)';
           cx.fillRect(x, y, bw, bh);
+        }
+
+        /* Playhead — a hairline with a soft halo, only once there's a position
+           worth marking. */
+        if (prog > 0 && prog < 1) {
+          var px = prog * w;
+          cx.fillStyle = 'rgba(233,193,126,.16)';
+          cx.fillRect(px - 2.5, 0, 5, h);
+          cx.fillStyle = 'rgba(248,231,196,.9)';
+          cx.fillRect(px - 0.75, 0, 1.5, h);
+        }
+
+        /* Hover scrub hint (desktop pointers only). */
+        if (hoverX != null) {
+          cx.fillStyle = 'rgba(231,221,203,.32)';
+          cx.fillRect(hoverX - 0.5, 0, 1, h);
         }
 
         if (raf) cancelAnimationFrame(raf);
@@ -3661,14 +3706,8 @@
       }
 
       playBtn.addEventListener('click', function () {
-        if (!mp.classList.contains('has-audio')) return;
-        if (audio.paused) {
-          wireAnalyser();
-          var p = audio.play();
-          if (p && p.catch) p.catch(function () { setPlayIcon(false); });
-        } else {
-          audio.pause();
-        }
+        if (audio.paused) startPlayback();
+        else audio.pause();
       });
 
       audio.addEventListener('play', function () { setPlayIcon(true); draw(); });
@@ -3689,6 +3728,20 @@
         }
       });
 
+      /* Scrub hint follows a mouse but never a touch — on a phone the tap is
+         the scrub, and a lingering line would just look like a glitch. */
+      canvas.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch' || !mp.classList.contains('has-audio')) return;
+        var r = canvas.getBoundingClientRect();
+        hoverX = e.clientX - r.left;
+        if (audio.paused) draw();
+      });
+      canvas.addEventListener('pointerleave', function () {
+        if (hoverX == null) return;
+        hoverX = null;
+        if (audio.paused) draw();
+      });
+
       /* Scrub by clicking the waveform. */
       canvas.addEventListener('click', function (e) {
         if (!mp.classList.contains('has-audio')) return;
@@ -3698,8 +3751,25 @@
         draw();
       });
 
+      /* Set when the listener asked for the player before the sheet row landed,
+         so the clip can start the moment it arrives. */
+      var wantsPlay = false;
+
+      function startPlayback() {
+        if (!mp.classList.contains('has-audio')) return false;
+        if (!audio.paused) return true;
+        wireAnalyser();
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () { setPlayIcon(false); });
+        return true;
+      }
+
+      /* Called straight from the "Listen Now" click, so playback inherits that
+         gesture and browsers allow it. If the clip URL hasn't arrived yet we
+         remember the intent and start on setSong instead. */
       function openPlayer() {
         mp.classList.add('open');
+        wantsPlay = !startPlayback();
         requestAnimationFrame(draw);
       }
 
@@ -3761,6 +3831,8 @@
               audio.crossOrigin = 'anonymous';
               audio.src = s.audio;
             }
+            // Opened before the clip URL arrived — honour that request now.
+            if (wantsPlay) { wantsPlay = false; startPlayback(); }
           } else {
             mp.classList.remove('has-audio');
           }
