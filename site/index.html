@@ -2184,6 +2184,201 @@
         animation: none;
       }
     }
+    /* ============ MINI PLAYER (docked, "Listen Now" opens it) ============ */
+    .miniplayer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2vw, 22px);
+      padding: 12px clamp(14px, 3vw, 34px);
+      background: linear-gradient(180deg, rgba(10, 7, 5, .96), rgba(6, 4, 2, .99));
+      border-top: 1px solid rgba(205, 164, 95, .34);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 -18px 44px rgba(0, 0, 0, .55);
+      transform: translateY(115%);
+      visibility: hidden;
+      /* visibility flips only after the slide-out finishes, so a closed player
+         keeps its animation but drops out of the tab order. */
+      transition: transform .5s cubic-bezier(.22, .8, .3, 1), visibility 0s linear .5s;
+    }
+
+    .miniplayer.open {
+      transform: translateY(0);
+      visibility: visible;
+      transition: transform .5s cubic-bezier(.22, .8, .3, 1), visibility 0s;
+    }
+
+    .mp-cover {
+      position: relative;
+      flex: none;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(205, 164, 95, .3);
+      background: var(--bg3);
+      overflow: hidden;
+    }
+
+    .mp-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mp-play {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      cursor: pointer;
+      color: var(--cream);
+      font-size: 17px;
+      background: rgba(6, 4, 2, .52);
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .miniplayer.has-audio .mp-play {
+      display: flex;
+    }
+
+    .mp-play:hover {
+      background: rgba(6, 4, 2, .28);
+      color: var(--gold2);
+    }
+
+    .mp-body {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .mp-title {
+      font-family: var(--serifsc);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: var(--cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mp-meta {
+      font-family: var(--body);
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mp-wave {
+      display: block;
+      width: 100%;
+      height: 26px;
+      margin-top: 7px;
+    }
+
+    .miniplayer.has-audio .mp-wave {
+      cursor: pointer;
+    }
+
+    .mp-actions {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.4vw, 16px);
+    }
+
+    .mp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 20px;
+      border: 1px solid var(--gold);
+      background: linear-gradient(180deg, rgba(205, 164, 95, .18), rgba(205, 164, 95, .06));
+      color: var(--gold2);
+      font-family: var(--serifsc);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 11px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .28s ease, color .28s ease;
+    }
+
+    .mp-cta:hover {
+      background: var(--gold);
+      color: #140d05;
+    }
+
+    .mp-close {
+      border: 0;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      padding: 8px;
+      transition: color .25s ease;
+    }
+
+    .mp-close:hover {
+      color: var(--cream);
+    }
+
+    @media (max-width: 640px) {
+      .miniplayer {
+        gap: 11px;
+        padding: 10px 13px calc(10px + env(safe-area-inset-bottom));
+      }
+
+      .mp-cover {
+        width: 50px;
+        height: 50px;
+      }
+
+      .mp-wave {
+        height: 19px;
+        margin-top: 5px;
+      }
+
+      .mp-meta {
+        font-size: 10px;
+        letter-spacing: .1em;
+      }
+
+      .mp-cta {
+        padding: 10px 13px;
+        font-size: 10px;
+        letter-spacing: .12em;
+      }
+
+      .mp-cta .mp-cta-icon {
+        display: none;
+      }
+
+      /* Thumb-sized dismiss target on touch. */
+      .mp-close {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .miniplayer {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -3193,11 +3388,14 @@
 
         el('songEyebrow').textContent = released ? 'Latest Single' : 'New Single';
 
+        // Short form of the same line for the mini player's narrow bar.
+        var metaLine = 'Available Now';
         if (released) {
           el('songDate').textContent = 'Available Now';
           var cd = el('countdown'); if (cd) cd.style.display = 'none';
         } else if (rel) {
           el('songDate').textContent = 'Out ' + DAYS[rel.getDay()] + ' · ' + MONTHS_FULL[rel.getMonth()] + ' ' + rel.getDate() + ', ' + rel.getFullYear();
+          metaLine = 'Out ' + MONTHS_FULL[rel.getMonth()] + ' ' + rel.getDate() + ', ' + rel.getFullYear();
           var cd2 = el('countdown'); if (cd2) cd2.style.display = '';
           if (window.__dhCountdown) window.__dhCountdown(s.releaseDate);
         }
@@ -3239,6 +3437,13 @@
         } else {
           el('coverTitle').textContent = s.title;
           el('coverMeta').innerHTML = 'Dixon Hall · ' + (rel ? rel.getFullYear() : new Date().getFullYear());
+        }
+
+        // Same row feeds the docked mini player.
+        if (window.__dhPlayer) {
+          window.__dhPlayer.setSong({
+            title: s.title, cover: s.cover, audio: s.audio, links: L, meta: metaLine
+          }, released);
         }
       }
 
@@ -3314,6 +3519,257 @@
       if (document.readyState === 'complete') reveal();
       else window.addEventListener('load', reveal);
       setTimeout(reveal, CAP);
+    })();
+  </script>
+
+  <!-- MINI PLAYER — every "Listen Now" opens this; it docks until dismissed -->
+  <aside class="miniplayer" id="miniPlayer" aria-label="Now playing">
+    <div class="mp-cover">
+      <img id="mpCover"
+        src="https://assets.cdn.filesafe.space/haWFPoulqpLwAW4WuXgC/media/6a47c93339a69d42f8e1b452.png"
+        alt="Beautiful Life — cover art">
+      <button class="mp-play" id="mpPlay" aria-label="Play preview"><i class="fa-solid fa-play"></i></button>
+    </div>
+    <div class="mp-body">
+      <div class="mp-title" id="mpTitle">Beautiful Life</div>
+      <div class="mp-meta" id="mpMeta">Out Friday &middot; July 31, 2026</div>
+      <canvas class="mp-wave" id="mpWave" aria-hidden="true"></canvas>
+    </div>
+    <div class="mp-actions">
+      <a class="mp-cta" id="mpCTA" href="https://distrokid.com/hyperfollow/dixonhall/beautiful-life?ref=release"
+        target="_blank" rel="noopener">
+        <i class="mp-cta-icon fa-solid fa-heart-circle-plus" id="mpCTAIcon"></i><span id="mpCTAText">Pre-Save</span>
+      </a>
+      <button class="mp-close" id="mpClose" aria-label="Close player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <audio id="mpAudio" preload="none"></audio>
+  </aside>
+
+  <script>
+    /* ============ MINI PLAYER ============
+       Opened by any "Listen Now". Title / date / cover / pre-save all come from
+       the same Sheets row the Music section renders (renderSong hands them over
+       via __dhPlayer.setSong). The waveform is a fixed silhouette that fills in
+       gold as the track plays; when the Web Audio analyser is reachable the bars
+       also breathe with the real signal. No audio URL in the sheet yet just means
+       no play button — the card still sells the release and the pre-save. */
+    (function () {
+      var mp = document.getElementById('miniPlayer');
+      if (!mp) return;
+      var audio = document.getElementById('mpAudio');
+      var canvas = document.getElementById('mpWave');
+      var playBtn = document.getElementById('mpPlay');
+      var playIcon = playBtn.querySelector('i');
+      var cx = canvas.getContext('2d');
+      var raf = null;
+
+      /* Fixed bar silhouette — seeded so it's identical every load, with a swell
+         through the middle so it reads as a song rather than noise. */
+      var BARS = 64, shape = [];
+      for (var i = 0; i < BARS; i++) {
+        var n = Math.sin(i * 12.9898) * 43758.5453;
+        n = n - Math.floor(n);
+        var env = 0.42 + 0.58 * Math.sin(Math.PI * (i / (BARS - 1)));
+        shape.push(Math.max(0.14, Math.min(1, (0.34 + n * 0.66) * env)));
+      }
+
+      /* The analyser can only be attached once, and only to same-origin or
+         CORS-enabled audio — attaching it to an opaque cross-origin file would
+         silence playback. So we try crossOrigin first and fall back to a plain
+         element (synthetic bar motion) if the host refuses it. */
+      var analyser = null, freqData = null, wired = false, allowAnalyser = true;
+
+      function wireAnalyser() {
+        if (wired || !allowAnalyser) return;
+        wired = true;
+        try {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          var actx = new AC();
+          if (actx.state === 'suspended') actx.resume();
+          var src = actx.createMediaElementSource(audio);
+          analyser = actx.createAnalyser();
+          analyser.fftSize = 128;
+          src.connect(analyser);
+          analyser.connect(actx.destination);
+          freqData = new Uint8Array(analyser.frequencyBinCount);
+        } catch (e) { analyser = null; }
+      }
+
+      /* Bounded so a canvas that never gets a layout box (hidden tab, odd
+         embed) stops retrying instead of holding a rAF loop open forever. */
+      var sizeRetry = null, sizeTries = 0;
+      function draw() {
+        var box = canvas.getBoundingClientRect();
+        var w = Math.round(box.width) || canvas.clientWidth;
+        var h = Math.round(box.height) || canvas.clientHeight;
+        /* Layout can report zero on the first paint (and while the dock is still
+           sliding in). Keep retrying on the next frame instead of leaving the
+           canvas stuck at its default 300x150 backing store, which would render
+           as a stretched smear. */
+        if (!w || !h) {
+          if (!sizeRetry && sizeTries < 90) {
+            sizeTries++;
+            sizeRetry = requestAnimationFrame(function () { sizeRetry = null; draw(); });
+          }
+          return;
+        }
+        sizeTries = 0;
+        var dpr = window.devicePixelRatio || 1;
+        if (canvas.width !== Math.round(w * dpr)) { canvas.width = Math.round(w * dpr); }
+        if (canvas.height !== Math.round(h * dpr)) { canvas.height = Math.round(h * dpr); }
+        cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cx.clearRect(0, 0, w, h);
+
+        var playing = !audio.paused && !audio.ended;
+        var dur = (audio.duration && isFinite(audio.duration)) ? audio.duration : 0;
+        var prog = dur ? (audio.currentTime / dur) : 0;
+
+        var live = 0;
+        if (playing) {
+          if (analyser) {
+            analyser.getByteFrequencyData(freqData);
+            var sum = 0;
+            for (var k = 0; k < freqData.length; k++) sum += freqData[k];
+            live = (sum / freqData.length) / 255;
+          } else {
+            live = 0.42 + 0.34 * Math.abs(Math.sin(audio.currentTime * 3.1));
+          }
+        }
+
+        /* Thin the bar count on narrow screens — 64 bars inside a phone-width
+           dock would render sub-pixel slivers. Sampling the same silhouette
+           keeps the shape recognisable at every width. */
+        var count = Math.max(18, Math.min(BARS, Math.floor(w / 7)));
+        var gap = count > 40 ? 2 : 1.5;
+        var bw = Math.max(1, (w - gap * (count - 1)) / count);
+        for (var b = 0; b < count; b++) {
+          var amp = shape[Math.floor(b * BARS / count)] * (playing ? (0.7 + live * 0.72) : 1);
+          var bh = Math.max(2, Math.min(h, amp * h));
+          var x = b * (bw + gap), y = (h - bh) / 2;
+          cx.fillStyle = ((b + 1) / count) <= prog ? 'rgba(233,193,126,.95)' : 'rgba(231,221,203,.2)';
+          cx.fillRect(x, y, bw, bh);
+        }
+
+        if (raf) cancelAnimationFrame(raf);
+        raf = playing ? requestAnimationFrame(draw) : null;
+      }
+
+      function setPlayIcon(playing) {
+        playIcon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        playBtn.setAttribute('aria-label', playing ? 'Pause preview' : 'Play preview');
+      }
+
+      playBtn.addEventListener('click', function () {
+        if (!mp.classList.contains('has-audio')) return;
+        if (audio.paused) {
+          wireAnalyser();
+          var p = audio.play();
+          if (p && p.catch) p.catch(function () { setPlayIcon(false); });
+        } else {
+          audio.pause();
+        }
+      });
+
+      audio.addEventListener('play', function () { setPlayIcon(true); draw(); });
+      audio.addEventListener('pause', function () { setPlayIcon(false); draw(); });
+      audio.addEventListener('ended', function () { setPlayIcon(false); audio.currentTime = 0; draw(); });
+      audio.addEventListener('timeupdate', function () { if (!raf) draw(); });
+      audio.addEventListener('loadedmetadata', draw);
+
+      /* A cross-origin host with no CORS headers errors the load — drop the
+         crossOrigin flag, give up on the analyser, and try the file again. */
+      audio.addEventListener('error', function () {
+        if (audio.crossOrigin && audio.currentSrc !== '') {
+          var url = audio.src;
+          audio.removeAttribute('crossorigin');
+          allowAnalyser = false;
+          audio.src = url;
+          audio.load();
+        }
+      });
+
+      /* Scrub by clicking the waveform. */
+      canvas.addEventListener('click', function (e) {
+        if (!mp.classList.contains('has-audio')) return;
+        if (!audio.duration || !isFinite(audio.duration)) return;
+        var r = canvas.getBoundingClientRect();
+        audio.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * audio.duration;
+        draw();
+      });
+
+      function openPlayer() {
+        mp.classList.add('open');
+        requestAnimationFrame(draw);
+      }
+
+      function closePlayer() {
+        mp.classList.remove('open');
+        if (!audio.paused) audio.pause();
+      }
+
+      document.getElementById('mpClose').addEventListener('click', closePlayer);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mp.classList.contains('open')) closePlayer();
+      });
+      /* Watch the canvas itself rather than the window: it fires the first time
+         layout gives the bar real dimensions, which a load-time draw() can miss,
+         and again on any resize or orientation change. */
+      if (window.ResizeObserver) {
+        new ResizeObserver(function () { draw(); }).observe(canvas);
+      } else {
+        window.addEventListener('resize', draw);
+      }
+
+      /* Every "Listen Now" affordance — top nav, hero, mobile menu. */
+      document.querySelectorAll('.nav-cta, .hero-listen, .m-cta').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openPlayer();
+        });
+      });
+
+      window.__dhPlayer = {
+        open: openPlayer,
+        /* Called by renderSong once the Sheets row lands. */
+        setSong: function (s, released) {
+          if (!s) return;
+          if (s.title) {
+            document.getElementById('mpTitle').textContent = s.title;
+            document.getElementById('mpCover').alt = s.title + ' — cover art';
+          }
+          if (s.cover) document.getElementById('mpCover').src = s.cover;
+          if (s.meta) document.getElementById('mpMeta').textContent = s.meta;
+
+          var L = s.links || {};
+          var stream = L.spotify || L.apple || L.youtube || L.amazon;
+          var href = released ? (stream || L.presave) : (L.presave || stream);
+          var cta = document.getElementById('mpCTA');
+          if (href) {
+            cta.href = href;
+            cta.style.display = '';
+            document.getElementById('mpCTAText').textContent = released ? 'Listen Now' : 'Pre-Save';
+            document.getElementById('mpCTAIcon').className =
+              'mp-cta-icon fa-solid ' + (released ? 'fa-headphones' : 'fa-heart-circle-plus');
+          } else {
+            cta.style.display = 'none';
+          }
+
+          if (s.audio) {
+            mp.classList.add('has-audio');
+            if (audio.getAttribute('src') !== s.audio) {
+              audio.crossOrigin = 'anonymous';
+              audio.src = s.audio;
+            }
+          } else {
+            mp.classList.remove('has-audio');
+          }
+          if (mp.classList.contains('open')) draw();
+        }
+      };
+
+      draw();
+      window.addEventListener('load', draw);
     })();
   </script>
 

@@ -33,7 +33,23 @@ eq('song.cover', song.cover, 'assets/beautiful-life.jpg');
 eq('song.featured (from "yes")', song.featured, true);
 eq('song.links shape', song.links, { spotify: null, apple: null, youtube: null, amazon: null, presave: null });
 eq('song has exactly the keys index.html reads',
-  Object.keys(song).sort(), ['blurb', 'cover', 'featured', 'links', 'releaseDate', 'status', 'title']);
+  Object.keys(song).sort(), ['audio', 'blurb', 'cover', 'featured', 'links', 'releaseDate', 'status', 'title']);
+eq('song.audio absent when the sheet has no preview column', song.audio, null);
+
+// ---- Mini-player preview clip ----
+// The header is hand-typed, so the column must be found whatever the casing —
+// the live sheet says "Preview url", not "Preview URL".
+const songMap = C.TABS.find((t) => t.key === 'songs').map;
+const clipRow = (header) => songMap(C.rowsFromGviz(gviz(
+  ['Title', 'Status', 'Release Date', 'Cover', 'Blurb', 'Featured', 'Spotify', 'Apple Music', 'YouTube', 'Amazon', 'Pre-Save Link', header],
+  [['Beautiful Life', 'Upcoming', 'Date(2026,6,31)', 'c.jpg', 'b', 'yes', null, null, null, null, null, 'https://cdn/clip.mp4']]
+))[0]);
+eq('song.audio from "Preview url" (live sheet casing)', clipRow('Preview url').audio, 'https://cdn/clip.mp4');
+eq('song.audio from "Preview URL"', clipRow('Preview URL').audio, 'https://cdn/clip.mp4');
+eq('song.audio from legacy "Audio" header', clipRow('Audio').audio, 'https://cdn/clip.mp4');
+eq('song.audio blank cell -> null', songMap(C.rowsFromGviz(gviz(
+  ['Title', 'Preview url'], [['Beautiful Life', '   ']]
+))[0]).audio, null);
 
 // ---- Songs now read from the band's Gig Calendar, "Music" tab (gid-pinned) ----
 // The old standalone website sheet is retired: BOTH sections read one band sheet.

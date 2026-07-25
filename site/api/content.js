@@ -30,6 +30,9 @@ const TABS = [
       status: r['Status'] || 'Upcoming',          // Upcoming | Released | Hidden
       releaseDate: toISO(r['Release Date']),        // -> YYYY-MM-DD
       cover: r['Cover'] || null,                    // an image URL John pastes
+      // A direct-to-file MP3 URL for the mini player's preview clip. Empty until
+      // the track is cleared for release — the player just hides its play button.
+      audio: pick(r, 'Preview URL', 'Audio', 'Audio URL', 'Clip'),
       blurb: r['Blurb'] || '',
       featured: truthy(r['Featured']),
       links: {
@@ -64,6 +67,20 @@ const TABS = [
 
 const TTL_MS = 60 * 1000; // in-memory cache for warm lambdas / local dev
 let cache = { ts: 0, body: null };
+
+// Column headers are typed by hand in the sheet, so casing and spacing drift
+// ("Preview url" vs "Preview URL"). Find a column ignoring both, taking the
+// first name given that actually holds something.
+function pick(row, ...names) {
+  const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+  const byNorm = {};
+  Object.keys(row).forEach((k) => { byNorm[norm(k)] = row[k]; });
+  for (const name of names) {
+    const v = byNorm[norm(name)];
+    if (v != null && String(v).trim() !== '') return v;
+  }
+  return null;
+}
 
 // Google's checkbox comes back as a real boolean; also accept text truthy values.
 function truthy(v) {
