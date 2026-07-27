@@ -123,6 +123,150 @@ function mapsUrl(venue, address) {
     encodeURIComponent(venue + ' ' + address).replace(/%20/g, '+');
 }
 
+// ─── Google Calendar (iCal) → Shows ────────────────────────────────────────
+// Shows come from the band's public "DIXON HALL WEBSITE" calendar, so John
+// books a gig once — in the calendar he already lives in — and the site
+// follows. The Gig sheet's Shows tab stays wired as a fallback: if this feed
+// is unreachable or yields nothing usable, we silently fall back to the sheet.
+//
+// Trade-off worth knowing: a calendar title is free text, so whatever John
+// types becomes the venue label on the site. Google also caches this feed, so
+// edits can take minutes to appear (the sheet was near-instant).
+const SHOWS_ICS_URL = process.env.SHOWS_ICS_URL ||
+  'https://calendar.google.com/calendar/ical/c_c63fbfb6c92c625915001adbcc79c82c93f8b31d5fd960ac35d713c9fe315d05%40group.calendar.google.com/public/basic.ics';
+
+// The band plays the Mid-Atlantic; the calendar is authored in this zone and
+// basic.ics hands us UTC, so this is what we render wall-clock times in.
+const SHOWS_TZ = 'America/New_York';
+
+// RFC 5545 folds long lines with CRLF + a leading space/tab. Unfold before
+// parsing or a wrapped LOCATION arrives cut in half.
+function unfoldIcs(text) {
+  return String(text == null ? '' : text).replace(/\r\n/g, '\n').replace(/\n[ \t]/g, '');
+}
+
+// Text values escape commas, semicolons and newlines.
+function unescapeIcs(v) {
+  return String(v == null ? '' : v)
+    .replace(/\\n/gi, ' ').replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\\\/g, '\\')
+    .replace(/\s+/g, ' ').trim();
+}
+
+// "Dixon Hall @ Admirals Cup" / "Dixon Hall - Fagers Island" / "Dixon Hall
+// Admirals Cup" all mean the same thing — the band prefix is noise on a page
+// that's already about the band. Strip it, with or without a separator.
+function icsVenue(summary) {
+  const s = unescapeIcs(summary);
+  const stripped = s.replace(/^dixon\s+hall\s*(?:[@\-–—:|]+\s*)?/i, '').trim();
+  return stripped || s;
+}
+
+// A calendar LOCATION is a full street address; the site shows a city line.
+// "Fager's Island, 201 60th St, Ocean City, MD 21842, USA" -> "Ocean City, MD"
+// Walk back from the end for a "ST" / "ST 12345" segment; the city precedes it.
+function icsCity(location) {
+  const raw = unescapeIcs(location);
+  if (!raw) return '';
+  const parts = raw.split(',').map((s) => s.trim())
+    .filter((s) => s && !/^(usa|united states)$/i.test(s));
+  if (!parts.length) return '';
+  for (let i = parts.length - 1; i >= 1; i--) {
+    const m = /^([A-Za-z]{2})(?:\s+\d{5}(?:-\d{4})?)?$/.exec(parts[i]);
+    if (m) return parts[i - 1] + ', ' + m[1].toUpperCase();
+  }
+  return parts[parts.length - 1];
+}
+
+// DTSTART -> { date: "YYYY-MM-DD", time: "7:00 PM" } as wall clock in SHOWS_TZ.
+// Three forms show up in the wild:
+//   20260725T213000Z  UTC (what basic.ics emits) -> convert
+//   20260725T173000   floating, or carrying TZID -> already local, use as-is
+//   20260725          all-day -> no time
+function icsWhen(value, tzid) {
+  const v = String(value == null ? '' : value).trim();
+  let m = /^(\d{4})(\d{2})(\d{2})$/.exec(v);
+  if (m) return { date: m[1] + '-' + m[2] + '-' + m[3], time: '' };
+
+  m = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?(Z)?$/.exec(v);
+  if (!m) return null;
+  const y = +m[1], mo = +m[2], d = +m[3], h = +m[4], mi = +m[5], isUtc = !!m[7];
+
+  // Not UTC: the clock time is already local to the calendar (TZID or floating).
+  if (!isUtc) return { date: m[1] + '-' + m[2] + '-' + m[3], time: to12h(h, mi) };
+
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: tzid && /^[A-Za-z_]+\/[A-Za-z_]+$/.test(tzid) ? tzid : SHOWS_TZ,
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hour12: false,
+  }).formatToParts(new Date(Date.UTC(y, mo - 1, d, h, mi)));
+  const get = (t) => (parts.find((p) => p.type === t) || {}).value;
+  // hour12:false can hand back "24" for midnight in some ICU builds.
+  const hh = +get('hour') % 24;
+  return { date: get('year') + '-' + get('month') + '-' + get('day'), time: to12h(hh, +get('minute')) };
+}
+
+function to12h(h, mi) {
+  const ap = h >= 12 ? 'PM' : 'AM';
+  return (h % 12 || 12) + ':' + String(mi).padStart(2, '0') + ' ' + ap;
+}
+
+// An .ics body -> the raw VEVENT fields we care about. Cancelled events are
+// dropped here so they can never reach the page. Pure — unit-testable.
+function parseIcsEvents(text) {
+  const s = unfoldIcs(text);
+  const out = [];
+  const blocks = /BEGIN:VEVENT\n([\s\S]*?)END:VEVENT/g;
+  let b;
+  while ((b = blocks.exec(s))) {
+    const body = b[1];
+    const prop = (name) => {
+      const m = new RegExp('^' + name + '([^:\\n]*):(.*)$', 'm').exec(body);
+      return m ? { params: m[1] || '', value: m[2] } : null;
+    };
+    const dt = prop('DTSTART');
+    if (!dt) continue;
+    const status = prop('STATUS');
+    if (status && /CANCELLED/i.test(status.value)) continue;
+    const tzid = (dt.params.match(/TZID=([^;:]+)/) || [])[1] || null;
+    out.push({
+      summary: (prop('SUMMARY') || {}).value || '',
+      location: (prop('LOCATION') || {}).value || '',
+      dtstart: dt.value.trim(),
+      tzid: tzid,
+    });
+  }
+  return out;
+}
+
+// One VEVENT -> the show shape index.html renders (same keys as the sheet path).
+// The calendar carries no ticket links, so — exactly as the sheet path does —
+// we synthesize a Google Maps search. Here we can feed it the full street
+// address, which lands on the right pin more reliably than a city line.
+function icsToShow(ev) {
+  const when = icsWhen(ev.dtstart, ev.tzid);
+  if (!when) return null;
+  const venue = icsVenue(ev.summary);
+  if (!venue) return null;
+  const address = unescapeIcs(ev.location);
+  return {
+    venue: venue,
+    date: when.date,
+    city: icsCity(ev.location),
+    time: when.time,
+    ticketUrl: address ? mapsUrl(venue, address) : null,
+  };
+}
+
+// Read the calendar. Throws on a bad response or a feed with nothing usable so
+// the caller can fall back to the sheet.
+async function fetchShowsFromIcs() {
+  const r = await fetch(SHOWS_ICS_URL);
+  if (!r.ok) throw new Error('ics: HTTP ' + r.status);
+  const shows = parseIcsEvents(await r.text()).map(icsToShow).filter(Boolean);
+  if (!shows.length) throw new Error('ics: no usable events');
+  return shows;
+}
+
 // Parse a gviz response body into row objects keyed by the header in row 1.
 // Pure (no network) so it can be unit-tested.
 // Body is wrapped: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
@@ -250,10 +394,19 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const rowSets = await Promise.all(TABS.map((t) => fetchTab(t.source)));
+    // Songs come from the sheet. Shows come from the calendar, with the sheet's
+    // Shows tab as the fallback — so a flaky feed degrades to yesterday's
+    // source instead of an empty section. Both start in parallel; the sheet's
+    // shows are already in hand either way, so the fallback costs no extra
+    // round trip on the unhappy path.
+    const [rowSets, icsShows] = await Promise.all([
+      Promise.all(TABS.map((t) => fetchTab(t.source))),
+      fetchShowsFromIcs().catch(() => null),
+    ]);
     const out = {};
     // map() may return null for rows to drop (blank spacers) — filter them out.
     TABS.forEach((t, i) => { out[t.key] = rowSets[i].map((row) => t.map(row)).filter(Boolean); });
+    if (icsShows) out.shows = icsShows;
 
     // Merch is optional and best-effort — GHL being unconfigured or throwing
     // never fails the Songs/Shows response, it just skips the `products` key.
@@ -282,3 +435,10 @@ module.exports.gvizUrl = gvizUrl;
 module.exports.TABS = TABS;
 module.exports.formatPriceRange = formatPriceRange;
 module.exports.mapProduct = mapProduct;
+module.exports.unfoldIcs = unfoldIcs;
+module.exports.unescapeIcs = unescapeIcs;
+module.exports.icsVenue = icsVenue;
+module.exports.icsCity = icsCity;
+module.exports.icsWhen = icsWhen;
+module.exports.parseIcsEvents = parseIcsEvents;
+module.exports.icsToShow = icsToShow;

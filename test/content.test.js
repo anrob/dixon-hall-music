@@ -162,5 +162,84 @@ eq('mapProduct: mix of deleted + live price -> deleted one excluded from the ran
   C.mapProduct(merchTee, [{ amount: 99.99, deleted: true }, { amount: 23.26, deleted: false }]),
   { name: 'Short Sleeve Tee', image: 'https://cdn.example.com/tee.png', price: '$23.26' });
 
+// ---- Google Calendar (iCal) -> Shows ----
+// Every fixture below is copied from the band's real basic.ics feed.
+
+// Venue: the calendar uses three different band-prefix styles. All must reduce
+// to the same clean venue label the page prints.
+eq('icsVenue: "@" separator', C.icsVenue('Dixon Hall @ Smoke on the Rail BBQ Fest'), 'Smoke on the Rail BBQ Fest');
+eq('icsVenue: "-" separator', C.icsVenue('Dixon Hall - Fagers Island'), 'Fagers Island');
+eq('icsVenue: no separator at all', C.icsVenue('Dixon Hall Admirals Cup'), 'Admirals Cup');
+eq('icsVenue: bare band name is left alone rather than emptied', C.icsVenue('Dixon Hall'), 'Dixon Hall');
+eq('icsVenue: unrelated title passes through', C.icsVenue('Private Event'), 'Private Event');
+
+// City: LOCATION is a full street address; the page wants "City, ST".
+eq('icsCity: full US address w/ zip + USA',
+  C.icsCity("Fager's Island\\, 201 60th St\\, Ocean City\\, MD 21842\\, USA"), 'Ocean City, MD');
+eq('icsCity: no zip, no country',
+  C.icsCity('Marge Goodfellow Park\\, 1 Playground Alley\\, New Freedom\\, PA'), 'New Freedom, PA');
+eq('icsCity: venue name contains a dash + floor',
+  C.icsCity("Admiral's Cup - Main Floor\\, 1647 Thames St\\, Baltimore\\, MD 21231\\, USA"), 'Baltimore, MD');
+eq('icsCity: empty LOCATION (6 of 37 events have none)', C.icsCity(''), '');
+
+// Time: basic.ics emits UTC. July is EDT (-4), December EST (-5) — the
+// conversion has to follow DST or winter gigs print an hour early.
+eq('icsWhen: UTC -> EDT wall clock',
+  C.icsWhen('20260725T213000Z', null), { date: '2026-07-25', time: '5:30 PM' });
+eq('icsWhen: UTC -> EST wall clock (DST boundary crossed)',
+  C.icsWhen('20261210T000000Z', null), { date: '2026-12-09', time: '7:00 PM' });
+eq('icsWhen: TZID form is already local, not re-converted',
+  C.icsWhen('20260812T190000', 'America/New_York'), { date: '2026-08-12', time: '7:00 PM' });
+eq('icsWhen: all-day event -> no time', C.icsWhen('20260725', null), { date: '2026-07-25', time: '' });
+eq('icsWhen: garbage -> null', C.icsWhen('nonsense', null), null);
+
+// Parsing: folded lines, escaped commas, cancelled events.
+// The fold below is copied byte-for-byte from the live feed: Google breaks the
+// line mid-token, between the state and the ZIP. RFC 5545 says exactly ONE
+// leading space is the fold marker, so unfolding must leave "DE 19952" — strip
+// two and the ZIP welds onto the state.
+const ics = [
+  'BEGIN:VCALENDAR',
+  'BEGIN:VEVENT',
+  'DTSTART:20260926T230000Z',
+  'LOCATION:Harrington Raceway & Casino\\, 18500 S Dupont Hwy\\, Harrington\\, DE',
+  '  19952\\, USA',
+  'STATUS:CONFIRMED',
+  'SUMMARY:Dixon Hall - Herrington Casino',
+  'END:VEVENT',
+  'BEGIN:VEVENT',
+  'DTSTART:20260901T230000Z',
+  'STATUS:CANCELLED',
+  'SUMMARY:Dixon Hall @ Called Off',
+  'END:VEVENT',
+  'END:VCALENDAR',
+].join('\r\n');
+
+const parsed = C.parseIcsEvents(ics);
+eq('parseIcsEvents: cancelled events are dropped', parsed.length, 1);
+eq('parseIcsEvents: folded LOCATION rejoins without eating the ZIP\'s space',
+  C.unescapeIcs(parsed[0].location),
+  'Harrington Raceway & Casino, 18500 S Dupont Hwy, Harrington, DE 19952, USA');
+
+// Note the venue is John's typo ("Herrington") — free-text titles land on the
+// page verbatim, which is the trade-off of sourcing from a calendar.
+eq('icsToShow: full mapping matches the sheet path\'s shape',
+  C.icsToShow(parsed[0]),
+  {
+    venue: 'Herrington Casino',
+    date: '2026-09-26',
+    city: 'Harrington, DE',
+    time: '7:00 PM',
+    // "&" must arrive as %26 or it would terminate the query string early.
+    ticketUrl: 'https://www.google.com/maps/search/Herrington+Casino+Harrington+Raceway+%26+Casino%2C+18500+S+Dupont+Hwy%2C+Harrington%2C+DE+19952%2C+USA',
+  });
+
+eq('icsToShow: keys match exactly what renderShows() reads',
+  Object.keys(C.icsToShow(parsed[0])).sort(), ['city', 'date', 'ticketUrl', 'time', 'venue']);
+
+eq('icsToShow: no LOCATION -> venue still renders, ticketUrl null',
+  C.icsToShow({ summary: 'Dixon Hall - Somewhere', location: '', dtstart: '20260812T230000Z', tzid: null }),
+  { venue: 'Somewhere', date: '2026-08-12', city: '', time: '7:00 PM', ticketUrl: null });
+
 console.log(fails ? `\n${fails} FAILED` : '\nAll passed');
 process.exit(fails ? 1 : 0);
