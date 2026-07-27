@@ -1,0 +1,59 @@
+# Dixon Hall — No Limit Country
+# https://www.dixonhallmusic.com/
+
+# Search engines — full access
+User-agent: *
+Allow: /
+
+# AI assistants & answer engines — explicitly welcome.
+# Being cited in ChatGPT / Claude / Perplexity / Gemini answers is
+# discovery for a touring band, not a leak. Keep these allowed.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Serverless endpoints — nothing to index
+Disallow: /api/
+
+Sitemap: https://www.dixonhallmusic.com/sitemap.xml
