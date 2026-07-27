@@ -2865,7 +2865,8 @@
       <h2 class="display metal reveal d1" style="margin-bottom:clamp(30px,4vw,50px);">In The Frame</h2>
       <div class="reveal d1">
         <script src="https://freshgallery.vercel.app/embed.js" data-account="dixonhall" data-gallery="the-band"
-          data-theme="dark" data-bg="transparent"></script>
+          data-theme="dark" data-bg="transparent"
+          data-author-id="https://www.dixonhallmusic.com/#band"></script>
       </div>
       <div class="gallery-more reveal">
         <a href="https://www.instagram.com/dixonhallband/" target="_blank" rel="noopener"><i
@@ -3502,32 +3503,6 @@
           return m ? m[1] : '';
         } catch (e) { return ''; }
       }
-
-      /* The FreshGallery embed injects its own ImageGallery JSON-LD, using the
-         gallery slug ("The Band") as both the gallery name and an Organization
-         author — a stray entity competing with the MusicGroup declared in <head>.
-         Re-point it at the real band. Proper fix belongs upstream in freshgallery. */
-      function fixGallerySchema() {
-        var BASE = 'https://www.dixonhallmusic.com/';
-        var blocks = document.querySelectorAll('script[type="application/ld+json"]');
-        for (var i = 0; i < blocks.length; i++) {
-          var b = blocks[i];
-          if (b.id === 'schema-dynamic') continue;
-          var j;
-          try { j = JSON.parse(b.textContent); } catch (e) { continue; }
-          if (!j || j['@type'] !== 'ImageGallery') continue;
-          j.name = 'Dixon Hall — In The Frame';
-          j.author = { '@id': BASE + '#band' };
-          j.isPartOf = { '@id': BASE + '#webpage' };
-          b.textContent = JSON.stringify(j);
-          return true;
-        }
-        return false;
-      }
-      (function watchGallerySchema(tries) {
-        if (fixGallerySchema() || tries <= 0) return;
-        setTimeout(function () { watchGallerySchema(tries - 1); }, 400);
-      })(15);
 
       function parseDate(str) { return str ? new Date(str + 'T00:00:00') : null; }
       function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
