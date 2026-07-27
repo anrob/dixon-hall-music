@@ -39,13 +39,9 @@ correct root, ~30s), then fix the setting.
 1. **Turn off Cloudflare's managed robots.txt** — it overrides `site/robots.txt` at the edge and
    Disallows ClaudeBot, GPTBot, CCBot, Google-Extended, Bytespider, Applebot-Extended,
    meta-externalagent and Amazonbot. Blocks the site from AI answer engines. Dashboard-only fix.
-2. **Fix the loader's LCP stall** — the animated gold sheen (`.loader-shine`) repaints
-   continuously and holds Largest Contentful Paint open for ~48s (98% render delay). Reproducible
-   on localhost, so it's not network. Dominates mobile performance.
-3. Trim page weight: `band.png` is 3.8MB (1920×852 PNG), total page ~12MB.
-4. Wire real streaming links + store links (currently `#` stubs).
-5. Swap merch placeholder art for real product photos.
-6. Add `Product` schema once the store opens with real buy URLs (deliberately omitted while
+2. Wire real streaming links + store links (currently `#` stubs).
+4. Swap merch placeholder art for real product photos.
+5. Add `Product` schema once the store opens with real buy URLs (deliberately omitted while
    it's "Opening Soon" — Product markup without a valid offer is a liability).
 
 ## Band facts (from dixonhallmusic.com)
