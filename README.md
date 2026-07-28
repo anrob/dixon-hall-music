@@ -36,13 +36,37 @@ correct root, ~30s), then fix the setting.
 - **v1 (alternate)** — code-built hero over the raw Parthenon band photo: Anton headline "Soul Meets Southern Rock", new-single badge, marquee. Preserved in `docs/design-handoff/`.
 
 ## Next action
-1. **Turn off Cloudflare's managed robots.txt** — it overrides `site/robots.txt` at the edge and
-   Disallows ClaudeBot, GPTBot, CCBot, Google-Extended, Bytespider, Applebot-Extended,
-   meta-externalagent and Amazonbot. Blocks the site from AI answer engines. Dashboard-only fix.
-2. Wire real streaming links + store links (currently `#` stubs).
-3. Swap merch placeholder art for real product photos.
-4. Add `Product` schema once the store opens with real buy URLs (deliberately omitted while
+1. Wire real streaming links + store links (currently `#` stubs).
+2. Swap merch placeholder art for real product photos.
+3. Add `Product` schema once the store opens with real buy URLs (deliberately omitted while
    it's "Opening Soon" — Product markup without a valid offer is a liability).
+
+## Cloudflare (settled 2026-07-27 — don't re-enable)
+Two settings under **AI Crawl Control** were blocking AI answer engines. Both are now off:
+- **Managed robots.txt** (Overview) — was prepending `Content-Signal: ai-train=no` plus a
+  `Disallow: /` list ahead of `site/robots.txt`. It also failed Lighthouse's robots.txt
+  validation, capping SEO at 92.
+- **Per-crawler blocks** (Security) — the real enforcement. GPTBot, CCBot, Bytespider and
+  Amazonbot were being served a block response regardless of what robots.txt said.
+
+Verified by user-agent, not just by reading the file:
+```
+for UA in GPTBot CCBot Bytespider Amazonbot ClaudeBot; do
+  curl -sS -A "$UA" -o /dev/null -w "$UA %{http_code}\n" https://www.dixonhallmusic.com/
+done
+```
+All 200. Lighthouse SEO is 100/100 with zero failing audits.
+
+## Known: mobile Performance reads low in Lighthouse
+Default Lighthouse (and PageSpeed Insights lab data) uses *simulated* throttling, which
+intermittently attributes LCP to `a.hero-listen` with ~93% "render delay" and 0ms load time —
+scoring 58–65. Re-run the same URL with `--throttling-method=devtools` and it's **Performance
+100, LCP ~1.3s**. The page really does paint in ~1.3s; the low number is a modelling artifact.
+Trust CrUX field data over the lab score. Ruled out by experiment: the `.eq` animation and the
+scroll-driven nav fade each moved LCP by 0.0s.
+
+Remaining Best Practices 78/79 is `__cf_bm` cookies set by the `filesafe.space` and
+`printful.com` CDNs serving cover art and product images — their infrastructure, not ours.
 
 ## Band facts (from dixonhallmusic.com)
 - **Members:** John Dixon Hall Jr. (vocals/songwriter), Terry Glaze (guitar/vocals)
